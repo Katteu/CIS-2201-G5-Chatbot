@@ -1,11 +1,16 @@
 import React from "react";
-import { useOutlet } from "react-router-dom";
+import { useOutlet, useNavigate, useLocation } from "react-router-dom";
 import logo from "../assets/DCISM_LOGO.png";
 import { FiUser, FiLogOut, FiBell } from "react-icons/fi";
 import { colors } from "../constants/colors";
+import { SignedInLinks } from "../constants/links";
+import { getLinkClass } from "../helpers/functions";
 
 function SignedInLayout() {
   const outlet = useOutlet();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   return (
     <div>
       <div style={styles.topNav}>
@@ -17,8 +22,16 @@ function SignedInLayout() {
         </div>
       </div>
       <div style={styles.sideNav}>
-        <p className="link" onClick={() => console.log('asd')} style={styles.link}>Link</p>
-        <p className="link" onClick={() => console.log('asd')} style={styles.link}>Link</p>
+        {SignedInLinks.map((link) => (
+          <p
+            key={link.name}
+            className={getLinkClass(link.link, location.pathname)}
+            onClick={() => navigate(link.link)}
+            style={styles.link}
+          >
+            {link.name}
+          </p>
+        ))}
       </div>
       <div style={styles.contentContainer}>{outlet}</div>
     </div>
@@ -45,12 +58,12 @@ const styles: any = {
   sideNav: {
     position: "absolute",
     top: "6vh",
-    width: "9%",
+    width: "12%",
     height: "100vh",
     backgroundColor: colors.brand,
     display: "flex",
-    flexDirection: 'column',
-    alignItems: 'center',
+    flexDirection: "column",
+    alignItems: "center",
   },
   navIcon: {
     marginRight: 20,
@@ -60,12 +73,13 @@ const styles: any = {
   contentContainer: {
     width: "98vh",
     height: "100vh",
-    marginLeft: "9vw",
+    marginLeft: "12vw",
     marginTop: "6vh",
   },
   link: {
-    marginTop: 20,
+    marginTop: 30,
     color: "white",
     height: 10,
+    textAlign: "right",
   },
 };
