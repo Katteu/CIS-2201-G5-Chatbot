@@ -118,5 +118,3 @@ git push
 7. g7-inventory-module
 8. g8-grievances
 9. g9-room-issues
-
-HAPPY CODING! :D
