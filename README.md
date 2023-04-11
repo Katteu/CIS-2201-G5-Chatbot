@@ -7,10 +7,49 @@
 Access using usc email ⚠
 
 ## Setting Up the Project
-1. 
+1. Clone the project in any local directory you like
+Example using the git CLI
+```
+git clone https://github.com/JulianErnest/CIS2201-Class-Project-FE.git
+```
+2. CD into the root folder
+```
+cd CIS2201-Class-Project-FE
+```
+3. Install dependencies
+```
+// If you're using npm
+npm install
+
+// If you're using yarn
+yarn
+```
+
+4. Run the project
+```
+// If you're using npm
+npm run dev
+
+// If you're using yarn
+yarn dev
+```
+
+5. ⚠ Please check the `Branching` section below ⚠
 
 ## Commands To Run During Development
-1.
+1. Start local frontend server
+```
+// If you're using npm
+npm run dev
+
+// If you're using yarn
+yarn dev
+```
+
+2. Make sure your local backend server and mySQL server is running as well 
+```
+// TODO: Add commands here
+```
 
 ## File Structure
 1. 
@@ -55,6 +94,7 @@ git commit -m "[feature] added a meaningful table 😲"
 
 git push
 // For merge conflicts, resolve within your subgroups 
+```
 
 ## Branch Names
 
