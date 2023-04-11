@@ -52,7 +52,10 @@ yarn dev
 ```
 
 ## File Structure
-1. 
+1. `src\assets` - This is where you place images (.png, .svg, etc...)
+2. `src\components` - Common components to be used throughout the application, you usually don't wanna touch this folder
+3. `src\pages` - Pages of the website
+4. `src\constants` - Global variables  
 
 ## Branching
 1. When you clone the repository, make sure you are in the `main` branch. You can check by running this command:
