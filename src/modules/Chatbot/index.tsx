@@ -1,12 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "../Chatbot/chatbot.css"
 import bot from "../../assets/blabbot.png";
+import Aboutcb from './aboutcb';
+import Botupdates from './botupdates';
+import Customize from './customize';
 
 function Chatbot() {
   let status = true;
+  const [openModal,setOpenModal] = useState(false);
+  const [openB,setOpenB] = useState(false);
+  const [openC,setOpenC] = useState(false);
   return (
     <div className='cbCont'>
-      <div className='containerA'>
+      <div className='containerA' style={openModal==true || openB==true || openC==true? {opacity:'0.2',backgroundColor:"rgba(0,0,0,0.5)"}:{opacity:'1'}}>
         <div className='upperCont'>
           <img alt="Blab Bot" src={bot} style={styleCB.bot}/>
            <h1 className="slogan" style={styleCB.slogan}>Blabbot at</h1>
@@ -25,31 +31,44 @@ function Chatbot() {
           }
           <div className='listCB'>
             <div style={{marginTop:"10%",marginBottom:"6%"}}>
-              <i className="fas fa-duotone fa-brush"></i> Customize <br/>
+              <a onClick={()=>setOpenC(true)} className='linkStl'> 
+                <i className="fas fa-duotone fa-brush"></i> Customize <br/>
+              </a>
             </div>
             <div style={{marginTop:"2%",marginBottom:"6%"}}>
-              <i className="fas fa-solid fa-bullhorn"></i> Bot Updates <br/>
+              <a onClick={()=>setOpenB(true)} className='linkStl'> 
+                <i className="fas fa-solid fa-bullhorn"></i> Bot Updates <br/>
+              </a>    
             </div>
             <div style={{marginTop:"4%",marginBottom:"3%"}}>
-              <i className='bx bxs-info-square'></i> About            
+              <a onClick={()=>setOpenModal(true)} className='linkStl'> 
+              <i className='bx bxs-info-square'></i> About
+              </a>            
             </div> 
           </div>
         </div>
       </div>
-      <div className='containerB'>
-          <div className='upperContB'>Insert Chat</div>
+      <div className='containerB' >
+          <div className='upperContB' >
+            <div className="contentB" style={openModal==true || openB==true || openC==true? {opacity:'0.2',backgroundColor:"rgba(0,0,0,0.5)"}:{opacity:'1'}}>
+              Insert Chat Content
+            </div>
+          </div>
           <div className='lowerContB'>
-            <div className="formCont">
-              <form className="textForm">
-              <input id="input" type="text" placeholder="Message"/>
+            <div className="formCont" style={openModal==true || openB==true || openC==true? {opacity:"0.2"}:{opacity:"1"}}>
+              <form className="textForm" >
+              <input id="input" type="text" placeholder="Send a Message..."/>
               </form>
             </div>
             
-            <div className="submitBtn">
+            <div className="submitBtn" style={openModal==true || openB==true || openC==true? {opacity:"0.2"}:{opacity:"1"}}>
               <button><i className="fa fa-paper-plane"></i></button>
             </div>
           </div>
       </div>
+      <Aboutcb open={openModal} onClose={()=> setOpenModal(false)}/>
+      <Botupdates openB={openB} onCloseB={()=> setOpenB(false)}/>
+      <Customize openC={openC} onCloseC={()=> setOpenC(false)}/>
     </div>
   )
 }
@@ -94,7 +113,7 @@ const styleCB: any = {
     backgroundColor: "gray",
     borderRadius: "50%",
     marginRight: "2%",
-  }
+  },
 };
 
 export default Chatbot

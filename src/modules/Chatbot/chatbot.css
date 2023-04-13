@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+
 .cbCont{
-    max-width:100%;
+    width:100%;
     margin:0;
     padding:0;
     display:flex;
@@ -38,38 +39,73 @@
 
 .upperContB{
     height:90vh;
+    width:100%;
+    position: relative;
+}
+
+.contentB{
+    width:211.3%;
+    height:100vh;
 }
 
 .lowerContB{
     display:flex;
-    width:100%;
+    width:70%;
     justify-content: center;
+    position:absolute;
+    margin-left: 1.6%;
 }
 
 .formCont{
     width:100%;
-    margin-right: 20px;
+    margin-right:1.5em;
 }
 
 .textForm {
     width:100%;
-    margin-top: 5px;
+    margin-top: 0.1%;
 }
   
 .textForm input[type="text"] {
     width: 100%;
-    height: 28px;
-    font-size: 15px;
+    height: 4vh;
+    font-size: 1em;
     border-radius: 20px;
     border: 1px solid #4da6ff;
-    padding-left: 10px;
+    padding-left: 1.2%;
     transition: 0.5;
 }
 
 .submitBtn button {
-    border-radius: 10%;
+    border-radius: 50%;
+    width:3.2em;
+    height:2.8em;
     color: #ffffff;
     font-size: 100%;
     text-align: center;
     cursor: pointer;
-  }
+    padding:0;
+}
+
+.linkStl{
+    text-decoration: none;
+    color:white;
+}
+
+.linkStl:hover{
+    color:rgb(165, 165, 165);
+}
+
+/*About Modal*/
+.modalContAbout,.modalContUpd,.modalContCust{
+    transform:(translate(-50%,-50%));
+    position:fixed;
+    width:50%;
+    top:25%;
+    left:35%;
+    background-color:white;
+    box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.75);
+}
+
+
+
