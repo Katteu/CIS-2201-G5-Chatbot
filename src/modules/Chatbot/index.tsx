@@ -42,7 +42,7 @@ function Chatbot() {
             </div>
             <div style={{marginTop:"4%",marginBottom:"3%"}}>
               <a onClick={()=>setOpenModal(true)} className='linkStl'> 
-              <i className='bx bxs-info-square'></i> About
+                <i className='bx bxs-info-square'></i> About
               </a>            
             </div> 
           </div>

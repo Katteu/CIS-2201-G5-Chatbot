@@ -4,16 +4,12 @@ const Customize = ({openC,onCloseC}:{openC:boolean,onCloseC:MouseEventHandler<HT
     if(!openC) return null
     return (
       <div>
-        <div className='overlay'>
           <div className='modalContCust'>
-              <div className='modalRightCust'>
+              <div className='topTitle'>
+                <h1 className='sectionTitle'>Customize</h1>
                   <p onClick={onCloseC} className='closeBtn'>X</p>
-                  <div className='modalContentCust'>
-                      <p>Customize</p>
-                  </div>
               </div>  
           </div>
-        </div>
       </div>
     )
 }
