@@ -26,12 +26,12 @@ const Aboutcb = ({open,onClose}:{open:boolean,onClose:MouseEventHandler<HTMLPara
                     <div className="number" style={styleAbout.number}>
                         <i className="fas fa-solid fa-phone fa-flip-horizontal" style={styleAbout.contactlogo}></i>
                         <h4 style={styleAbout.contact}>Talamban Campus: </h4>
-                        <p style={{marginLeft:"1%"}}>(032)230-0100</p>
+                        <p style={{marginLeft:"1%",marginTop:"0%"}}>(032)230-0100</p>
                     </div>
                     <div className="email" style={styleAbout.email}>
                         <i className="fas fa-solid fa-envelope" style={styleAbout.emaillogo}></i>
                         <h4 style={styleAbout.contact}>DCISM Secretary: </h4>
-                        <p style={{marginLeft:"1%"}}>dcissec@usc.edu.ph</p>
+                        <p style={{marginLeft:"1%",marginTop:"0%"}}>dcissec@usc.edu.ph</p>
                         <br/>
                     </div>
 
@@ -40,12 +40,12 @@ const Aboutcb = ({open,onClose}:{open:boolean,onClose:MouseEventHandler<HTMLPara
                     <div className="number" style={styleAbout.number}>
                     <i className="fas fa-solid fa-address-book" style={styleAbout.contactlogo}></i>
                         <h4 style={styleAbout.contact}>DCISM: </h4>
-                        <p style={{marginLeft:"1%"}}>(032)230-0100 Local 158</p>
+                        <p style={{marginLeft:"1%",marginTop:"0%"}}>(032)230-0100 Local 158</p>
                     </div>
                     <div className="email" style={styleAbout.email}>
                         <i className="fas fa-solid fa-inbox" style={styleAbout.emaillogo}></i>
                         <h4 style={styleAbout.contact}>CISCO: </h4>
-                        <p style={{marginLeft:"1%"}}>dcism.sc@gmail.com</p>
+                        <p style={{marginLeft:"1%",marginTop:"0%"}}>dcism.sc@gmail.com</p>
                         <br/>
                     </div>
                 </div>
