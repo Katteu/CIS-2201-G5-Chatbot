@@ -58,29 +58,12 @@ const Aboutcb = ({open,onClose}:{open:boolean,onClose:MouseEventHandler<HTMLPara
 export default Aboutcb
 
 const styleAbout :any = {
-    get:{
-        float:"left",
-        marginLeft: "10%",
-        marginTop: "1%",
-        marginBottom: "0.8%",
-    },
     contactPart:{
         display:"flex",
         width:"100%",
         marginLeft:"10%",
         textAlign:"left",
         marginBottom: "0.5%",
-    },
-    number:{
-        width:"35%",
-        display:"flex",
-    },
-    email:{
-        width:"55%",
-        display:"flex",
-    },
-    socmed:{
-        width:"35%",
     },
     contact:{
         margin:"0",
