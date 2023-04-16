@@ -21,7 +21,7 @@ const Aboutcb = ({open,onClose}:{open:boolean,onClose:MouseEventHandler<HTMLPara
                 BlabBot is an innovative DCISM (Department of Computer, Information Sciences and Mathematics) chatbot designed to meet the academic needs of students. As a fast and accurate information provider, BlabBot is dedicated to answering questions related to courses, schedules, faculty, fees, and other academic inquiries. With its advanced technology, BlabBot caters to the diverse needs of students in a timely manner, making sure that users can access relevant information quickly and easily. As a result, BlabBot provides a reliable source of information to support students in their academic endeavors, enabling them to make informed decisions about their courses, schedules, and other academic pursuits.
                 </p>
                 <hr style={{width:"80%"}}/>
-                <h2 className='contTitle'style={styleAbout.get}><span style={{textDecoration: "underline"}}>GET IN TOUCH</span>👇🏼</h2>
+                <h2 className='contTitle'><span style={{textDecoration: "underline"}}>GET IN TOUCH</span>👇🏼</h2>
                 <div className='contactPart' style={styleAbout.contactPart}>
                     <div className="number" style={styleAbout.number}>
                         <i className="fas fa-solid fa-phone fa-flip-horizontal" style={styleAbout.contactlogo}></i>
@@ -34,7 +34,6 @@ const Aboutcb = ({open,onClose}:{open:boolean,onClose:MouseEventHandler<HTMLPara
                         <p style={{marginLeft:"1%",marginTop:"0%"}}>dcissec@usc.edu.ph</p>
                         <br/>
                     </div>
-
                 </div>
                 <div className='contactPart' style={styleAbout.contactPart}>
                     <div className="number" style={styleAbout.number}>
