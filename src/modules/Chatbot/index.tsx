@@ -78,6 +78,7 @@ const styleCB: any = {
     width: "60%",
     marginBottom:"2%",
   },
+
   message:{
     color: "White",
     margin: "0",

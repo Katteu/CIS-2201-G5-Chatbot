@@ -199,6 +199,14 @@
         margin: 0;
       }
 
+@media (min-width:800px) and (max-width: 1600px) {
+    .slogan{
+        font-size:1.5em;
+        color: White;
+        font-weight: 900;
+        margin: 0;
+      }
+
     .para{
        color: White;
        margin: 0;
@@ -208,4 +216,23 @@
        padding-right: 10%;
        padding-top: 3%;
     }
+
+    #lineCB{
+        margin-top: 30%;
+    }
+
+    .upperCont{
+        padding-top: 30%;
+    }
+
+    .linkStl{
+        font-size: 0.89em;
+    }
+
+    .submitBtn button{
+        font-size: 90%;
+        height: 2.5em;
+        width: 3em;
+    }
+}
 }
