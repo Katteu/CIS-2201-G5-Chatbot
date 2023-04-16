@@ -215,14 +215,6 @@
         margin: 0;
       }
 
-@media (min-width:800px) and (max-width: 1600px) {
-    .slogan{
-        font-size:1.5em;
-        color: White;
-        font-weight: 900;
-        margin: 0;
-      }
-
     .para{
        color: White;
        margin: 0;
