@@ -90,6 +90,23 @@
     padding:0;
 }
 
+.slogan{
+    font-size:1.8em;
+    color: white;
+    font-weight: 900;
+    margin: 0;
+}
+
+.para{
+    color: White;
+    margin: 0;
+    font-size:1em;
+    font-family: Montserrat;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 3%;    
+}
+
 .linkStl{
     text-decoration: none;
     color:white;
@@ -99,6 +116,7 @@
 .linkStl:hover{
     color:rgb(165, 165, 165);
 }
+
 
 /*Modal*/
 .modalContAbout,.modalContUpd,.modalContCust{
@@ -169,5 +187,25 @@
 
 }
 
+#lineCB{
+    margin-top:40%;
+}
 
+@media (min-width:800px) and (max-width: 1600px) {
+    .slogan{
+        font-size:1.5em;
+        color: White;
+        font-weight: 900;
+        margin: 0;
+      }
 
+    .para{
+       color: White;
+       margin: 0;
+       font-size:0.86em;
+       font-family: Montserrat;
+       padding-left: 10%;
+       padding-right: 10%;
+       padding-top: 3%;
+    }
+}

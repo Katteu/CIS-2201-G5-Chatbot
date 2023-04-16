@@ -19,7 +19,7 @@ function Chatbot() {
            <h1 className="slogan" style={styleCB.slogan}>your service!</h1>
             <p className="para" style={styleCB.para}> Have a question? Ask away or explore our options</p>
         </div>
-        <hr style={{color:"White", marginLeft:"5%",marginRight:"5%",marginTop:"40%"}}/>
+        <hr id="lineCB" style={{color:"White", marginLeft:"5%",marginRight:"5%"}}/>
         <div className='lowerCont'>
           {status
             ? <div style={{width:"100%",display:"flex",justifyContent:"center"}}>
@@ -77,21 +77,6 @@ const styleCB: any = {
   bot: {
     width: "60%",
     marginBottom:"2%",
-  },
-  slogan:{
-    fontSize:"1.8em",
-    color: "White",
-    fontWeight: "900",
-    margin: "0",
-  },
-  para:{
-    color: "White",
-    margin: "0",
-    fontSize:"1em",
-    fontFamily: "Montserrat",
-    paddingLeft: "10%",
-    paddingRight: "10%",
-    paddingTop: "3%",
   },
   message:{
     color: "White",
