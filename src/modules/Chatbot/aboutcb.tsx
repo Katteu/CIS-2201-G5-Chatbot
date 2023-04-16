@@ -34,7 +34,6 @@ const Aboutcb = ({open,onClose}:{open:boolean,onClose:MouseEventHandler<HTMLPara
                         <p style={{marginLeft:"1%",marginTop:"0%"}}>dcissec@usc.edu.ph</p>
                         <br/>
                     </div>
-
                 </div>
                 <div className='contactPart' style={styleAbout.contactPart}>
                     <div className="number" style={styleAbout.number}>
