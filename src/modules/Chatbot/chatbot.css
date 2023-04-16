@@ -242,4 +242,26 @@
         height: 2.5em;
         width: 3em;
     }
+
+
+    .aboutPara{
+        font-size: 0.83em;
+    }
+
+    .difflogo{
+        width: 21%;
+    }
+
+    .botlogo{
+        width: 25%;
+    }
+
+    .contTitle{
+        font-size: 0.9em;
+    }
+
+    .number h4,.number p,.email h4,.email p{
+        font-size:0.85em;
+      }
+
 }
