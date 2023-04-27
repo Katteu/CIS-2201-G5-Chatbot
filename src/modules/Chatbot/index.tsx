@@ -4,12 +4,47 @@ import bot from "../../assets/blabbot.png";
 import Aboutcb from './aboutcb';
 import Botupdates from './botupdates';
 import Customize from './customize';
+import Chatbubble from './chatbubble';
+import clogo from "../../assets/chatlogo.png";
 
 function Chatbot() {
   let status = true;
   const [openModal,setOpenModal] = useState(false);
   const [openB,setOpenB] = useState(false);
   const [openC,setOpenC] = useState(false);
+
+  const humanHandover = () => {
+
+  };
+
+  const studentConcerns = () => {
+    console.log("Button 2 clicked!");
+  };
+
+  const wayFinding = () => {
+    console.log("Button 2 clicked!");
+  };
+
+  const disPrepared = () => {
+    console.log("Button 2 clicked!");
+  };
+
+  const alumniAffairs = () => {
+    console.log("Button 2 clicked!");
+  };
+
+  const misc = () => {
+    console.log("Button 2 clicked!");
+  };
+
+  const buttons = [
+    { label: "Human Handover", onClick: humanHandover },
+    { label: "Student Concerns", onClick: studentConcerns },
+    { label: "Wayfinding or Room Location", onClick: wayFinding },
+    { label: "Disaster Preparedness", onClick: disPrepared },
+    { label: "Alumni Affairs", onClick: alumniAffairs },
+    { label: "Miscellaneous", onClick: misc },
+  ];
   return (
     <div className='cbCont'>
       <div className='containerA' style={openModal==true || openB==true || openC==true? {opacity:'0.2',backgroundColor:"rgba(0,0,0,0.5)"}:{opacity:'1'}}>
@@ -51,7 +86,11 @@ function Chatbot() {
       <div className='containerB' >
           <div className='upperContB' >
             <div className="contentB" style={openModal==true || openB==true || openC==true? {opacity:'0.2',backgroundColor:"rgba(0,0,0,0.5)"}:{opacity:'1'}}>
-              Insert Chat Content
+              <Chatbubble message="Great to see you here! I'm BlabBot and I'm here to assist you. How can I be of help to you today? 
+                                  ㅤㅤHere are some choices that you can select:" 
+                          buttons={buttons}
+                          subtext={"Please let me know which option you would like to choose."}
+                          chatImage={clogo}/>
             </div>
           </div>
           <div className='lowerContB'>
