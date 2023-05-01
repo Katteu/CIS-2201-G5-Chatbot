@@ -159,10 +159,128 @@
     margin-left:2%;
 }
 
+.themeHeader{
+    width: 100%;
+    background-color: #4da6ff;
+}
+
+.customTitle{
+    text-align: center;
+    color: #252525;
+    margin: 0;
+    padding: 3vh;
+}
+
 #lineCB{
     margin-top:40%;
 }
 
+/*Customization theme*/
+.parentSect{
+    display: flex;
+    justify-content: center;
+    height: 52%;
+}
+.leftHalf{
+    display: 50%;
+    width: 46%;
+    height: 100%;
+    background-color: white;
+    padding: 2vh;
+    margin: 0;
+}
+.rightHalf{
+    display: 50%;
+    width: 46%;
+    height: 100%;
+    background-color: white;
+    padding: 2vh;
+}
+.themeRow{
+    margin: 0;
+    padding: 1vh;
+}
+
+.footerExit{
+    display:flex;
+    width:100%;
+    height: 17%;
+    background-color: #001B4E;
+    margin-top: 4%;
+}
+.customName{
+    color: black;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.saveBtn{
+    text-align: center;
+    margin-right:1.9%;
+    margin-top:1.5%;
+    font-family: Montserrat;
+    color:white;
+    font-size:1.2em;
+    width: 50%;
+    cursor:pointer;
+ }
+ .cancelBtn{
+    width:50%;
+    align-items: center;
+    text-align: center;
+    font-size:1.2em;
+    color: white;
+    font-family: Montserrat;
+    margin-left:2%;
+    cursor:pointer;
+}
+.cobaltTheme{
+    width: 9vh;
+    height: 9vh;
+    border-radius: 50%;
+    background:linear-gradient( -45deg, #143d59, #143d59 49%, #143d59 49%, #f4b41a 51%, #f4b41a 51% );
+    border: 2px solid #143d59;
+    margin: 0;
+}
+.defaultTheme{
+    width: 9vh;
+    height: 9vh;
+    border-radius: 50%;
+    background:linear-gradient( -45deg, #002366, #002366 49%, #002366 49%, #8dd8ff 51%, #8dd8ff 51% );
+    border: 2px solid #002366;
+    margin: 0;
+}
+.royaltyTheme{
+    width: 9vh;
+    height: 9vh;
+    border-radius: 50%;
+    background:linear-gradient( -45deg, #182F41 , #182F41  49%, #182F41  49%, #F19372 51%, #F19372 51% );
+    border: 2px solid #182F41;
+    margin: 0;
+}
+.forestmossTheme{
+    width: 9vh;
+    height: 9vh;
+    border-radius: 50%;
+    background:linear-gradient( -45deg, #2c5f2d, #2c5f2d 49%, #2c5f2d 49%, #97bc62 51%, #97bc62 51% );
+    border: 2px solid #2c5f2d;
+    margin: 0;
+}
+.soyeclipseTheme{
+    width: 9vh;
+    height: 9vh;
+    border-radius: 50%;
+    background:linear-gradient( -45deg, #343148, #343148 49%, #343148 49%, #d7c49e 51%, #d7c49e 51% );
+    border: 2px solid #343148;
+    margin: 0;
+}
+.fiestaredTheme{
+    width: 9vh;
+    height: 9vh;
+    border-radius: 50%;
+    background:linear-gradient( -45deg, #dd4132, #dd4132 49%, #dd4132 49%, #9e1030 51%, #9e1030 51% );
+    border: 2px solid #9e1030;
+    margin: 0;
+}
 /*About Modal*/
 .modalContAbout{
     background-image: url("../../assets/sides.png");
