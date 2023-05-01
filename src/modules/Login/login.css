@@ -1,0 +1,20 @@
+.loginBody{
+    height: 96.1vh;
+    background-image: linear-gradient(rgba(1, 1, 1, 0.5), rgba(255, 255, 255, 0.5)), url(../../assets/USC-TC.jpg);
+    background-size: cover;
+    background-position: center;
+    font-family: Montserrat, 'sans-serif';
+    background-repeat: no-repeat;
+}
+
+.rowz{
+    background-color: rgba(255, 255, 255, 0.628);
+    position: absolute;
+    left: 50%; 
+    top: 54%; 
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    width: 25%; 
+    text-align: center;
+    border-radius: 10px;
+}   

@@ -1,0 +1,261 @@
+/*Start of BlabBot Chat Bubble*/
+
+.chat-bubble-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: left;
+}
+
+.chat-content {
+    display: flex;
+    align-items: flex-end;
+}
+
+.chat-bubble {
+    position:relative;
+    background-color: #fff;
+    border: 1px solid #e5e5ea;
+    border-radius: 0.4em;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 1.5em;
+    padding-right:0.5em;
+    background-color: #8dd8ff;
+    max-width:26%;
+    min-width:10%;
+    word-wrap: break-word;
+    margin-top: 0.8%;
+    animation: bounceIn; 
+    animation-duration: 0.8s;
+}
+
+.chat-bubble p{color:#002366;}
+
+.buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1%;
+}
+
+.buttons-container button {
+    background-color: white;
+    color: black;
+    font-weight:700;
+    font-size:0.8em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width:45%;
+    text-align: center;
+    word-wrap: break-word;
+    padding: 1.5% 2%;
+    margin-right:4%;
+    margin-top:2%;
+    margin-bottom:2%;
+    box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.buttons-container button:hover {
+    background-color: white;
+    color: black;
+}
+
+.buttonz-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1%;
+}
+
+.buttonz-container button {
+    background-color: white;
+    color: black;
+    font-weight:700;
+    font-size:0.8em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width:100%;
+    text-align: center;
+    word-wrap: break-word;
+    padding: 1.5% 2%;
+    margin-right:4%;
+    margin-top:2%;
+    margin-bottom:2%;
+    box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.buttonz-container button:hover {
+    background-color: white;
+    color: black;
+}
+
+.chat-image {
+    background-color: #8dd8ff;
+    border-radius: 100%;
+    padding-top:0.5%;
+    padding-bottom:0.2%;
+    padding-right:0.05%;
+    padding-left:0.05%;
+    width:3.9%;
+    margin-left:2.1%;
+    margin-right:1.5%;
+    animation: bounceIn; 
+    animation-duration: 0.8s;
+}
+
+.chat-bubble::before {
+    content: '';
+    position: absolute;
+    left: -3.95%;
+    bottom: 0%;
+    border: 10px solid transparent;
+    border-right: 10px solid #8dd8ff;
+    border-bottom: 0px solid transparent;
+}
+
+.chat-bubble-bef{  /*Loading chat bubble*/
+    position:relative;
+    background-color: #fff;
+    border: 1px solid #e5e5ea;
+    border-radius: 0.4em;
+    padding: 1em 2em;
+    background-color: #8dd8ff;
+    width:1%;
+    margin-top:0.5%;
+    animation: fadeIn; 
+    animation-duration: 0.8s;
+}
+
+.chat-bubble-bef::before {
+    content: '';
+    position: absolute;
+    left: -18%;
+    bottom: 0%;
+    border: 10px solid transparent;
+    border-right: 10px solid #8dd8ff;
+    border-bottom: 0px solid transparent;
+}
+
+/*End of BlabBot Chat Bubble*/
+
+/*Start of Student Chat Bubble*/
+
+.chatstud-bubble-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: right;
+}
+
+.chatstud-content {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.chatstud-bubble {
+    position:relative;
+    border: 1px solid #013fa6;
+    border-radius: 0.4em;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 1.5em;
+    background-color: #013fa6;
+    max-width:26%;
+    min-width:10%;
+    word-wrap: break-word;
+    margin-top: 1%;
+    animation: bounceIn; 
+    animation-duration: 0.8s;
+}
+
+.chatstud-bubble p{color:white;}
+
+.chatstud-image {
+    background-color: #013fa6;
+    border-radius: 100%;
+    padding-top:0.5%;
+    padding-bottom:0.2%;
+    padding-right:0.05%;
+    padding-left:0.05%;
+    width:3.9%;
+    margin-left:2.1%;
+    margin-right:1.5%;
+    animation: bounceIn; 
+    animation-duration: 0.8s;
+}
+
+.chatstud-bubble::before {
+    content: '';
+    position: absolute;
+    right: -3.95%;
+    bottom: 0%;
+    border: 10px solid transparent;
+    border-left: 10px solid #013fa6;
+    border-bottom: 0px solid transparent;
+}
+
+.chatstud-bubble-bef{  /*Loading chat bubble*/
+    position:relative;
+    border: 1px solid #013fa6;
+    border-radius: 0.4em;
+    padding: 1em 2em;
+    background-color: #013fa6;
+    width:1%;
+    margin-top:1%;
+    animation: fadeIn; 
+    animation-duration: 0.8s;
+}
+
+.chatstud-bubble-bef::before {
+    content: '';
+    position: absolute;
+    right: -18%;
+    bottom: 0%;
+    border: 10px solid transparent;
+    border-left: 10px solid #013fa6;
+    border-bottom: 0px solid transparent;
+}
+
+/*End of Student Chat Bubble*/ 
+
+
+
+/*Dot Typing*/
+.dot-typing {
+position: relative;
+left: -9999px;
+width: 10px;
+height: 10px;
+border-radius: 5px;
+background-color: white;
+color: white;
+box-shadow: 9984px 0 0 0 white, 9999px 0 0 0 white, 10014px 0 0 0 white;
+animation: dot-typing 1.5s infinite linear;
+}
+
+@keyframes dot-typing {
+0% {
+    box-shadow: 9984px 0 0 0 white, 9999px 0 0 0 white, 10014px 0 0 0 white;
+}
+16.667% {
+    box-shadow: 9984px -10px 0 0 white, 9999px 0 0 0 white, 10014px 0 0 0 white;
+}
+33.333% {
+    box-shadow: 9984px 0 0 0 white, 9999px 0 0 0 white, 10014px 0 0 0 white;
+}
+50% {
+    box-shadow: 9984px 0 0 0 white, 9999px -10px 0 0 white, 10014px 0 0 0 white;
+}
+66.667% {
+    box-shadow: 9984px 0 0 0 white, 9999px 0 0 0 white, 10014px 0 0 0 white;
+}
+83.333% {
+    box-shadow: 9984px 0 0 0 white, 9999px 0 0 0 white, 10014px -10px 0 0 white;
+}
+100% {
+    box-shadow: 9984px 0 0 0 white, 9999px 0 0 0 white, 10014px 0 0 0 white;
+}
+}
+/*End of Dot Flashing*/

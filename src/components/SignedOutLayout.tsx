@@ -21,7 +21,7 @@ function SignedOutLayout() {
           Link
         </p>
       </div>
-      <div style={{ marginTop: "10vh", width: "100%", height: "100vh" }}>
+      <div style={{ marginTop: "10vh", width: "100%", height: "96.1vh" }}>
         {outlet}
       </div>
     </div>

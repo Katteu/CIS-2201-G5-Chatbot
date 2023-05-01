@@ -1,6 +1,5 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Login from "./modules/Login";
 import Register from "./modules/Register";
 import SignedInLayout from "./components/SignedInLayout";
 import SignedOutLayout from "./components/SignedOutLayout";
@@ -15,6 +14,7 @@ import Inventory from "./modules/Inventory";
 import Grievances from "./modules/Grievances";
 import RoomIssues from "./modules/RoomIssues";
 import SeatingAssignment from "./modules/SeatingAssignment";
+import Logincb from "./modules/Login/logincb";
 
 function App() {
   return (
@@ -33,7 +33,7 @@ function App() {
       </Route>
       <Route element={<SignedOutLayout />} >
         <Route path="/" element={<Landing/>} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Logincb />} />
         <Route path="/register" element={<Register />} />
       </Route>
     </Routes>

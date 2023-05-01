@@ -59,7 +59,7 @@ const styles: any = {
     position: "absolute",
     top: "6vh",
     width: "12%",
-    height: "100vh",
+    height: "94vh",
     backgroundColor: colors.brand,
     display: "flex",
     flexDirection: "column",

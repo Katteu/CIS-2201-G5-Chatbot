@@ -1,24 +1,57 @@
-import React, { useState } from 'react'
-import "../Chatbot/chatbot.css"
+import React, { useEffect, useState } from 'react'
+import "../Chatbot/assets/chatbot.css"
+import "../Chatbot/assets/bubble.css"
 import bot from "../../assets/blabbot.png";
 import Aboutcb from './aboutcb';
 import Botupdates from './botupdates';
 import Customize from './customize';
-import Chatbubble from './chatbubble';
+import Chatbubble from './component/chatbubble';
+import ChatStud from './component/chatStud';
 import clogo from "../../assets/chatlogo.png";
+import axios from "axios";
+import Studconcern from './categories/studconcern';
+
 
 function Chatbot() {
   let status = true;
   const [openModal,setOpenModal] = useState(false);
   const [openB,setOpenB] = useState(false);
   const [openC,setOpenC] = useState(false);
+  const [studData,setStudData] = useState<StudCon[]>([]);
+  const [label,setLabel]= useState<string|null>(null);
+  const [butClick,setButClick] = useState<boolean>(false);
 
-  const humanHandover = () => {
+  /*To check what is clicked*/
+  const [showStudConcern, setShowStudConcern] = useState(false);
+  const [human,setHuman] = useState(false);
 
+
+  /*for useEffect*/
+  const [studState,setStudCon] = useState(false);
+  useEffect(()=>{
+    if(human){
+      humanHandover();
+    }else if(studState){
+      studentConcerns();
+    }
+  },[]);
+
+  const humanHandover = async () => {
+    if(!butClick){
+      setLabel("Human Handover");
+      setButClick(true);
+    }
   };
 
-  const studentConcerns = () => {
-    console.log("Button 2 clicked!");
+  const studentConcerns = async () => {
+    if(!butClick){
+      setLabel("Student Concerns");
+      setButClick(true);
+      const response = await axios.get("http://localhost:3001/api/studconcerns");
+      setStudData(response.data);
+      setStudCon(true);
+      setTimeout(() => setShowStudConcern(true), 1500); 
+    }
   };
 
   const wayFinding = () => {
@@ -45,6 +78,12 @@ function Chatbot() {
     { label: "Alumni Affairs", onClick: alumniAffairs },
     { label: "Miscellaneous", onClick: misc },
   ];
+
+  // const button2 = [
+  //   {label:"Do you want to continue?", onClick: repeatMenu},
+  // ];
+
+
   return (
     <div className='cbCont'>
       <div className='containerA' style={openModal==true || openB==true || openC==true? {opacity:'0.2',backgroundColor:"rgba(0,0,0,0.5)"}:{opacity:'1'}}>
@@ -91,6 +130,14 @@ function Chatbot() {
                           buttons={buttons}
                           subtext={"Please let me know which option you would like to choose."}
                           chatImage={clogo}/>
+
+
+              {label && <ChatStud message={label} chatImage="S"/>}
+
+               {/* Shows Student Concerns */}
+               {showStudConcern && <Studconcern studData={studData}/>}
+
+
             </div>
           </div>
           <div className='lowerContB'>

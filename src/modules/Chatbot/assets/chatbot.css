@@ -10,6 +10,7 @@
     margin:0;
     padding:0;
     display:flex;
+    padding-top:3.4%;
 }
 
 .containerA{
@@ -17,14 +18,14 @@
     width:18%;
     color:white;
     font-family:Montserrat;
-    height:100vh;   
+    height:94vh;   
     margin-left:-0.25%;
 }
 
 .upperCont{
     text-align: center;
     padding-top:45%;
-    
+
 }
 
 .lowerCont{
@@ -42,14 +43,16 @@
 }
 
 .upperContB{
-    height:90vh;
+    height:85vh;
     width:100%;
     position: relative;
+    overflow-y: auto;
+    padding-bottom:2%;
 }
 
 .contentB{
     /* width:211.3%; */
-    height:100vh;
+    height:94.4vh;
 }
 
 .lowerContB{
@@ -207,156 +210,6 @@
     width:55%;
     display:flex;
 }
-
-/*Start of BlabBot Chat Bubble*/
-
-.chat-bubble-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: left;
-}
-
-.chat-content {
-    display: flex;
-    align-items: flex-end;
-}
-
-.chat-bubble {
-    position:relative;
-    background-color: #fff;
-    border: 1px solid #e5e5ea;
-    border-radius: 0.4em;
-    display: flex;
-    flex-direction: column;
-    padding: 0.5em 1.5em;
-    padding-right:0.5em;
-    background-color: #8dd8ff;
-    width:26%;
-    word-wrap: break-word;
-    margin-top: 2%;
-
-    animation: bounceIn; 
-    animation-duration: 0.8s;
-}
-
-.chat-bubble p{color:#002366;}
-
-.buttons-container {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 1%;
-}
-
-.buttons-container button {
-    background-color: white;
-    color: black;
-    font-weight:700;
-    font-size:0.8em;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width:45%;
-    text-align: center;
-    word-wrap: break-word;
-    padding: 1.5% 2%;
-    margin-right:4%;
-    margin-top:2%;
-    margin-bottom:2%;
-    box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.5);
-}
-
-.buttons-container button:hover {
-    background-color: white;
-    color: black;
-}
-
-.chat-image {
-    background-color: #8dd8ff;
-    border-radius: 100%;
-    padding-top:0.5%;
-    padding-bottom:0.2%;
-    padding-right:0.05%;
-    padding-left:0.05%;
-    width:3.9%;
-    margin-left:2.1%;
-    margin-right:1.5%;
-    animation: bounceIn; 
-    animation-duration: 0.8s;
-}
-
-.chat-bubble::before {
-    content: '';
-    position: absolute;
-    left: -3.95%;
-    bottom: 0%;
-    border: 10px solid transparent;
-    border-right: 10px solid #8dd8ff;
-    border-bottom: 0px solid transparent;
-}
-
-.chat-bubble-bef{  /*Loading chat bubble*/
-    position:relative;
-    background-color: #fff;
-    border: 1px solid #e5e5ea;
-    border-radius: 0.4em;
-    padding: 1em 2em;
-    background-color: #8dd8ff;
-    width:1%;
-    margin-top:2%;
-    animation: fadeIn; 
-    animation-duration: 0.8s;
-}
-
-.chat-bubble-bef::before {
-    content: '';
-    position: absolute;
-    left: -18%;
-    bottom: 0%;
-    border: 10px solid transparent;
-    border-right: 10px solid #8dd8ff;
-    border-bottom: 0px solid transparent;
-}
-
-/*End of BlabBot Chat Bubble*/
-
-/*Dot Typing*/
-.dot-typing {
-position: relative;
-left: -9999px;
-width: 10px;
-height: 10px;
-border-radius: 5px;
-background-color: white;
-color: white;
-box-shadow: 9984px 0 0 0 white, 9999px 0 0 0 white, 10014px 0 0 0 white;
-animation: dot-typing 1.5s infinite linear;
-}
-
-@keyframes dot-typing {
-0% {
-    box-shadow: 9984px 0 0 0 white, 9999px 0 0 0 white, 10014px 0 0 0 white;
-}
-16.667% {
-    box-shadow: 9984px -10px 0 0 white, 9999px 0 0 0 white, 10014px 0 0 0 white;
-}
-33.333% {
-    box-shadow: 9984px 0 0 0 white, 9999px 0 0 0 white, 10014px 0 0 0 white;
-}
-50% {
-    box-shadow: 9984px 0 0 0 white, 9999px -10px 0 0 white, 10014px 0 0 0 white;
-}
-66.667% {
-    box-shadow: 9984px 0 0 0 white, 9999px 0 0 0 white, 10014px 0 0 0 white;
-}
-83.333% {
-    box-shadow: 9984px 0 0 0 white, 9999px 0 0 0 white, 10014px -10px 0 0 white;
-}
-100% {
-    box-shadow: 9984px 0 0 0 white, 9999px 0 0 0 white, 10014px 0 0 0 white;
-}
-}
-/*End of Dot Flashing*/
 
 @media (min-width:800px) and (max-width: 1600px) {
     .slogan{

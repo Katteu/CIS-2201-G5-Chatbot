@@ -3,15 +3,16 @@ import React, { useState, useEffect } from "react";
 interface ChatBubbleProps {
   message: string;
   buttons?: { label: string; onClick: () => void }[];
+  buttonz?: { label: string; onClick: () => void }[];
   chatImage?: string;
   subtext?: string;
 }
 
-const ChatBubble: React.FC<ChatBubbleProps> = ({ message, buttons, subtext, chatImage }) => {
+const ChatBubble: React.FC<ChatBubbleProps> = ({ message, buttons, buttonz,subtext, chatImage }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => setIsVisible(true), 2000);
+    const timeoutId = setTimeout(() => setIsVisible(true), 1500);
     return () => clearTimeout(timeoutId);
   }, []);
 
@@ -28,6 +29,16 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ message, buttons, subtext, chat
             {buttons && (
               <div className="buttons-container">
                 {buttons.map((button) => (
+                  <button key={button.label} onClick={() => handleButtonClick(button.onClick)}>
+                    {button.label}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {buttonz && (
+              <div className="buttonz-container">
+                {buttonz.map((button) => (
                   <button key={button.label} onClick={() => handleButtonClick(button.onClick)}>
                     {button.label}
                   </button>
