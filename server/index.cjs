@@ -22,6 +22,26 @@ app.get("/api/studconcerns",(req,res)=>{
     })
 })
 
+app.post('/login', (req,res)=> {
+    const username = req.body.username;
+    const password = req.body.password;
+
+    db.query(
+        "SELECT * FROM stud_tb WHERE _EmailAdd = ? AND _Password = ?",
+        [username, password],
+        (err,result) => {
+            if(err){
+                res.send({err:err})
+            }
+            if(result.length = 0){
+                res.send(result);
+            }else{
+                res.send({message: "Wala"});
+            }
+        }
+    );
+}); 
+
 // app.get("/",(req,res)=>{
 //     const sqlInsert = "INSERT INTO contact (school_id,name,email) VALUES ('19103523','john doe','johndoe@gmail.com')";
 //     db.query(sqlInsert,(err,res)=>{
