@@ -22,6 +22,16 @@ app.get("/api/studconcerns",(req,res)=>{
     })
 })
 
+app.get("/login",(req,res)=>{
+    const username = req.body.username;
+    const password = req.body.password;
+
+    const loginSQL = "SELECT * FROM studcon_tb";
+    db.query(loginSQL,(err,result)=>{
+        res.send(result);
+    })
+})
+
 // app.get("/",(req,res)=>{
 //     const sqlInsert = "INSERT INTO contact (school_id,name,email) VALUES ('19103523','john doe','johndoe@gmail.com')";
 //     db.query(sqlInsert,(err,res)=>{
