@@ -1,4 +1,3 @@
-import React from "react";
 import { useOutlet, useNavigate, useLocation } from "react-router-dom";
 import logo from "../assets/DCISM_LOGO.png";
 import { FiUser, FiLogOut, FiBell } from "react-icons/fi";
@@ -11,6 +10,11 @@ function SignedInLayout() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const logout = () => {
+    sessionStorage.removeItem("firstName");
+    sessionStorage.removeItem('email');
+    navigate('/');
+}
   return (
     <div>
       <div style={styles.topNav}>
@@ -18,7 +22,7 @@ function SignedInLayout() {
         <div style={{ marginLeft: "auto" }}>
           <FiBell style={styles.navIcon} />
           <FiUser style={styles.navIcon} />
-          <FiLogOut style={styles.navIcon} />
+          <FiLogOut onClick={logout} style={styles.navIcon} />
         </div>
       </div>
       <div style={styles.sideNav}>
