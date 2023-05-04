@@ -34,3 +34,49 @@
     font-weight: 500;
     font-size:1.2em;
 }
+
+/*Load Container*/
+
+.bodyLoader{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #ffffff;
+}
+
+.progress{
+    position: relative;
+    height: 1vh;
+    width: 100%;
+    border: 10px solid #001B4E;
+    border-radius: 15px;
+}
+.progress .color{
+    position: absolute;
+    background-color: #4da6ff;
+    width: 0px;
+    height: 10px;
+    border-radius: 15px;
+    animation: progres 2s infinite linear;    
+}
+@keyframes progres{
+    0%{
+      width: 0%;
+    }
+    25%{
+        width: 50%;
+    }
+    50%{
+        width: 75%;
+    }
+    75%{
+        width: 85%;
+    }
+    100%{
+        width: 100%;
+    }
+};
+
+/*Start of Another Preload*/
+

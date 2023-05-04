@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import stud from "../../assets/wave.png"
 import '../Chatbot/assets/landing.css'
 import { TbArrowBigUpLinesFilled } from "react-icons/tb";
+import Preloader from '../Chatbot/component/preloader';
 
 function Landing() {
   const [firstName, setFirstName] = useState('');
@@ -9,14 +10,14 @@ function Landing() {
   useEffect(() => {
     const fNameStore = sessionStorage.getItem('firstName') || '';
     setFirstName(fNameStore);
-  }, []);
+    }, []);
 
   return (
     <div>
       <div className='bodyLanding' style={{paddingTop:"12%"}}>
-        <img alt="Student Wave" className='studWave' src={stud} />
         {firstName ?
           <div>
+            <img alt="Student Wave" className='studWave' src={stud} />
             <div className='pointTo'>
               <TbArrowBigUpLinesFilled style={styles.arrow}/>
               <h2>To start your experience,{"\n"} Click here!</h2>
@@ -26,6 +27,7 @@ function Landing() {
           </div>
           :
           <div>
+            LOG IN NA HOY
             {/* Insert here unsay iingon kung wa pa ka log in */}
           </div>
         }

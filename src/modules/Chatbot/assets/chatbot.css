@@ -11,6 +11,8 @@
     padding:0;
     display:flex;
     padding-top:3.4%;
+    animation: fadeIn;
+    animation-duration: 0.2s;
 }
 
 .containerA{

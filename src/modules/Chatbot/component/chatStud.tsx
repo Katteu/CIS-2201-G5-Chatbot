@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from "react";
 
-interface ChatBubbleProps {
+interface ChatStudBubbleProps {
   message: string;
-  chatImage?: string;
   subtext?: string;
 }
 
-const ChatStud: React.FC<ChatBubbleProps> = ({ message, subtext, chatImage }) => {
+const ChatStud: React.FC<ChatStudBubbleProps> = ({ message, subtext}) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [firstName, setFirstName] = useState('');
 
   useEffect(() => {
     const timeoutId = setTimeout(() => setIsVisible(true), 1000);
+    const fNameStore = sessionStorage.getItem('firstName') || '';
+    setFirstName(fNameStore);
     return () => clearTimeout(timeoutId);
   }, []);
+
 
 
   return isVisible ? (
@@ -22,7 +25,7 @@ const ChatStud: React.FC<ChatBubbleProps> = ({ message, subtext, chatImage }) =>
             <p>{message}</p>
             <p>{subtext}</p>
           </div>
-          {chatImage && <img src={chatImage} alt="S" className="chatstud-image" />}
+          {firstName && <p className="chatstud-image">{firstName.charAt(0)}</p>}
       </div>
     </div>
   ) :
@@ -35,7 +38,7 @@ const ChatStud: React.FC<ChatBubbleProps> = ({ message, subtext, chatImage }) =>
           </div>
         </div>
       </div>
-      {chatImage && <img src={chatImage} alt="S" className="chatstud-image" />}
+      {firstName && <p className="chatstud-image">{firstName.charAt(0)}</p>}
   </div>
   </div>;
 };

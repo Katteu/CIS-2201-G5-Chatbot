@@ -5,10 +5,11 @@ interface ChatBubbleProps {
   buttons?: { label: string; onClick: () => void }[];
   buttonz?: { label: string; onClick: () => void }[];
   chatImage?: string;
+  imageUrl?: string;
   subtext?: string;
 }
 
-const ChatBubble: React.FC<ChatBubbleProps> = ({ message, buttons, buttonz,subtext, chatImage }) => {
+const ChatBubble: React.FC<ChatBubbleProps> = ({ message, buttons, buttonz,subtext, chatImage,imageUrl}) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -26,6 +27,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ message, buttons, buttonz,subte
         {chatImage && <img src={chatImage} alt="chat" className="chat-image" />}
           <div className="chat-bubble">
             <p>{message}</p>
+            {imageUrl && <img src={imageUrl} alt="roomLoc" className="roomImg" />}
             {buttons && (
               <div className="buttons-container">
                 {buttons.map((button) => (

@@ -40,6 +40,34 @@ app.get("/api/studconcerns",(req,res)=>{
     })
 })
 
+app.get("/api/roomlocation",(req,res)=>{
+    const sqlGet = "SELECT * FROM roomlocations_tb";
+    db.query(sqlGet,(err,result)=>{
+        res.send(result);
+    })
+})
+
+app.get("/api/disprep",(req,res)=>{
+    const sqlGet = "SELECT * FROM distprep_tb";
+    db.query(sqlGet,(err,result)=>{
+        res.send(result);
+    })
+})
+
+app.get("/api/alumniaff",(req,res)=>{
+    const sqlGet = "SELECT * FROM alumniaff_tb";
+    db.query(sqlGet,(err,result)=>{
+        res.send(result);
+    })
+})
+
+app.get("/api/miscellaneous",(req,res)=>{
+    const sqlGet = "SELECT * FROM misc_tb";
+    db.query(sqlGet,(err,result)=>{
+        res.send(result);
+    })
+})
+
 app.post('/login', (req,res)=> {
     const email = req.body.email;
     const password = req.body.password;
@@ -56,7 +84,7 @@ app.post('/login', (req,res)=> {
                 const hashedPassword = crypto.createHash('sha256').update(password).digest('hex'); // hash the password
                 if(hashedPassword === result[0]._Password){
                     req.session.user = result;
-                    console.log(req.session.user);
+                    // console.log(req.session.user);
                     res.send(result);
                 }else{
                     res.send({message: "Invalid Login Credentials!"});

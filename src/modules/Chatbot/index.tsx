@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "../Chatbot/assets/chatbot.css"
 import "../Chatbot/assets/bubble.css"
 import bot from "../../assets/blabbot.png";
@@ -10,6 +10,10 @@ import ChatStud from './component/chatStud';
 import clogo from "../../assets/chatlogo.png";
 import axios from "axios";
 import Studconcern from './categories/studconcern';
+import Roomlocation from './categories/roomlocation';
+import Disasterprep from './categories/disasterprep';
+import Alumniaff from './categories/alumniaff';
+import Miscellaneous from './categories/miscellaneous';
 
 
 function Chatbot() {
@@ -17,22 +21,37 @@ function Chatbot() {
   const [openModal,setOpenModal] = useState(false);
   const [openB,setOpenB] = useState(false);
   const [openC,setOpenC] = useState(false);
-  const [studData,setStudData] = useState<StudCon[]>([]);
   const [label,setLabel]= useState<string|null>(null);
   const [butClick,setButClick] = useState<boolean>(false);
 
+  /*To hold the data*/
+  const [studData,setStudData] = useState<StudCon[]>([]);
+  const [roomData,setRoomData] = useState<RoomLoc[]>([]);
+  const [disData,setDisData] = useState<DistPrep[]>([]);
+  const [alumnData,setAlumnData] = useState<AlumniAff[]>([]);
+  const [miscData,setMiscData] = useState<Miscellaneous[]>([]);
+
   /*To check what is clicked*/
   const [showStudConcern, setShowStudConcern] = useState(false);
+  const [showRoomLoc, setShowRoomLoc] = useState(false);
+  const [showDisPrep, setShowDisPrep] = useState(false);
+  const [showAlumnAff, setShowAlumnAff] = useState(false);
+  const [showMisc, setShowMisc] = useState(false);
   const [human,setHuman] = useState(false);
 
-
-  /*for useEffect*/
-  const [studState,setStudCon] = useState(false);
   useEffect(()=>{
     if(human){
       humanHandover();
-    }else if(studState){
+    }else if(showStudConcern){
       studentConcerns();
+    }else if(showRoomLoc){
+      wayFinding();
+    }else if(showDisPrep){
+      disPrepared();
+    }else if(showAlumnAff){
+      alumniAffairs();
+    }else if(showMisc){
+      misc();
     }
   },[]);
 
@@ -49,25 +68,48 @@ function Chatbot() {
       setButClick(true);
       const response = await axios.get("http://localhost:3001/api/studconcerns");
       setStudData(response.data);
-      setStudCon(true);
       setTimeout(() => setShowStudConcern(true), 1500); 
     }
   };
 
-  const wayFinding = () => {
-    console.log("Button 2 clicked!");
+  const wayFinding = async () => {
+    if(!butClick){
+      setLabel("Room Locations");
+      setButClick(true);
+      const response = await axios.get("http://localhost:3001/api/roomlocation");
+      setRoomData(response.data);
+      setTimeout(()=> setShowRoomLoc(true),1500);
+    }
   };
 
-  const disPrepared = () => {
-    console.log("Button 2 clicked!");
+  const disPrepared = async () => {
+    if(!butClick){
+      setLabel("Disaster Preparedness");
+      setButClick(true);
+      const response = await axios.get("http://localhost:3001/api/disprep");
+      setDisData(response.data);
+      setTimeout(()=> setShowDisPrep(true),1500);
+    }
   };
 
-  const alumniAffairs = () => {
-    console.log("Button 2 clicked!");
+  const alumniAffairs = async () => {
+    if(!butClick){
+      setLabel("Alumni Affairs");
+      setButClick(true);
+      const response = await axios.get("http://localhost:3001/api/alumniaff");
+      setAlumnData(response.data);
+      setTimeout(()=> setShowAlumnAff(true),1500);
+    }
   };
 
-  const misc = () => {
-    console.log("Button 2 clicked!");
+  const misc = async () => {
+    if(!butClick){
+      setLabel("Miscellaneous");
+      setButClick(true);
+      const response = await axios.get("http://localhost:3001/api/miscellaneous");
+      setMiscData(response.data);
+      setTimeout(()=> setShowMisc(true),1500);
+    }
   };
 
   const buttons = [
@@ -78,11 +120,6 @@ function Chatbot() {
     { label: "Alumni Affairs", onClick: alumniAffairs },
     { label: "Miscellaneous", onClick: misc },
   ];
-
-  // const button2 = [
-  //   {label:"Do you want to continue?", onClick: repeatMenu},
-  // ];
-
 
   return (
     <div className='cbCont'>
@@ -132,11 +169,18 @@ function Chatbot() {
                           chatImage={clogo}/>
 
 
-              {label && <ChatStud message={label} chatImage="S"/>}
+              {label && <ChatStud message={label}/>}
 
                {/* Shows Student Concerns */}
                {showStudConcern && <Studconcern studData={studData}/>}
-
+               {/* Shows Room Locations */}
+               {showRoomLoc && <Roomlocation roomData={roomData}/>}
+               {/* Shows Disaster Preparedness */}
+               {showDisPrep && <Disasterprep disData={disData}/>}
+               {/* Shows Alumni Affairs */}
+               {showAlumnAff && <Alumniaff alumnData={alumnData}/>}
+               {/* Shows Miscellaneous */}
+               {showMisc && <Miscellaneous miscData={miscData}/>}
 
             </div>
           </div>

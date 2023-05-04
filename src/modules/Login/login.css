@@ -1,3 +1,5 @@
+@import 'animate.css';
+
 .loginBody{
     height: 96.1vh;
     background-image: linear-gradient(rgba(1, 1, 1, 0.5), rgba(255, 255, 255, 0.5)), url(../../assets/USC-TC.jpg);
@@ -5,6 +7,8 @@
     background-position: center;
     font-family: Montserrat, 'sans-serif';
     background-repeat: no-repeat;
+    animation: fadeIn;
+    animation-duration: 0.2s;
 }
 
 .rowz{

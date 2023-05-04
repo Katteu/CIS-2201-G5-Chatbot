@@ -4,10 +4,12 @@ import clogo from "../../../assets/chatlogo.png";
 import ChatStud from '../component/chatStud';
 import Chatmenu from '../component/chatmenu'
 
-const Studconcern = ({studData}:{studData: StudCon[]}) => {
+const Roomlocation = ({roomData}:{roomData: RoomLoc[]}) => {
+
   /*To check what is clicked*/
-  const [selectedItem, setSelectedItem] = useState<StudCon | null>(null);
-  const [showQues, setShowQues] = useState<StudCon | null>(null);
+  const [selectedItem, setSelectedItem] = useState<RoomLoc | null>(null);
+  const [showQues, setShowQues] = useState<RoomLoc | null>(null);
+  const [end,setEnd] = useState(false);
 
   /*Determines what is clicked*/
   const [buttonClicked, setButtonClicked] = useState<boolean>(false);
@@ -16,12 +18,12 @@ const Studconcern = ({studData}:{studData: StudCon[]}) => {
   const [contChat2,setContChat2] = useState<string|null>(null);
   const [ask,setAsk] = useState(false);
   const [menuz,setMenuz] = useState(false);
-  const [end,setEnd] = useState(false);
 
   const handleButtonClick = (id: number) => {
     if(!buttonClicked){
-      const item = studData.find((item) => item._SCID === id);
+      const item = roomData.find((item) => item._RLID === id);
       setShowQues(item || null);
+      console.log(item?._imageURL)
       setTimeout(() => setSelectedItem(item ||null), 1000);
       setTimeout(() => setContChat(true), 3000); 
       setButtonClicked(true);
@@ -64,10 +66,10 @@ const Studconcern = ({studData}:{studData: StudCon[]}) => {
       <Chatbubble message="You may click or type your desired question:"
                   chatImage={clogo}
                   buttonz={
-                    studData.map((item, i) => ({
+                    roomData.map((item, i) => ({
                       label: item._Question,
-                      onClick: () => handleButtonClick(item._SCID),
-                      "data-id": item._SCID,
+                      onClick: () => handleButtonClick(item._RLID),
+                      "data-id": item._RLID,
                       key: i
                     }))
                   }
@@ -76,8 +78,9 @@ const Studconcern = ({studData}:{studData: StudCon[]}) => {
       {showQues && (
          <ChatStud message={showQues?._Question}/>
       )}
+
       {selectedItem && (
-         <Chatbubble chatImage={clogo} message={selectedItem._Response} />
+         <Chatbubble chatImage={clogo} message={selectedItem._Response} imageUrl={selectedItem._imageURL} />
       )}
 
       {contChat && (
@@ -91,15 +94,15 @@ const Studconcern = ({studData}:{studData: StudCon[]}) => {
         )}
 
       {menuz && (<Chatmenu/>)}
-
       {ask && (
-        <Studconcern studData={studData}/>
+        <Roomlocation roomData={roomData}/>
       )}
+
       {end && (
-        <Chatbubble chatImage={clogo} message="Thanks for chatting with me today! Don't hesitate to come back if you have more questions." />
+        <Chatbubble chatImage={clogo} message="It was a pleasure chatting with you today! Have a great day." />
       )}
     </div>
   )
 }
 
-export default Studconcern;
+export default Roomlocation;

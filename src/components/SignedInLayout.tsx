@@ -12,9 +12,12 @@ function SignedInLayout() {
 
   const logout = () => {
     sessionStorage.removeItem("firstName");
-    sessionStorage.removeItem('email');
-    navigate('/');
-}
+    sessionStorage.removeItem("lastName");
+    sessionStorage.removeItem("email");
+    navigate('/'); // Navigate to the root page
+  }
+
+
   return (
     <div>
       <div style={styles.topNav}>
@@ -73,6 +76,7 @@ const styles: any = {
     marginRight: 20,
     color: colors.brand,
     fontSize: 15,
+    cursor: "pointer",
   },
   contentContainer: {
     // width: "98vh",
@@ -85,5 +89,6 @@ const styles: any = {
     color: "white",
     height: 10,
     textAlign: "right",
+    cursor: "pointer",
   },
 };
