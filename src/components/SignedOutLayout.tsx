@@ -24,13 +24,13 @@ function SignedOutLayout() {
         setIsLoading(false);
       }, 1500);
     }
-    console.log(isLoading);
   }, [location]);
 
   const logout = () => {
     sessionStorage.removeItem("firstName");
     sessionStorage.removeItem("lastName");
     sessionStorage.removeItem("email");
+    sessionStorage.removeItem("userType");
     if (location.pathname === "/") {
       window.location.reload();
     }

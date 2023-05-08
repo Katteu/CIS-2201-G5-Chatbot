@@ -14,7 +14,11 @@ import Roomlocation from './categories/roomlocation';
 import Disasterprep from './categories/disasterprep';
 import Alumniaff from './categories/alumniaff';
 import Miscellaneous from './categories/miscellaneous';
+import ProgCoord from './component/progcoord';
+import { io, Socket } from "socket.io-client";
+import Livechat from './categories/livechat';
 
+const socket = io("http://localhost:3001");
 
 function Chatbot() {
   let status = true;
@@ -30,6 +34,7 @@ function Chatbot() {
   const [disData,setDisData] = useState<DistPrep[]>([]);
   const [alumnData,setAlumnData] = useState<AlumniAff[]>([]);
   const [miscData,setMiscData] = useState<Miscellaneous[]>([]);
+  const [human,setHuman] = useState("");
 
   /*To check what is clicked*/
   const [showStudConcern, setShowStudConcern] = useState(false);
@@ -37,10 +42,19 @@ function Chatbot() {
   const [showDisPrep, setShowDisPrep] = useState(false);
   const [showAlumnAff, setShowAlumnAff] = useState(false);
   const [showMisc, setShowMisc] = useState(false);
-  const [human,setHuman] = useState(false);
+  const [showHuman, setShowHuman] = useState(false);
+  const [userType, setUserType] = useState(0);
+  const [userID,setUserID] = useState(0);
 
   useEffect(()=>{
-    if(human){
+    const userIDStore = parseInt(sessionStorage.getItem('userID') || '');
+    setUserID(userIDStore);
+  },[])
+  useEffect(()=>{
+    const userStore = parseInt(sessionStorage.getItem('userType') || '');
+    setUserType(userStore);
+
+    if(showHuman){
       humanHandover();
     }else if(showStudConcern){
       studentConcerns();
@@ -53,13 +67,38 @@ function Chatbot() {
     }else if(showMisc){
       misc();
     }
-  },[]);
+  },[userID]);
 
+  /*user Room ID*/
+  const [roomID,setRoomID] = useState(0);
+  const [room,setRoom] = useState(false);
   const humanHandover = async () => {
     if(!butClick){
       setLabel("Human Handover");
-      setButClick(true);
+      setTimeout(() => setShowHuman(true), 500); 
+      try {
+        setTimeout(() => {
+          socket.emit("chat_request", userID,(result: {status: string,req_ID: number})=>{
+            console.log("At index:"+result);
+            if(result.status==='accepted'){
+              setHuman("Accepted");
+              setTimeout(() => {
+                setRoomID(result.req_ID);
+                socket.emit('join_room',roomID);
+              }, 1000); 
+            }else if(result.status==='declined'){
+              setHuman("Declined");
+            }
+          });
+        }, 2500);
+      } catch (error) {
+        console.error(error);
+      }
     }
+  };
+
+  const liveChat = async () =>{
+    setTimeout(() => setRoom(true), 5000);
   };
 
   const studentConcerns = async () => {
@@ -121,7 +160,12 @@ function Chatbot() {
     { label: "Miscellaneous", onClick: misc },
   ];
 
+  const laybeuChat = [
+    { label: "Proceed to Live Chat", onClick: liveChat },
+  ];
+
   return (
+    
     <div className='cbCont'>
       <div className='containerA' style={openModal==true || openB==true || openC==true? {opacity:'0.2',backgroundColor:"rgba(0,0,0,0.5)"}:{opacity:'1'}}>
         <div className='upperCont'>
@@ -159,7 +203,10 @@ function Chatbot() {
           </div>
         </div>
       </div>
+      
       <div className='containerB' >
+      {userType===3 && room==false &&
+         <>
           <div className='upperContB' >
             <div className="contentB" style={openModal==true || openB==true || openC==true? {opacity:'0.2',backgroundColor:"rgba(0,0,0,0.5)"}:{opacity:'1'}}>
               <Chatbubble message="Great to see you here! I'm BlabBot and I'm here to assist you. How can I be of help to you today? 
@@ -182,8 +229,23 @@ function Chatbot() {
                {/* Shows Miscellaneous */}
                {showMisc && <Miscellaneous miscData={miscData}/>}
 
+               {/* Starts Human Handover */}
+               {showHuman && 
+                <>
+              <Chatbubble message="Please wait while I find someone to assist you..."
+                          chatImage={clogo}/>                
+                </>}
+                {human && 
+                <>
+              <Chatbubble message={human}
+                          chatImage={clogo}/>                
+               <Chatbubble message="Will connect you to the live assistant now."
+                       buttons={laybeuChat}
+                       chatImage={clogo}/>
+                </>}
             </div>
           </div>
+          
           <div className='lowerContB'>
             <div className="formCont" style={openModal==true || openB==true || openC==true? {opacity:"0.2"}:{opacity:"1"}}>
               <form className="textForm" >
@@ -195,7 +257,17 @@ function Chatbot() {
               <button><i className="fa fa-paper-plane"></i></button>
             </div>
           </div>
+          </>
+        }
+
+        {userType===2 && room==false &&
+              <ProgCoord/>
+        }
+
+        {room && <Livechat socket={socket} room={roomID} author="Student"/>}
+
       </div>
+      
       <Aboutcb open={openModal} onClose={()=> setOpenModal(false)}/>
       <Botupdates openB={openB} onCloseB={()=> setOpenB(false)}/>
       <Customize openC={openC} onCloseC={()=> setOpenC(false)}/>
@@ -203,6 +275,9 @@ function Chatbot() {
   )
 }
 
+// {roomID ?
+//   <>
+//           :<Livechat socket={socket} room={roomID}/>}
 const styleCB: any = {
   bot: {
     width: "60%",

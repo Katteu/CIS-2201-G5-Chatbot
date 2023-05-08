@@ -15,6 +15,7 @@ import Grievances from "./modules/Grievances";
 import RoomIssues from "./modules/RoomIssues";
 import SeatingAssignment from "./modules/SeatingAssignment";
 import Logincb from "./modules/Login/logincb";
+import Livechat from "./modules/Chatbot/categories/livechat";
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
         <Route path="/inventory" element={<Inventory/>} />
         <Route path="/grievances" element={<Grievances />} />
         <Route path="/room-issues" element={<RoomIssues />} />
-        
+        <Route path="/livechat" element={<Livechat />} />
       </Route>
       <Route element={<SignedOutLayout />} >
         <Route path="/" element={<Landing/>} />
