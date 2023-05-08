@@ -1,7 +1,12 @@
 import React, { FC, useEffect, useState } from 'react'
 import { io, Socket } from "socket.io-client";
+import bot from "../../../assets/blabbot.png";
+import clogo from "../../../assets/chatlogo.png";
 import ChatBubble from '../component/chatbubble';
 import ChatStud from '../component/chatStud';
+import Aboutcb from '../aboutcb';
+import Botupdates from '../botupdates';
+import Customize from '../customize';
 
 interface LivechatProps {
   socket: Socket;
@@ -50,7 +55,6 @@ const Livechat: FC<LivechatProps> = ({ socket, room,author }) => {
     }
   };
 
-
   return (
     <>
           <div className='upperContB' >
@@ -89,9 +93,37 @@ const Livechat: FC<LivechatProps> = ({ socket, room,author }) => {
               <button onClick={sendMessage}></button>
               {/* <i onClick={sendMessage} className="fa fa-paper-plane"></i> */}
             </div>
-          </div>       
-    </>
+          </div>      
+      </>
   )
 }
 
+const styleCB: any = {
+  bot: {
+    width: "60%",
+    marginBottom:"2%",
+  },
+
+  message:{
+    color: "White",
+    margin: "0",
+    fontSize:"1.1em",
+    fontFamily: "Montserrat",
+    fontWeight: "600",
+  },
+  active:{
+    width: "9%",
+    height: "100%",
+    backgroundColor: "#28d700",
+    borderRadius: "50%",
+    marginRight: "2%",
+  },
+  inactive:{
+    width: "9%",
+    height: "100%",
+    backgroundColor: "gray",
+    borderRadius: "50%",
+    marginRight: "2%",
+  },
+};
 export default Livechat

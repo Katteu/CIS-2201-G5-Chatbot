@@ -31,7 +31,6 @@ function App() {
         <Route path="/inventory" element={<Inventory/>} />
         <Route path="/grievances" element={<Grievances />} />
         <Route path="/room-issues" element={<RoomIssues />} />
-        <Route path="/livechat" element={<Livechat />} />
       </Route>
       <Route element={<SignedOutLayout />} >
         <Route path="/" element={<Landing/>} />
