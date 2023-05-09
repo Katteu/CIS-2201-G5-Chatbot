@@ -37,6 +37,10 @@ const Logincb = () => {
         });
     };
 
+    function redirectForgPass(){
+        window.location.href = "/forgotpass";
+    }
+
     useEffect(()=>{
         Axios.get("http://localhost:3001/login").then((res)=>{
             if(res.data.loggedIn==true){
@@ -68,7 +72,7 @@ const Logincb = () => {
                 </div>
                 <br/>
                 <div className="form-group">
-                <p>Forgot your password? Click <a style={{textDecoration:"none", color:"#87a2f7", fontWeight: "bold"}}>here</a></p>
+                <p>Forgot your password? Click <a style={{textDecoration:"none", color:"#87a2f7", fontWeight: "bold", cursor: "pointer"}} onClick={redirectForgPass}>here</a></p>
                 </div>
                 <br/>
             </form>
