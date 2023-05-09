@@ -10,7 +10,7 @@
     margin:0;
     padding:0;
     display:flex;
-    padding-top:3.4%;
+    padding-top:6vh;
     animation: fadeIn;
     animation-duration: 0.2s;
 }
@@ -20,7 +20,7 @@
     width:18%;
     color:white;
     font-family:Montserrat;
-    height:94vh;   
+    height:94vh;
     margin-left:-0.25%;
 }
 
@@ -41,6 +41,7 @@
 }
 
 .containerB{
+    
     width:82.9%;
 }
 
@@ -174,7 +175,7 @@
 }
 
 #lineCB{
-    margin-top:40%;
+    margin-top:25%;
 }
 
 /*Customization theme*/

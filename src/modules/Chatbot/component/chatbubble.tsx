@@ -47,7 +47,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ message, buttons, buttonz,subte
                 ))}
               </div>
             )}
-            <p>{subtext}</p>
+            {subtext && <p>{subtext}</p>}
           </div>
       </div>
     </div>

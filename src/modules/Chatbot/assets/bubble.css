@@ -10,7 +10,6 @@
 .chat-content {
     display: flex;
     align-items: flex-end;
-    margin-bottom: 1%;
 }
 
 .chat-bubble {
@@ -31,7 +30,10 @@
     animation-duration: 0.8s;
 }
 
-.chat-bubble p{color:#002366;}
+.chat-bubble p{
+    color:#002366;
+    margin: 0;
+}
 
 .buttons-container {
     display: flex;
@@ -171,7 +173,10 @@
     animation-duration: 0.8s;
 }
 
-.chatstud-bubble p{color:white;}
+.chatstud-bubble p{
+    color:white;
+    margin: 0;
+}
 
 .chatstud-image {
     background-color: #013fa6;
@@ -181,6 +186,7 @@
     padding-right:0.05%;
     padding-left:0.05%;
     width:3.5%;
+    margin:0;
     margin-left:2.1%;
     margin-right:1.5%;
     animation: bounceIn; 
@@ -223,8 +229,6 @@
 
 /*End of Student Chat Bubble*/ 
 
-
-
 /*Dot Typing*/
 .dot-typing {
 position: relative;
@@ -262,3 +266,19 @@ animation: dot-typing 1.5s infinite linear;
 }
 }
 /*End of Dot Flashing*/
+
+/*Live Chat*/
+.authorTime{
+    text-align: right;
+    margin-right:7.5%;
+    font-family: Montserrat;
+    font-size:0.7em;
+}
+
+.otherTime{
+    text-align: left;
+    margin-left:7.5%;
+    font-family: Montserrat;
+    font-size:0.7em;
+}
+

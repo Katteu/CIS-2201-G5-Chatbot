@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { AiFillWechat, AiFillBell } from 'react-icons/ai'
 import { io, Socket } from "socket.io-client";
 import Livechat from '../categories/livechat';
+import '../assets/request.css'
 
 const socket = io("http://localhost:3001");
 
@@ -61,47 +62,50 @@ function ProgCoord(){
     return(
 
         <div>
-            {proceed===false && showLive===false ?
-            <>
+            {proceed===false && showLive===false &&
+            <div className='containerPend'>
             <div className='Pending' style={{ marginBottom: "10px" }}>
-                <div className='out' style={{ display: 'flex', marginLeft: "3%" }}>
+                <div className='out' style={{ display: 'flex'}}>
                     <div className='pending'>
-                        <p style={{ marginLeft: "2vh", marginBottom: "0vh", marginRight: "0.3em", fontSize: "2vh" }}>Pending Chat Requests</p>
+                        <h3>Pending Chat Requests</h3>
                     </div>
                     <div className='bubbless' style={{ marginTop: '1.2em' }}>
-                        <AiFillWechat style={{ fontSize: '2em' }} />
+                        <AiFillWechat style={{ fontSize: '3em' }} />
                     </div>
                 </div>
-                <hr style={{ marginLeft: "2vh", marginRight: "2vh" }}></hr>
+                <hr style={{ margin:"0 2vh"}}></hr>
             </div>
 
             
 
             {reqs && reqs.map((req,index)=>(
                 <>
-                <div className='outer' style={{ display: 'flex', marginLeft: "3%" }}>
+                <div className='outer'>
                         <div className="Bell" style={{ color: 'orange' }}>
                             <AiFillBell style={{ fontSize: '4em', margin: "0", marginTop: '0.25em' }} />
                         </div>
-                        <div className='Contents' style={{ width: '67 %', marginTop: '0', marginBottom: '0' }}>
+                        <div className='Contents'>
                             <h2 style={{ marginLeft: "1%", marginBottom: '0' }}>{req._EmailAdd}</h2>
-                            <p style={{ marginLeft: "1%", margin: '0', fontSize: '1.2em' }}>Someone is requesting for your assistance.</p>
+                            <p>Someone is requesting for your assistance...</p>
                         </div>
-                        <div className='AcceptDecline' style={{ display: 'flex', margin: '2%' }}>
-                            <button onClick={()=>acceptChat(index)} className='Accept' style={{ marginRight: '5%' }}>Accept</button>
+                        <div className='AcceptDecline'>
+                            <button onClick={()=>acceptChat(index)} className='Accept' style={{ marginRight: '3%' }}>Accept</button>
                             <button onClick={()=>declineChat(index)}style={{ backgroundColor: 'gray' }}>Decline</button>
                         </div>
                 </div>
                 <hr style={{ marginLeft: "2vh", marginRight: "2vh" }} />
                 </>
             ))}
-            </>
-            : 
-            <>
-            Click to proceed
-            <button onClick={()=>setLiveChat(true)}>Proceed to live chat</button>
-            </>
+            </div>
             }
+
+            {proceed===true && showLive===false ?
+            <div className='progToLive'>
+                <h2>Click to proceed</h2>
+                <button onClick={()=>setLiveChat(true)}>Proceed to live chat</button>
+            </div>
+            :null}
+            
 
             {showLive && <Livechat socket={socket} room={reqID} author="ProgCoord"/>}
         </div>

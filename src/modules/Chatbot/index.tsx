@@ -17,6 +17,9 @@ import Miscellaneous from './categories/miscellaneous';
 import ProgCoord from './component/progcoord';
 import { io, Socket } from "socket.io-client";
 import Livechat from './categories/livechat';
+import { FaRegPaperPlane } from 'react-icons/fa'
+import Chatmenu from './component/chatmenu';
+import Preloader from './component/preloader';
 
 const socket = io("http://localhost:3001");
 
@@ -49,7 +52,8 @@ function Chatbot() {
   useEffect(()=>{
     const userIDStore = parseInt(sessionStorage.getItem('userID') || '');
     setUserID(userIDStore);
-  },[])
+  },[userID])
+
   useEffect(()=>{
     const userStore = parseInt(sessionStorage.getItem('userType') || '');
     setUserType(userStore);
@@ -67,11 +71,13 @@ function Chatbot() {
     }else if(showMisc){
       misc();
     }
-  },[userID]);
+  },[]);
 
   /*user Room ID*/
   const [roomID,setRoomID] = useState(0);
   const [room,setRoom] = useState(false);
+  const [decline,setDecline]=useState(false);
+
   const humanHandover = async () => {
     if(!butClick){
       setLabel("Human Handover");
@@ -79,15 +85,15 @@ function Chatbot() {
       try {
         setTimeout(() => {
           socket.emit("chat_request", userID,(result: {status: string,req_ID: number})=>{
-            console.log("At index:"+result);
             if(result.status==='accepted'){
-              setHuman("Accepted");
+              setHuman("A live assistant is ready to chat with you now.");
               setTimeout(() => {
                 setRoomID(result.req_ID);
                 socket.emit('join_room',roomID);
               }, 1000); 
             }else if(result.status==='declined'){
-              setHuman("Declined");
+              setHuman("There is no available live assistant as of the moment.");
+              setDecline(true);
             }
           });
         }, 2500);
@@ -97,8 +103,10 @@ function Chatbot() {
     }
   };
 
+  // const [load,setLoad]=useState(true);
   const liveChat = async () =>{
-    setTimeout(() => setRoom(true), 5000);
+    // setTimeout(()=>setLoad(false),1500);
+    setTimeout(() => setRoom(true), 500);
   };
 
   const studentConcerns = async () => {
@@ -235,14 +243,20 @@ function Chatbot() {
               <Chatbubble message="Please wait while I find someone to assist you..."
                           chatImage={clogo}/>                
                 </>}
+
                 {human && 
-                <>
               <Chatbubble message={human}
-                          chatImage={clogo}/>                
-               <Chatbubble message="Will connect you to the live assistant now."
-                       buttons={laybeuChat}
-                       chatImage={clogo}/>
-                </>}
+                          chatImage={clogo}/>
+              }
+
+              {human==="A live assistant is ready to chat with you now." && decline===false && 
+              <Chatbubble message="Will connect you to the live assistant now."
+              buttonz={laybeuChat}
+              chatImage={clogo}/>}
+
+            {human==="There is no available live assistant as of the moment." && decline===true && 
+              <Chatmenu/>}
+
             </div>
           </div>
           
@@ -254,7 +268,7 @@ function Chatbot() {
             </div>
             
             <div className="submitBtn" style={openModal==true || openB==true || openC==true? {opacity:"0.2"}:{opacity:"1"}}>
-              <button><i className="fa fa-paper-plane"></i></button>
+              <button><FaRegPaperPlane/></button>
             </div>
           </div>
           </>
@@ -275,9 +289,6 @@ function Chatbot() {
   )
 }
 
-// {roomID ?
-//   <>
-//           :<Livechat socket={socket} room={roomID}/>}
 const styleCB: any = {
   bot: {
     width: "60%",

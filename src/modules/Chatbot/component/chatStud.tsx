@@ -23,7 +23,7 @@ const ChatStud: React.FC<ChatStudBubbleProps> = ({ message, subtext}) => {
       <div className="chatstud-content">
           <div className="chatstud-bubble">
             <p>{message}</p>
-            <p>{subtext}</p>
+            {subtext && <p>{subtext}</p>}
           </div>
           {firstName && <p className="chatstud-image">{firstName.charAt(0)}</p>}
       </div>

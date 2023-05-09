@@ -21,12 +21,14 @@ const io = new Server(server, {
     },
   });
   
+
 io.on("connection", (socket) => {
-    const connectedUsers = {};
+ 
     console.log(`User Connected: ${socket.id}`);
 
     socket.on('chat_request', async (studentId,callback) => {
         try {
+          setTimeout(()=>{db.query('DELETE FROM livechat_tb WHERE status=?',['declined']);},1000);
           // Call the API endpoint to get the ID of an available program coordinator
           const response = await axios.get('http://localhost:3001/api/progcoord/available');
           const availableProgramCoordinators = response.data.availableProgramCoordinators;
@@ -37,7 +39,7 @@ io.on("connection", (socket) => {
       
           // Save the chat request to the database
           db.query('INSERT INTO livechat_tb(stud_id, progcoord_id, status) VALUES (?, ?, ?)', [studentId, programCoordinatorId, 'pending']);
-      
+          console.log("Went in the server side 2!");
           timeoutId = setTimeout(() => {
             db.query('SELECT * FROM livechat_tb WHERE stud_id = ? AND status = ?', [studentId, 'pending'], (error, rows) => {
               if (error) {
@@ -47,7 +49,7 @@ io.on("connection", (socket) => {
       
               if (rows.length > 0) {
                 const chatRequestId = rows[0].request_id;
-                db.query('UPDATE livechat_tb SET status = ? WHERE id = ?', ['declined', chatRequestId]);
+                db.query('UPDATE livechat_tb SET status = ? WHERE request_id = ?', ['declined', chatRequestId]);
               }
             });
           }, 5 * 60 * 1000);
@@ -61,11 +63,10 @@ io.on("connection", (socket) => {
                   console.error(error);
                   return;
                 }
-      
                 if (rows.length > 0) {
-                  const chatRequest = rows[0];
-                  const date_time = chatRequest.created_at;
-                  const reqID = chatRequest.request_id;
+                    const chatRequest = rows[0];
+                    const date_time = chatRequest.created_at;
+                    const reqID = chatRequest.request_id;
                   if (chatRequest.status === "accepted") {
                     clearInterval(intervalId);
                     clearTimeout(timeoutId);
@@ -74,6 +75,7 @@ io.on("connection", (socket) => {
                     /*Delete query*/
                     db.query('DELETE FROM livechat_tb WHERE request_id = ?',reqID);
                   }
+                  console.log("Server side:" + chatRequest.status);
                   callback({status: chatRequest.status, req_ID: reqID});
                 }
               }
@@ -85,10 +87,18 @@ io.on("connection", (socket) => {
       });
 
 
+      socket.on('stop_chat', async (studentId,callback) => {
+        try {
+      
+          callback({status: chatRequest.status, req_ID: reqID});
+        } catch (error) {
+          console.error(error);
+        }
+      });
+
+
     socket.on("join_room", (data) => {
-        connectedUsers[socket.id] = socket;
         socket.join(data);
-        
         console.log(`User with ID: ${socket.id} joined room: ${data}`);
     });
 
@@ -100,8 +110,17 @@ io.on("connection", (socket) => {
 
     socket.on("disconnect", () => {
         console.log("User Disconnected", socket.id);
-        delete connectedUsers[socket.id];
     });
+
+    socket.on("end_chat", (room) => {
+        console.log("Chat ended in room", room);
+        const roomSockets = io.sockets.adapter.rooms.get(room);
+        if (roomSockets) {
+          roomSockets.forEach((socketId) => {
+            io.sockets.sockets.get(socketId)?.leave(room);
+          });
+        }
+      });
 });
 
 server.on('error', (err) => {
@@ -215,6 +234,13 @@ app.post('/decline/:_id',(req,res)=>{
         res.send('Status updated successfully');
     })    
 })
+
+// app.delete('/delete/decline',(req,res)=>{
+//     const sqlGet = `DELETE FROM livechat_tb WHERE status='declined'`;
+//     db.query(sqlGet,(err,result)=>{
+//         res.send(result);
+//     })
+// })
 
 app.post('/login', (req,res)=> {
     const email = req.body.email;
