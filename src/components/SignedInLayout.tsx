@@ -14,6 +14,7 @@ function SignedInLayout() {
     sessionStorage.removeItem("firstName");
     sessionStorage.removeItem("lastName");
     sessionStorage.removeItem("email");
+    sessionStorage.removeItem("userType");
     navigate('/'); // Navigate to the root page
   }
 

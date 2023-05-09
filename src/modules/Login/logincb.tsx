@@ -25,9 +25,11 @@ const Logincb = () => {
             }else{
                 setLoginStatus(response.data[0]);
                 // console.log(response.data[0]);
+                sessionStorage.setItem("userID", response.data[0]._userID);
                 sessionStorage.setItem("firstName", response.data[0]._FirstName);
                 sessionStorage.setItem("lastName", response.data[0]._LastName);
                 sessionStorage.setItem("email", response.data[0]._EmailAdd);
+                sessionStorage.setItem("userType",response.data[0]._userType);
                 history('/');
             }
         }).catch((error)=>{
