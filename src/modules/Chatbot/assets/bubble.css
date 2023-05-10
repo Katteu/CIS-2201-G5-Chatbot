@@ -275,6 +275,90 @@ animation: dot-typing 1.5s infinite linear;
     font-size:0.7em;
 }
 
+/*Color Theme Changes Start*/
+
+.cobalt-main{
+    background-color: #f4b41a;
+    border-right: 10px solid #f4b41a;
+    border: 1px solid #f4b41a;
+    border-left: 10px solid #f4b41a;
+}
+
+.cobalt-sub{
+    background-color: #143d59;
+    border-right: 10px solid #143d59;
+    border: 1px solid #143d59;
+    border-left: 10px solid #143d59;
+    
+}
+
+.default-main{
+    background-color: #8dd8ff;
+    border-right: 10px solid #8dd8ff;
+    border: 1px solid #8dd8ff;
+    border-left: 10px solid #8dd8ff;
+}
+.default-sub{
+    background-color: #013fa6;
+    border-right: 10px solid #013fa6;
+    border: 1px solid #013fa6;
+    border-left: 10px solid #013fa6;
+    
+}
+
+.royalty-main{
+    background-color: #F19372;
+    border-right: 10px solid #F19372;
+    border: 1px solid #F19372;
+    border-left: 10px solid #F19372;
+}
+.royalty-sub{
+    background-color: #182F41;
+    border-right: 10px solid #182F41;
+    border: 1px solid #182F41;
+    border-left: 10px solid #182F41;
+}
+
+.forestmoss-main{
+    background-color: #97bc62;
+    border-right: 10px solid #97bc62;
+    border: 1px solid #97bc62;
+    border-left: 10px solid #97bc62;
+}
+.forestmoss-sub{
+    background-color: #2c5f2d;
+    border-right: 10px solid #2c5f2d;
+    border: 1px solid #2c5f2d;
+    border-left: 10px solid #2c5f2d;
+}
+
+.soyeclipse-main{
+    background-color: #d7c49e;
+    border-right: 10px solid #d7c49e;
+    border: 1px solid #d7c49e;
+    border-left: 10px solid #d7c49e;
+}
+.soyeclipse-sub{
+    background-color: #343148;
+    border-right: 10px solid #343148;
+    border: 1px solid #343148;
+    border-left: 10px solid #343148;
+}
+
+.fiestared-main{
+    background-color: #dd4132;
+    border-right: 10px solid #dd4132;
+    border: 1px solid #dd4132;
+    border-left: 10px solid #dd4132;
+}
+.fiestared-sub{
+    background-color: #9e1030;
+    border-right: 10px solid #9e1030;
+    border: 1px solid #9e1030;
+    border-left: 10px solid #9e1030;
+}
+/*Color Theme Changes End*/
+
 .otherTime{
     text-align: left;
     margin-left:7.5%;

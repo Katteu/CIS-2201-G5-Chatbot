@@ -15,7 +15,8 @@ import Grievances from "./modules/Grievances";
 import RoomIssues from "./modules/RoomIssues";
 import SeatingAssignment from "./modules/SeatingAssignment";
 import Logincb from "./modules/Login/logincb";
-
+import Livechat from "./modules/Chatbot/categories/livechat";
+import Profilecb from "./modules/Login/profile";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
         <Route path="/" element={<Landing/>} />
         <Route path="/login" element={<Logincb />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profilecb />} />
       </Route>  
     </Routes>
   );

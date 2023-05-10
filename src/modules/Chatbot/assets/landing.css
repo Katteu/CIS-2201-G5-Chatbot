@@ -2,6 +2,15 @@
 @import 'animate.css';
 
 
+.budey{
+    background-image: url(../../../assets/steez.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    height: 100%;
+}
+
 .studWave{
     width:25%;
 }
@@ -23,6 +32,10 @@
     text-align: center;
 }
 
+.secondtext{
+    font-size: 1.6em;
+}
+
 .pointTo{
     position:absolute;
     top:12%;
@@ -33,6 +46,49 @@
 .pointTo h2{
     font-weight: 500;
     font-size:1.2em;
+}
+
+.buttonDiv{
+    padding-top: 4vh;
+    text-decoration: none;
+}
+
+.buttonLog{
+    width: 200px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 40vh;
+    border: none;
+    color: white;
+    background: #4da6ff;
+    padding: 17px 60px;
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: uppercase;
+    outline: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,.2);
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.buttonLog:hover{
+    text-decoration: none;
+    color: white;
+}
+
+.btnLog1 span{
+    margin-left: 10px;
+    width: 0;
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.btnLog1:hover span{
+    width: 30px;
+    color: white;
 }
 
 /*Load Container*/

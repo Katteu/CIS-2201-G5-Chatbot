@@ -97,6 +97,50 @@
     padding:0;
 }
 
+/*Theme for Input Box Start*/
+.cobalt input[type="text"] {
+    border: 1px solid #f4b41a;
+}
+
+.cobalt button {
+    background-color: #143d59;
+    color: #ffffff;
+}
+
+.royalty input[type="text"] {
+    border: 1px solid #F19372;
+}
+
+.royalty button {
+    background-color: #182F41;
+    color: #ffffff;
+}
+
+.forestmoss input[type="text"]{
+    border: 1px solid #97bc62;
+}
+.forestmoss button {
+    background-color: #2c5f2d;
+    color: #ffffff;
+}
+
+.soyeclipse input[type="text"]{
+    border: 1px solid #d7c49e;
+}
+.soyeclipse button {
+    background-color: #343148;
+    color: #ffffff;
+}
+
+.fiestared input[type="text"]{
+    border: 1px solid #dd4132;
+}
+.fiestared button {
+    background-color: #9e1030;
+    color: #ffffff;
+}
+/*Theme for Input Box End*/
+
 .slogan{
     font-size:1.8em;
     color: white;
@@ -200,10 +244,19 @@
     padding: 2vh;
 }
 .themeRow{
+    display: flex;
     margin: 0;
     padding: 1vh;
 }
 
+.themeDiv{
+    display: flex;
+    align-items: center;
+    padding-left:5%;
+}
+.themeName{
+    font-size: 1.4em;
+}
 .footerExit{
     display:flex;
     width:100%;
@@ -224,6 +277,7 @@
     color:white;
     font-size:1.2em;
     width: 50%;
+    margin-top: 4%;
     cursor:pointer;
  }
  .cancelBtn{
@@ -234,6 +288,7 @@
     color: white;
     font-family: Montserrat;
     margin-left:2%;
+    margin-top: 4%;
     cursor:pointer;
 }
 .cobaltTheme{
@@ -243,6 +298,13 @@
     background:linear-gradient( -45deg, #143d59, #143d59 49%, #143d59 49%, #f4b41a 51%, #f4b41a 51% );
     border: 2px solid #143d59;
     margin: 0;
+    cursor: pointer;
+    transition: transform 1s ease-in-out;
+}
+.cobaltTheme:hover{
+    width: 9vh;
+    height: 9vh;
+    transform: rotate(540deg);
 }
 .defaultTheme{
     width: 9vh;
@@ -251,7 +313,15 @@
     background:linear-gradient( -45deg, #002366, #002366 49%, #002366 49%, #8dd8ff 51%, #8dd8ff 51% );
     border: 2px solid #002366;
     margin: 0;
+    cursor: pointer;
+    transition: transform 1s ease-in-out;
 }
+.defaultTheme:hover{
+    width: 9vh;
+    height: 9vh;
+    transform: rotate(540deg);
+}
+  
 .royaltyTheme{
     width: 9vh;
     height: 9vh;
@@ -259,6 +329,13 @@
     background:linear-gradient( -45deg, #182F41 , #182F41  49%, #182F41  49%, #F19372 51%, #F19372 51% );
     border: 2px solid #182F41;
     margin: 0;
+    cursor: pointer;
+    transition: transform 1s ease-in-out;
+}
+.royaltyTheme:hover{
+    width: 9vh;
+    height: 9vh;
+    transform: rotate(540deg);
 }
 .forestmossTheme{
     width: 9vh;
@@ -267,6 +344,13 @@
     background:linear-gradient( -45deg, #2c5f2d, #2c5f2d 49%, #2c5f2d 49%, #97bc62 51%, #97bc62 51% );
     border: 2px solid #2c5f2d;
     margin: 0;
+    cursor: pointer;
+    transition: transform 1s ease-in-out;
+}
+.forestmossTheme:hover{
+    width: 9vh;
+    height: 9vh;
+    transform: rotate(540deg);
 }
 .soyeclipseTheme{
     width: 9vh;
@@ -275,6 +359,13 @@
     background:linear-gradient( -45deg, #343148, #343148 49%, #343148 49%, #d7c49e 51%, #d7c49e 51% );
     border: 2px solid #343148;
     margin: 0;
+    cursor: pointer;
+    transition: transform 1s ease-in-out;
+}
+.soyeclipseTheme:hover{
+    width: 9vh;
+    height: 9vh;
+    transform: rotate(540deg);
 }
 .fiestaredTheme{
     width: 9vh;
@@ -283,6 +374,13 @@
     background:linear-gradient( -45deg, #dd4132, #dd4132 49%, #dd4132 49%, #9e1030 51%, #9e1030 51% );
     border: 2px solid #9e1030;
     margin: 0;
+    cursor: pointer;
+    transition: transform 1s ease-in-out;
+}
+.fiestaredTheme:hover{
+    width: 9vh;
+    height: 9vh;
+    transform: rotate(540deg);
 }
 /*About Modal*/
 .modalContAbout{

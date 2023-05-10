@@ -8,13 +8,17 @@ import Preloader from '../Chatbot/component/preloader';
 function Landing() {
   const [firstName, setFirstName] = useState('');
   
+  function redirectToLogin(){
+    window.location.href = "/login";
+  }
+
   useEffect(() => {
     const fNameStore = sessionStorage.getItem('firstName') || '';
     setFirstName(fNameStore);
     }, []);
 
   return (
-    <div>
+    <div className='budey'>
       <div className='bodyLanding' style={{paddingTop:"12%"}}>
         {firstName ?
           <div>
@@ -27,23 +31,19 @@ function Landing() {
             <p>This is the portal of our DCISM website. Everything starts here. Explore, share, and connect with us!</p>
           </div>
           :
-          <div>
+          <div className='landingDes'>
             {/* Insert here unsay iingon kung wa pa ka log in */}
             <div className="HeadTitle" style={{textAlign:'left', marginLeft: '2.5%', marginTop:'-2%'}}>
               <h1 className="firsttext" style={{fontSize:'125px'}}>WELCOME TO <br></br></h1>
               <h1 className="firsttext_1" style={{fontSize:'125px', marginLeft:'6.5%'}}>TECH OPS</h1>
-              <h2 className="secondtext" style={{marginLeft:'3%'}}>Department of Computer, Information Science and Mathematics</h2>
-              <br></br>
-              <br></br>
-              <br></br>
-              <h1  className="thirdtext" style={{marginLeft:'17%'}}>Login now!</h1>
+              <h2 className="secondtext" style={{ paddingLeft: '0.5vh'}}>Department of Computer, Information Science and Mathematics</h2>
+              <div className='buttonDiv' onClick={redirectToLogin}>
+                <a className="buttonLog btnLog1" style={{marginLeft:'16%'}}>Login now! <span>&#10230;</span></a>
+              </div>
             </div>
             <div className='Pic' style={{textAlign: 'right'}}>
-              <img id="Using-Laptop" src={usinglaptop} alt="USC Logo" style={{width:'100vh', marginTop:'-44vh'}} />
+              <img id="Using-Laptop" src={usinglaptop} alt="USC Logo" style={{width:'100vh', marginTop:'-41vh'}} />
             </div>
-
-
-            
           </div>
         }
       </div>
