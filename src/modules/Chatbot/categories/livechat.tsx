@@ -9,6 +9,7 @@ import Botupdates from '../botupdates';
 import Customize from '../customize';
 import { FaRegPaperPlane } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom';
+import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 
 interface LivechatProps {
   socket: Socket;
@@ -24,6 +25,9 @@ interface Message {
 }
 
 const Livechat: FC<LivechatProps> = ({ socket, room,author }) => {
+  console.log('socket:', socket);
+  console.log('roomID:', room);
+
   const history = useNavigate();
   const [openModal,setOpenModal] = useState(false);
   const [openB,setOpenB] = useState(false);
@@ -32,6 +36,7 @@ const Livechat: FC<LivechatProps> = ({ socket, room,author }) => {
   const [currentMessage,setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState<Message[]>([]);
   const [disc,setDisc]=useState(false);
+  const [display,setDisplayButton]=useState(false);
 
   useEffect(() => {
     socket.off("receive_message").on("receive_message", (data) => {
@@ -54,28 +59,34 @@ const Livechat: FC<LivechatProps> = ({ socket, room,author }) => {
             new Date(Date.now()).getMinutes(),
       };
       
-      // console.log('Sending message:', messageData);
-      await socket.emit("send_message",messageData);
-      // setMessageList((list) => [...list, messageData]);
-      setCurrentMessage("");
-      if (inputRef.current) {
-        inputRef.current.value = "";
-      }
+      if (currentMessage.toLowerCase().includes("$end")) {
+        setDisplayButton(true);
+        if (inputRef.current) {
+          inputRef.current.value = "";
+        }
+        socket.disconnect();
+      } else {
+        await socket.emit("send_message",messageData);
+        setCurrentMessage("");
+        if (inputRef.current) {
+          inputRef.current.value = "";
+        }
+      } 
     }
   };
 
   const stopChat = async () => {
-    await Promise.all([
-      socket.emit("end_chat", room, author),
-      new Promise((resolve) => setTimeout(resolve, 1000)), // wait 1 second before emitting the event for the other user
-    ]);
-    socket.disconnect();
+    const messageData = {
+      author:author,
+      room: room,
+      message: "Type $end or reload the page to leave the chat.",
+      time:new Date(Date.now()).getHours() + ":" +
+          new Date(Date.now()).getMinutes(),
+    };
+    await socket.emit("send_message",messageData);
     setDisc(true);
+    socket.disconnect();
   };
-
-  useEffect(() => {
-    console.log("disc changed to", disc);
-  }, [disc]);
 
   return (
     <>
@@ -100,7 +111,7 @@ const Livechat: FC<LivechatProps> = ({ socket, room,author }) => {
               </>
               )
             })}
-             {disc && author==='Student' &&               
+             {display && author==='Student' &&               
              <div style={{textAlign:"center"}}> 
                 <h1 style={{margin:"1%"}}>Live assistant has left the conversation.</h1>
                 <button onClick={()=> window.location.reload()}>Go Back to BlabBot</button>

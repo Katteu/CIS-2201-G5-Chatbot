@@ -81,6 +81,16 @@ io.on("connection", (socket) => {
               }
             );
           }, 2500);
+
+          socket.on("stop_chat", async (studentId, callback) => {
+            try {
+              callback({ status: chatRequest.status, req_ID: reqID });
+              clearInterval(intervalId); // Clear the interval
+              clearTimeout(timeoutId); // Clear the timeout
+            } catch (error) {
+              console.error(error);
+            }
+          });
         } catch (error) {
           console.error(error);
         }
@@ -89,7 +99,6 @@ io.on("connection", (socket) => {
 
       socket.on('stop_chat', async (studentId,callback) => {
         try {
-      
           callback({status: chatRequest.status, req_ID: reqID});
         } catch (error) {
           console.error(error);
@@ -112,15 +121,16 @@ io.on("connection", (socket) => {
         console.log("User Disconnected", socket.id);
     });
 
-    socket.on("end_chat", (room) => {
-        console.log("Chat ended in room", room);
-        const roomSockets = io.sockets.adapter.rooms.get(room);
-        if (roomSockets) {
-          roomSockets.forEach((socketId) => {
-            io.sockets.sockets.get(socketId)?.leave(room);
-          });
-        }
-      });
+    // socket.on("end_chat", (room,author) => {
+    //     console.log("Chat ended in room", room);
+    //     const roomSockets = io.sockets.adapter.rooms.get(room);
+    //     if (roomSockets) {
+    //       roomSockets.forEach((socketId) => {
+    //         io.sockets.sockets.get(socketId)?.leave(room);
+    //       });
+    //     }
+    //   });
+      
 });
 
 server.on('error', (err) => {

@@ -48,10 +48,13 @@ function Chatbot() {
   const [showHuman, setShowHuman] = useState(false);
   const [userType, setUserType] = useState(0);
   const [userID,setUserID] = useState(0);
-
+  const [loggedIn, setLoggedIn] = useState(false);
   useEffect(()=>{
     const userIDStore = parseInt(sessionStorage.getItem('userID') || '');
     setUserID(userIDStore);
+
+    const userLoggedIn = sessionStorage.getItem('userID') !== null;
+    setLoggedIn(userLoggedIn);
   },[userID])
 
   useEffect(()=>{
@@ -78,15 +81,21 @@ function Chatbot() {
   const [room,setRoom] = useState(false);
   const [decline,setDecline]=useState(false);
 
+  if(!loggedIn){
+    return <p>Login First</p>;
+  }
+  
   const humanHandover = async () => {
     if(!butClick){
       setLabel("Human Handover");
       setTimeout(() => setShowHuman(true), 500); 
       try {
         setTimeout(() => {
+          console.log("Bye");
           socket.emit("chat_request", userID,(result: {status: string,req_ID: number})=>{
             if(result.status==='accepted'){
               setHuman("A live assistant is ready to chat with you now.");
+              console.log(human);
               setTimeout(() => {
                 setRoomID(result.req_ID);
                 socket.emit('join_room',roomID);
@@ -173,7 +182,6 @@ function Chatbot() {
   ];
 
   return (
-    
     <div className='cbCont'>
       <div className='containerA' style={openModal==true || openB==true || openC==true? {opacity:'0.2',backgroundColor:"rgba(0,0,0,0.5)"}:{opacity:'1'}}>
         <div className='upperCont'>
@@ -211,7 +219,7 @@ function Chatbot() {
           </div>
         </div>
       </div>
-      
+
       <div className='containerB' >
       {userType===3 && room==false &&
          <>
@@ -254,8 +262,8 @@ function Chatbot() {
               buttonz={laybeuChat}
               chatImage={clogo}/>}
 
-            {human==="There is no available live assistant as of the moment." && decline===true && 
-              <Chatmenu/>}
+            {human==="There is no available live assistant as of the moment." &&
+                <Chatmenu/>}
 
             </div>
           </div>
@@ -267,8 +275,8 @@ function Chatbot() {
               </form>
             </div>
             
-            <div className="submitBtn" style={openModal==true || openB==true || openC==true? {opacity:"0.2"}:{opacity:"1"}}>
-              <button><FaRegPaperPlane/></button>
+            <div onClick={(event)=> event?.preventDefault} className="submitBtn" style={openModal==true || openB==true || openC==true? {opacity:"0.2"}:{opacity:"1"}}>
+              <button onClick={(event)=> event?.preventDefault}><FaRegPaperPlane/></button>
             </div>
           </div>
           </>

@@ -8,8 +8,14 @@ import Roomlocation from '../categories/roomlocation'
 import Disasterprep from '../categories/disasterprep'
 import Alumniaff from '../categories/alumniaff'
 import Miscellaneous from '../categories/miscellaneous'
+import { io , Socket} from "socket.io-client";
+import { useNavigate } from 'react-router-dom'
+
+const socket = io("http://localhost:3001");
 
 const Chatmenu = () => {
+    const navigate = useNavigate();
+
     const [label,setLabel]= useState<string|null>(null);
     const [butClick,setButClick] = useState<boolean>(false);
 
@@ -19,6 +25,7 @@ const Chatmenu = () => {
     const [disData,setDisData] = useState<DistPrep[]>([]);
     const [alumnData,setAlumnData] = useState<AlumniAff[]>([]);
     const [miscData,setMiscData] = useState<Miscellaneous[]>([]);
+    const [human,setHuman] = useState("");
 
     /*To check what is clicked*/
     const [showStudConcern, setShowStudConcern] = useState(false);
@@ -26,10 +33,20 @@ const Chatmenu = () => {
     const [showDisPrep, setShowDisPrep] = useState(false);
     const [showAlumnAff, setShowAlumnAff] = useState(false);
     const [showMisc, setShowMisc] = useState(false);
-    const [human,setHuman] = useState(false);
+    const [showHuman, setShowHuman] = useState(false);
+    const [userType, setUserType] = useState(0);
+    const [userID,setUserID] = useState(0);
+  
+    useEffect(()=>{
+      const userIDStore = parseInt(sessionStorage.getItem('userID') || '');
+      setUserID(userIDStore);
+    },[userID])
 
     useEffect(()=>{
-      if(human){
+      const userStore = parseInt(sessionStorage.getItem('userType') || '');
+      setUserType(userStore);
+  
+      if(showHuman){
         humanHandover();
       }else if(showStudConcern){
         studentConcerns();
@@ -44,10 +61,11 @@ const Chatmenu = () => {
       }
     },[]);
 
+
     const humanHandover = async () => {
       if(!butClick){
         setLabel("Human Handover");
-        setButClick(true);
+        setTimeout(()=> setShowHuman(true),1500);
       }
     };
 
@@ -100,6 +118,7 @@ const Chatmenu = () => {
         setTimeout(()=> setShowMisc(true),1500);
       }
     };
+
       const buttons = [
         { label: "Human Handover", onClick: humanHandover },
         { label: "Student Concerns", onClick: studentConcerns },
@@ -108,8 +127,18 @@ const Chatmenu = () => {
         { label: "Alumni Affairs", onClick: alumniAffairs },
         { label: "Miscellaneous", onClick: misc },
       ];
+
+      const chatbotLoad = () => {
+        window.location.reload();
+      }
+
+      const reload = [
+        { label: "Access Human Handover", onClick: chatbotLoad },
+      ];
+
   return (
     <div>
+      <>
         <Chatbubble message="Here are some choices that you can select once again:" 
                           buttons={buttons}
                           subtext={"Please let me know which option you would like to choose."}
@@ -128,6 +157,15 @@ const Chatmenu = () => {
                {showAlumnAff && <Alumniaff alumnData={alumnData}/>}
                {/* Shows Miscellaneous */}
                {showMisc && <Miscellaneous miscData={miscData}/>}
+
+                 {/* Starts Human Handover */}
+                 {showHuman && 
+                <>
+              <Chatbubble message="Click the button below to access the Human Handover function."
+                          buttonz={reload}
+                          chatImage={clogo}/>                
+                </>}
+          </>
         </div>
   )
 }
