@@ -2,12 +2,13 @@
 @import 'animate.css';
 
 
-body{
+.budey{
     background-image: url(../../../assets/steez.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     overflow: hidden;
+    height: 100%;
 }
 
 .studWave{

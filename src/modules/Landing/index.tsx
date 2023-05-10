@@ -18,7 +18,7 @@ function Landing() {
     }, []);
 
   return (
-    <div>
+    <div className='budey'>
       <div className='bodyLanding' style={{paddingTop:"12%"}}>
         {firstName ?
           <div>
