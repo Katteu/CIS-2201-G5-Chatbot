@@ -251,6 +251,39 @@ app.post('/decline/:_id',(req,res)=>{
 //     })
 // })
 
+app.post('/changepass',(req,res)=>{
+  const newpassword = req.body.newpassword;
+  const connewpassword = req.body.connewpassword;
+  const currpassword = req.body.currpassword;
+
+  const hashedPassword = crypto.createHash('sha256').update(currpassword).digest('hex');  
+
+  if(connewpassword===newpassword){
+  db.query(
+    "SELECT * FROM user_tb WHERE _Password = ?",
+    hashedPassword,
+    (err,result) => {
+        if(err){
+            // res.send({err:err})
+            res.send({message:'Incorrect Password'});
+        }
+
+        if(result.length > 0){
+            const email = result[0]._EmailAdd;
+            const query = `UPDATE user_tb SET _Password='${newpassword}' WHERE _EmailAdd='${email}'`;
+            db.query(query,(err,result)=>{
+              if(err){
+                console.log(err);
+              }
+            })
+        }
+    }
+  );
+  }else{
+    res.send({message:'Passwords do not match!'});
+  }
+})
+
 app.post('/login', (req,res)=> {
     const email = req.body.email;
     const password = req.body.password;

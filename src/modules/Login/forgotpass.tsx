@@ -17,10 +17,6 @@ const ForgotpassCB = () => {
         //Write code for forgot password
     }
 
-    function redirectLogin(){
-        window.location.href = "/login";
-    }
-
     Axios.defaults.withCredentials = true;
 
     useEffect(()=>{
@@ -48,14 +44,13 @@ const ForgotpassCB = () => {
                 <div className="form-group-btn">
                     <input type="submit" onClick={forgotpass} name="btnvery" className="verify-btn" value="Reset Password" style={{textDecoration: "none", display: "inline-block", color: "white", border: "1px solid #002366", padding: "11px 24px", fontSize: "1em", position: "relative", background: "#002366", cursor: "pointer", fontWeight: "bold", fontFamily: "var(--bs-body-font-family)", borderRadius: "10px", width: "65%", margin: "0px 0px 30px 0px"}}/>
                 </div>
-                <a style={{textDecoration:"none", color:"#87a2f7", fontWeight: "bold", cursor: "pointer", padding: "10px"}} onClick={redirectLogin}>Return to Login</a>
+                <a style={{textDecoration:"none", color:"#87a2f7", fontWeight: "bold", cursor: "pointer", padding: "10px"}} onClick={()=> history('/login')}>Return to Login</a>
             </form>
             </div>
         </div>
         <div className='spacer layer1'></div>
         <section className='bottom-section'>   
         </section>
-        
     </div>
   )
 }

@@ -2,11 +2,14 @@ import React,{ useEffect, useState} from 'react'
 import Axios from 'axios'
 import '../Login/profilestyle.css'
 import profdes from '../../assets/profdes.png'
-
+import {BiUserPin} from 'react-icons/bi'
+import { useNavigate } from 'react-router-dom'
 
 const Profilecb = () => {
 
   let status = true;
+
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [lName, setlName] = useState("");
@@ -36,10 +39,6 @@ const Profilecb = () => {
   const Fletter = fName.substring(0,1);
   const Lletter = lName.substring(0,1);
   const tempProf = Fletter.concat(Lletter);
-
-  function redirectToChangePass(){
-    window.location.href = "/changepass";
-  }
   
   return (
     <div className='budey'>
@@ -54,14 +53,17 @@ const Profilecb = () => {
                 </div>
                 <div style={{display: "flex"}}>
                   <a className='logoutbtn'>
-                    <div className='box'>
-                      <div className='innerbox'><h4 className='btntext'>Change Password</h4></div>
+                    <div className='boxers'>
+                      <div className='innerbox' onClick={()=>navigate('/changepass')}><h4 className='btntext'>Change Password</h4></div>
                       </div>
                   </a> 
                 </div>
           </div>
           <div className="profile-deets">
-              <h3>Information</h3>
+              <div  style={{display:'flex',}}>
+                <BiUserPin className='pin'/>
+                <h3>User Information</h3>
+              </div>
               <h2>First Name</h2>
               <p>{fName}</p>
               <h2>Last Name</h2>

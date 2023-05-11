@@ -33,6 +33,8 @@ function SignedOutLayout() {
     sessionStorage.removeItem("userType");
     if (location.pathname === "/") {  
       window.location.reload();
+    }else{
+      navigate('/');
     }
     setIsLoading(true);
   }

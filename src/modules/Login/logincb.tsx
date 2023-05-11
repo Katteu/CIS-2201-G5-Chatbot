@@ -22,6 +22,7 @@ const Logincb = () => {
         }).then((response) => {
             if(response.data.message){
                 setLoginStatus(response.data.message)
+                alert(loginStatus);
             }else{
                 setLoginStatus(response.data[0]);
                 // console.log(response.data[0]);
