@@ -2,7 +2,7 @@ import React from 'react'
 
 function Register() {
   return (
-    <div>Register</div>
+    <div style={{padding: "100px"}}>SUP BTICHHH</div>
   )
 }
 

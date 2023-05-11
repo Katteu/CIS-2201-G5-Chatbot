@@ -2,7 +2,7 @@ import React from 'react'
 
 function SeatingAssignment() {
   return (
-    <div>Seating</div>
+    <div style={{padding: "100px"}}>SUP BTICHHH</div>
   )
 }
 

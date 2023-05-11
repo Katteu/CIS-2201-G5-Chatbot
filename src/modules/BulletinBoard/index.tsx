@@ -2,7 +2,7 @@ import React from 'react'
 
 function BulletinBoard() {
   return (
-    <div>BulletinBoard</div>
+    <div style={{padding: "100px"}}>SUP BTICHHH</div>
   )
 }
 
