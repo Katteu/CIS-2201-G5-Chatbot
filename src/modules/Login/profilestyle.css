@@ -153,13 +153,13 @@
     text-align: center;
 }
 
-h2{
+.h2-deets{
     font-size: 2em; 
     margin: 2%; 
     color:#002366;
 }
 
-p{
+.p-deets{
     font-size: 1.5em;
     margin: 2%;
 }
