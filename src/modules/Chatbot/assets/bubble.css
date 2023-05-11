@@ -21,7 +21,7 @@
     flex-direction: column;
     padding: 0.5em 1.5em;
     padding-right:0.5em;
-    background-color: #8dd8ff;
+    /* background-color: #8dd8ff; */
     max-width:26%;
     min-width:10%;
     word-wrap: break-word;
@@ -31,7 +31,7 @@
 }
 
 .chat-bubble p{
-    color:#002366;
+    /* color:#002366; */
     margin: 0;
 }
 
@@ -107,7 +107,7 @@
     animation-duration: 0.8s;
 }
 
-.chat-bubble::before {
+/* .chat-bubble::before {
     content: '';
     position: absolute;
     left: -3.95%;
@@ -115,7 +115,7 @@
     border: 10px solid transparent;
     border-right: 10px solid #8dd8ff;
     border-bottom: 0px solid transparent;
-}
+} */
 
 .chat-bubble-bef{  /*Loading chat bubble*/
     position:relative;
@@ -123,14 +123,14 @@
     border: 1px solid #e5e5ea;
     border-radius: 0.4em;
     padding: 1em 2em;
-    background-color: #8dd8ff;
+    /* background-color: #8dd8ff; */
     width:1%;
     margin-top:0.5%;
     animation: fadeIn; 
     animation-duration: 0.8s;
 }
 
-.chat-bubble-bef::before {
+/* .chat-bubble-bef::before {
     content: '';
     position: absolute;
     left: -18%;
@@ -138,7 +138,7 @@
     border: 10px solid transparent;
     border-right: 10px solid #8dd8ff;
     border-bottom: 0px solid transparent;
-}
+} */
 
 /*End of BlabBot Chat Bubble*/
 
@@ -159,12 +159,12 @@
 
 .chatstud-bubble {
     position:relative;
-    border: 1px solid #013fa6;
+    /* border: 1px solid #013fa6; */
     border-radius: 0.4em;
     display: flex;
     flex-direction: column;
     padding: 0.5em 1.5em;
-    background-color: #013fa6;
+    /* background-color: #013fa6; */
     max-width:26%;
     min-width:10%;
     word-wrap: break-word;
@@ -174,12 +174,12 @@
 }
 
 .chatstud-bubble p{
-    color:white;
+    /* color:white; */
     margin: 0;
 }
 
 .chatstud-image {
-    background-color: #013fa6;
+    /* background-color: #013fa6; */
     color:white;
     border-radius: 100%;
     padding-bottom:0.2%;
@@ -195,7 +195,7 @@
     text-align: center;
 }
 
-.chatstud-bubble::before {
+/* .chatstud-bubble::before {
     content: '';
     position: absolute;
     right: -3.95%;
@@ -203,21 +203,21 @@
     border: 10px solid transparent;
     border-left: 10px solid #013fa6;
     border-bottom: 0px solid transparent;
-}
+} */
 
 .chatstud-bubble-bef{  /*Loading chat bubble*/
     position:relative;
-    border: 1px solid #013fa6;
+    /* border: 1px solid #013fa6; */
     border-radius: 0.4em;
     padding: 1em 2em;
-    background-color: #013fa6;
+    /* background-color: #013fa6; */
     width:1%;
     margin-top:1%;
     animation: fadeIn; 
     animation-duration: 0.8s;
 }
 
-.chatstud-bubble-bef::before {
+/* .chatstud-bubble-bef::before {
     content: '';
     position: absolute;
     right: -18%;
@@ -225,7 +225,7 @@
     border: 10px solid transparent;
     border-left: 10px solid #013fa6;
     border-bottom: 0px solid transparent;
-}
+} */
 
 /*End of Student Chat Bubble*/ 
 
@@ -274,6 +274,15 @@ animation: dot-typing 1.5s infinite linear;
     font-family: Montserrat;
     font-size:0.7em;
 }
+
+.otherTime{
+    text-align: left;
+    margin-left:7.5%;
+    font-family: Montserrat;
+    font-size:0.7em;
+}
+
+/*Live Chat End*/
 
 /*Color Theme Changes Start*/
 
@@ -358,11 +367,3 @@ animation: dot-typing 1.5s infinite linear;
     border-left: 10px solid #9e1030;
 }
 /*Color Theme Changes End*/
-
-.otherTime{
-    text-align: left;
-    margin-left:7.5%;
-    font-family: Montserrat;
-    font-size:0.7em;
-}
-

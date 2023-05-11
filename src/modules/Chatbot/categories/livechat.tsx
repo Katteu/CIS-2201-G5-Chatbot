@@ -15,6 +15,7 @@ interface LivechatProps {
   socket: Socket;
   room: number;
   author: string;
+  value?: boolean;
 }
 
 interface Message {
@@ -24,19 +25,26 @@ interface Message {
   time: string;
 }
 
-const Livechat: FC<LivechatProps> = ({ socket, room,author }) => {
-  console.log('socket:', socket);
-  console.log('roomID:', room);
+const Livechat: FC<LivechatProps> = ({ socket, room,author,value }) => {
+  // console.log('socket:', socket);
+  // console.log('roomID:', room);
 
   const history = useNavigate();
-  const [openModal,setOpenModal] = useState(false);
-  const [openB,setOpenB] = useState(false);
-  const [openC,setOpenC] = useState(false);
 
   const [currentMessage,setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState<Message[]>([]);
   const [disc,setDisc]=useState(false);
   const [display,setDisplayButton]=useState(false);
+
+  
+  /*Customize*/
+  const [butColor,setButColor]=useState('0054F8')
+  const [plane,setPlane]=useState('white');
+  const [inpColor,setInpColor]=useState('#4da6ff')
+  const [change,setChange]=useState(false);
+  useEffect(()=>{
+    setChange(true);
+  },[value])
 
   useEffect(() => {
     socket.off("receive_message").on("receive_message", (data) => {
@@ -45,6 +53,18 @@ const Livechat: FC<LivechatProps> = ({ socket, room,author }) => {
       }
     });
   }, [socket,room]);
+
+  useEffect(()=>{
+    const buttColor = sessionStorage.getItem('buttColor');
+    const plane = sessionStorage.getItem('plane');
+    const inpColor = sessionStorage.getItem('inpColor'); 
+  
+    if (buttColor !== null && plane!== null && inpColor !== null) {
+      setButColor(buttColor);
+      setPlane(plane);
+      setInpColor(inpColor);
+    }
+  },[])
 
   const inputRef = useRef<HTMLInputElement>(null);
   
@@ -79,7 +99,7 @@ const Livechat: FC<LivechatProps> = ({ socket, room,author }) => {
     const messageData = {
       author:author,
       room: room,
-      message: "Type $end or reload the page to leave the chat.",
+      message: "Thank you for chatting with me! I am now about to leave the conversation. Type  $end or reload the page to leave the chat.",
       time:new Date(Date.now()).getHours() + ":" +
           new Date(Date.now()).getMinutes(),
     };
@@ -90,8 +110,8 @@ const Livechat: FC<LivechatProps> = ({ socket, room,author }) => {
 
   return (
     <>
-          <div className='upperContB' >
-            <div className="contentB" style={openModal==true || openB==true || openC==true? {opacity:'0.2',backgroundColor:"rgba(0,0,0,0.5)"}:{opacity:'1'}}>
+          <div className='upperContB'>
+            <div className="contentB" style={change===true ? {opacity:"1"}:{opacity:"1"}}>
               {author==='ProgCoord' && <p style={{textAlign:"center",marginTop:"1%",color:"gray"}}>Another user has entered the chat.</p>}
               {author==='Student' && <p style={{textAlign:"center",marginTop:"1%",color:"gray"}}>Live assistant has entered the chat.</p>}
             {messageList.map((messageContent)=>{
@@ -124,20 +144,21 @@ const Livechat: FC<LivechatProps> = ({ socket, room,author }) => {
             </div>
           </div>
           <div className='lowerContB'>
-            <div className="formCont" style={openModal==true || openB==true || openC==true? {opacity:"0.2"}:{opacity:"1"}}>
+            <div className="formCont" style={change===true ? {opacity:"1"}:{opacity:"1"}}>
               <form className="textForm" >
               <input id="input" type="text" placeholder="Send a Message..." 
+              style={{border:"1px solid"+inpColor}}
               onChange={(event)=>{setCurrentMessage(event.target.value)}}
               onKeyDown={(event) => {event.key === "Enter" && sendMessage(event)}}
               ref={inputRef}/>
               </form>
             </div>
             
-            <div className="submitBtnz" style={openModal==true || openB==true || openC==true? {opacity:"0.2",display:"flex"}:{opacity:"1",display:"flex"}}>
+            <div className="submitBtnz" style={change===true ? {opacity:"1",display:'flex'}:{opacity:"1",display:'flex'}}  >
               {author === 'ProgCoord' &&
                   <button style={{backgroundColor:"red"}} onClick={stopChat}>Stop</button>
               }
-              <button onClick={sendMessage}><FaRegPaperPlane onClick={sendMessage}/></button>
+              <button style={{color:plane,backgroundColor:butColor}} onClick={sendMessage}><FaRegPaperPlane onClick={sendMessage}/></button>
             </div>
           </div>      
       </>

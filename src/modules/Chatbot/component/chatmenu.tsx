@@ -161,7 +161,7 @@ const Chatmenu = () => {
                  {/* Starts Human Handover */}
                  {showHuman && 
                 <>
-              <Chatbubble message="Click the button below to access the Human Handover function."
+              <Chatbubble message="Click the button below to reload chatbot and access the Human Handover function."
                           buttonz={reload}
                           chatImage={clogo}/>                
                 </>}

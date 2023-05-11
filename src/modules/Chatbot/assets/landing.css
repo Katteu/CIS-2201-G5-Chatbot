@@ -32,10 +32,6 @@
     text-align: center;
 }
 
-.secondtext{
-    font-size: 1.6em;
-}
-
 .pointTo{
     position:absolute;
     top:12%;
@@ -48,27 +44,39 @@
     font-size:1.2em;
 }
 
+.HeadTitle h1{
+    font-size:4.5em;
+    margin:0;
+}
+
+.HeadTitle h2{
+margin:0;
+    font-size: 1.9em;
+    font-weight:600;
+    margin-bottom:1.3%;
+}
+
 .buttonDiv{
-    padding-top: 4vh;
+    margin-top:1%;
     text-decoration: none;
 }
 
 .buttonLog{
-    width: 200px;
+    font-family: Montserrat;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 40vh;
+    margin: 0 43%;
     border: none;
-    color: white;
-    background: #4da6ff;
-    padding: 17px 60px;
+    background-color: white;
+    color:#001B4E;
+    padding:0.4% 1.3%;
     font-size: 22px;
     font-weight: 700;
-    text-transform: uppercase;
     outline: none;
-    box-shadow: 0 5px 15px rgba(0,0,0,.2);
+    box-shadow: 0 6px 15px rgba(0,0,0,.2);
+    border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
     text-decoration: none;
@@ -76,11 +84,11 @@
 
 .buttonLog:hover{
     text-decoration: none;
-    color: white;
+    color:#001B4E;
 }
 
 .btnLog1 span{
-    margin-left: 10px;
+    margin-left: 1%;
     width: 0;
     overflow: hidden;
     transition: 0.5s;
@@ -88,7 +96,15 @@
 
 .btnLog1:hover span{
     width: 30px;
-    color: white;
+    color:#001B4E;
+}
+
+.HeadTitle p{
+    margin-top:1.4%;
+    color:black;
+    font-family: Montserrat;
+    font-weight:300;
+    font-size:1.5em;
 }
 
 /*Load Container*/

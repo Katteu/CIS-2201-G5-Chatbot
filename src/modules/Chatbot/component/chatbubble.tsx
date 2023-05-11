@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 interface ChatBubbleProps {
   message: string;
@@ -11,11 +11,26 @@ interface ChatBubbleProps {
 
 const ChatBubble: React.FC<ChatBubbleProps> = ({ message, buttons, buttonz,subtext, chatImage,imageUrl}) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [color, setColor] = useState<string>('#8dd8ff');
+  const [colorP, setColorP] = useState<string>('#002366');
 
   useEffect(() => {
+    const otherChat = sessionStorage.getItem('otherChat');
+    const otherChatp = sessionStorage.getItem('otherChatp'); 
+  
+    if (otherChat !== null && otherChatp!== null) {
+      setColor(otherChat);
+      setColorP(otherChatp);
+    }
+
     const timeoutId = setTimeout(() => setIsVisible(true), 1500);
     return () => clearTimeout(timeoutId);
   }, []);
+
+    useEffect(() => {
+      sessionStorage.setItem('otherChat', color);
+      sessionStorage.setItem('otherChatp', colorP);
+    }, [color, colorP]);
 
   const handleButtonClick = (onClick: () => void) => {
     onClick();
@@ -24,9 +39,9 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ message, buttons, buttonz,subte
   return isVisible ? (
     <div className="chat-bubble-container">
       <div className="chat-content">
-        {chatImage && <img src={chatImage} alt="chat" className="chat-image" />}
-          <div className="chat-bubble">
-            <p>{message}</p>
+        {chatImage && <img src={chatImage} alt="chat" className="chat-image" style={{backgroundColor:color}}/>}
+          <div className="chat-bubble" style={{backgroundColor:color}}>
+            <p style={{color:colorP}}>{message}</p>
             {imageUrl && <img src={imageUrl} alt="roomLoc" className="roomImg" />}
             {buttons && (
               <div className="buttons-container">
@@ -47,15 +62,15 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ message, buttons, buttonz,subte
                 ))}
               </div>
             )}
-            {subtext && <p>{subtext}</p>}
+            {subtext && <p style={{color:colorP}}>{subtext}</p>}
           </div>
       </div>
     </div>
   ) :
   <div className="chat-bubble-container">
   <div className="chat-content">
-    {chatImage && <img src={chatImage} alt="chat" className="chat-image" />}
-      <div className="chat-bubble-bef">
+    {chatImage && <img src={chatImage} alt="chat" className="chat-image" style={{backgroundColor:color}} />}
+      <div className="chat-bubble-bef"  style={{backgroundColor:color}}>
       <div className="snippet" data-title="dot-typing">
           <div className="stage">
             <div className="dot-typing"></div>
@@ -67,3 +82,4 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ message, buttons, buttonz,subte
 };
 
 export default ChatBubble;
+

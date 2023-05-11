@@ -39,7 +39,6 @@ io.on("connection", (socket) => {
       
           // Save the chat request to the database
           db.query('INSERT INTO livechat_tb(stud_id, progcoord_id, status) VALUES (?, ?, ?)', [studentId, programCoordinatorId, 'pending']);
-          console.log("Went in the server side 2!");
           timeoutId = setTimeout(() => {
             db.query('SELECT * FROM livechat_tb WHERE stud_id = ? AND status = ?', [studentId, 'pending'], (error, rows) => {
               if (error) {
@@ -75,7 +74,7 @@ io.on("connection", (socket) => {
                     /*Delete query*/
                     db.query('DELETE FROM livechat_tb WHERE request_id = ?',reqID);
                   }
-                  console.log("Server side:" + chatRequest.status);
+                //   console.log("Server side:" + chatRequest.status);
                   callback({status: chatRequest.status, req_ID: reqID});
                 }
               }
@@ -113,7 +112,7 @@ io.on("connection", (socket) => {
 
 
     socket.on("send_message", (data) => {
-        console.log(data);
+        // console.log(data);
         io.emit('receive_message', data);
     });
 

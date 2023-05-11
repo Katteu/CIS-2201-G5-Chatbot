@@ -1,6 +1,11 @@
-
-
-
+.ProfileBody{
+    background-image: url(../../../assets/steez.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    height: 100%;
+}
 
 .rowzz{
     background-color: rgba(255, 255, 255, 0.628);

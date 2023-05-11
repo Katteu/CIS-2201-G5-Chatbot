@@ -24,8 +24,8 @@ function SignedInLayout() {
       <div style={styles.topNav}>
         <img src={logo} style={styles.logo} />
         <div style={{ marginLeft: "auto" }}>
-          <FiBell style={styles.navIcon} />
-          <FiUser style={styles.navIcon} />
+          <FiBell onClick={()=> alert('No updates!')} style={styles.navIcon} />
+          <FiUser onClick={()=> navigate('/profile')} style={styles.navIcon} />
           <FiLogOut onClick={logout} style={styles.navIcon} />
         </div>
       </div>

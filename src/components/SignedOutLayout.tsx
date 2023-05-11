@@ -31,7 +31,7 @@ function SignedOutLayout() {
     sessionStorage.removeItem("lastName");
     sessionStorage.removeItem("email");
     sessionStorage.removeItem("userType");
-    if (location.pathname === "/") {
+    if (location.pathname === "/") {  
       window.location.reload();
     }
     setIsLoading(true);
@@ -46,10 +46,13 @@ function SignedOutLayout() {
         <div style={styles.topNav}>
           <img src={logo} style={styles.logo} />
           <div style={{ marginLeft: "auto" }}>
-            <FiBell style={styles.icon} />
-            <FiUser style={styles.icon} />
             {firstName!=='' ?
+            <>
+            <FiBell onClick={()=> alert('No updates!')} style={styles.icon} />
+            <FiUser onClick={()=> navigate('/profile')} style={styles.icon} />
             <FiLogOut onClick={logout} style={styles.icon} />
+            </>
+
             :
             <FiLogIn onClick={()=>navigate('/login')} style={styles.icon}/>
           }

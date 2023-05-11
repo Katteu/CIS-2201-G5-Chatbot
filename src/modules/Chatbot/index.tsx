@@ -38,6 +38,7 @@ function Chatbot() {
   const [alumnData,setAlumnData] = useState<AlumniAff[]>([]);
   const [miscData,setMiscData] = useState<Miscellaneous[]>([]);
   const [human,setHuman] = useState("");
+  const [stay,setStay]=useState(0);
 
   /*To check what is clicked*/
   const [showStudConcern, setShowStudConcern] = useState(false);
@@ -48,18 +49,39 @@ function Chatbot() {
   const [showHuman, setShowHuman] = useState(false);
   const [userType, setUserType] = useState(0);
   const [userID,setUserID] = useState(0);
-  const [loggedIn, setLoggedIn] = useState(false);
+  // const [loggedIn, setLoggedIn] = useState(false);
+
+  /*Customize*/
+  const [butColor,setButColor]=useState('0054F8')
+  const [plane,setPlane]=useState('white');
+  const [inpColor,setInpColor]=useState('#4da6ff')
+
   useEffect(()=>{
     const userIDStore = parseInt(sessionStorage.getItem('userID') || '');
     setUserID(userIDStore);
 
-    const userLoggedIn = sessionStorage.getItem('userID') !== null;
-    setLoggedIn(userLoggedIn);
+    // const userLoggedIn = sessionStorage.getItem('userID') !== null;
+    // setLoggedIn(userLoggedIn);
   },[userID])
 
+  let value=false;
   useEffect(()=>{
     const userStore = parseInt(sessionStorage.getItem('userType') || '');
     setUserType(userStore);
+
+    const buttColor = sessionStorage.getItem('buttColor');
+    const plane = sessionStorage.getItem('plane');
+    const inpColor = sessionStorage.getItem('inpColor'); 
+
+    if (buttColor !== null && plane!== null && inpColor !== null) {
+      setButColor(buttColor);
+      setPlane(plane);
+      setInpColor(inpColor);
+    }
+
+    if(openModal===true || openB===true || openC===true){
+      value=true;
+    }
 
     if(showHuman){
       humanHandover();
@@ -81,9 +103,9 @@ function Chatbot() {
   const [room,setRoom] = useState(false);
   const [decline,setDecline]=useState(false);
 
-  if(!loggedIn){
-    return <p>Login First</p>;
-  }
+  // if(!loggedIn){
+  //   return <p>Login First</p>;
+  // }
   
   const humanHandover = async () => {
     if(!butClick){
@@ -91,17 +113,19 @@ function Chatbot() {
       setTimeout(() => setShowHuman(true), 500); 
       try {
         setTimeout(() => {
-          console.log("Bye");
+          // console.log("Bye");
           socket.emit("chat_request", userID,(result: {status: string,req_ID: number})=>{
             if(result.status==='accepted'){
               setHuman("A live assistant is ready to chat with you now.");
-              console.log(human);
+              // console.log(human);
+              setTimeout(()=>setStay(1),1500);
               setTimeout(() => {
                 setRoomID(result.req_ID);
                 socket.emit('join_room',roomID);
               }, 1000); 
             }else if(result.status==='declined'){
               setHuman("There is no available live assistant as of the moment.");
+              setTimeout(()=>setStay(2),1500);
               setDecline(true);
             }
           });
@@ -110,6 +134,10 @@ function Chatbot() {
         console.error(error);
       }
     }
+  };
+
+  const handleSubmit = (event: { preventDefault: () => void; }) => {
+    event.preventDefault(); 
   };
 
   // const [load,setLoad]=useState(true);
@@ -183,7 +211,7 @@ function Chatbot() {
 
   return (
     <div className='cbCont'>
-      <div className='containerA' style={openModal==true || openB==true || openC==true? {opacity:'0.2',backgroundColor:"rgba(0,0,0,0.5)"}:{opacity:'1'}}>
+      <div className='containerA' style={openModal==true || openB==true || openC==true? {opacity:'0.2'}:{opacity:'1'}}>
         <div className='upperCont'>
           <img alt="Blab Bot" src={bot} style={styleCB.bot}/>
            <h1 className="slogan" style={styleCB.slogan}>Blabbot at</h1>
@@ -224,7 +252,7 @@ function Chatbot() {
       {userType===3 && room==false &&
          <>
           <div className='upperContB' >
-            <div className="contentB" style={openModal==true || openB==true || openC==true? {opacity:'0.2',backgroundColor:"rgba(0,0,0,0.5)"}:{opacity:'1'}}>
+            <div className="contentB" style={openModal==true || openB==true || openC==true? {opacity:'0.2'}:{opacity:'1'}}>
               <Chatbubble message="Great to see you here! I'm BlabBot and I'm here to assist you. How can I be of help to you today? 
                                   ㅤㅤHere are some choices that you can select:" 
                           buttons={buttons}
@@ -257,26 +285,27 @@ function Chatbot() {
                           chatImage={clogo}/>
               }
 
-              {human==="A live assistant is ready to chat with you now." && decline===false && 
+              {stay===1 && decline===false && 
               <Chatbubble message="Will connect you to the live assistant now."
-              buttonz={laybeuChat}
-              chatImage={clogo}/>}
+                          buttonz={laybeuChat}
+                          chatImage={clogo}/>}
 
-            {human==="There is no available live assistant as of the moment." &&
-                <Chatmenu/>}
+            {stay===2 && <Chatmenu/>}
 
             </div>
           </div>
           
           <div className='lowerContB'>
             <div className="formCont" style={openModal==true || openB==true || openC==true? {opacity:"0.2"}:{opacity:"1"}}>
-              <form className="textForm" >
-              <input id="input" type="text" placeholder="Send a Message..."/>
+              <form  className="textForm" onSubmit={handleSubmit}>
+              <input id="input" type="text" style={{border:"1px solid"+inpColor}} placeholder="Send a Message..."/>
               </form>
             </div>
             
-            <div onClick={(event)=> event?.preventDefault} className="submitBtn" style={openModal==true || openB==true || openC==true? {opacity:"0.2"}:{opacity:"1"}}>
-              <button onClick={(event)=> event?.preventDefault}><FaRegPaperPlane/></button>
+            <div onClick={handleSubmit} className="submitBtn" 
+                  style={openModal==true || openB==true || openC==true?{opacity:"0.2"}:{opacity:"1"}}>
+              <button style={{color:plane,backgroundColor:butColor}} onClick={handleSubmit}>
+                     <FaRegPaperPlane onClick={handleSubmit} onKeyDown={(event) => {event.key === "Enter" && event.preventDefault()}}/></button>
             </div>
           </div>
           </>
@@ -286,7 +315,7 @@ function Chatbot() {
               <ProgCoord/>
         }
 
-        {room && <Livechat socket={socket} room={roomID} author="Student"/>}
+        {room && <Livechat socket={socket} room={roomID} author="Student" value={value}/>}
 
       </div>
       

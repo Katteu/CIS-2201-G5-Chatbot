@@ -23,7 +23,7 @@ const Roomlocation = ({roomData}:{roomData: RoomLoc[]}) => {
     if(!buttonClicked){
       const item = roomData.find((item) => item._RLID === id);
       setShowQues(item || null);
-      console.log(item?._imageURL)
+      // console.log(item?._imageURL)
       setTimeout(() => setSelectedItem(item ||null), 1000);
       setTimeout(() => setContChat(true), 3000); 
       setButtonClicked(true);

@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import usinglaptop from '../../assets/usinglaptop.png'
+import usinglaptop from '../../assets/laptophuman.png'
 import stud from "../../assets/wave.png"
 import '../Chatbot/assets/landing.css'
 import { TbArrowBigUpLinesFilled } from "react-icons/tb";
 import Preloader from '../Chatbot/component/preloader';
+import { useNavigate } from 'react-router-dom';
 
 function Landing() {
+  const navigate = useNavigate();
   const [firstName, setFirstName] = useState('');
-  
-  function redirectToLogin(){
-    window.location.href = "/login";
-  }
 
   useEffect(() => {
     const fNameStore = sessionStorage.getItem('firstName') || '';
@@ -19,7 +17,7 @@ function Landing() {
 
   return (
     <div className='budey'>
-      <div className='bodyLanding' style={{paddingTop:"12%"}}>
+      <div className='bodyLanding' style={ firstName ? {paddingTop:"12%"}: {paddingTop:"8.3%"}}>
         {firstName ?
           <div>
             <img alt="Student Wave" className='studWave' src={stud} />
@@ -32,17 +30,14 @@ function Landing() {
           </div>
           :
           <div className='landingDes'>
-            {/* Insert here unsay iingon kung wa pa ka log in */}
-            <div className="HeadTitle" style={{textAlign:'left', marginLeft: '2.5%', marginTop:'-2%'}}>
-              <h1 className="firsttext" style={{fontSize:'125px'}}>WELCOME TO <br></br></h1>
-              <h1 className="firsttext_1" style={{fontSize:'125px', marginLeft:'6.5%'}}>TECH OPS</h1>
-              <h2 className="secondtext" style={{ paddingLeft: '0.5vh'}}>Department of Computer, Information Science and Mathematics</h2>
-              <div className='buttonDiv' onClick={redirectToLogin}>
-                <a className="buttonLog btnLog1" style={{marginLeft:'16%'}}>Login now! <span>&#10230;</span></a>
+            <div className="HeadTitle">
+              <h1 className="firsttext" >Welcome to Tech Ops!</h1>
+              <h2>Department of Computer, Information Science and Mathematics</h2>
+              <img alt="Laptop with Humans" className='lappy' src={usinglaptop} />
+              <p>Log in to witness an immersive and enriching experience!</p>
+              <div className='buttonDiv' onClick={()=> navigate('/login')}>
+                <a className="buttonLog btnLog1">Login Now<span>&#10230;</span></a>
               </div>
-            </div>
-            <div className='Pic' style={{textAlign: 'right'}}>
-              <img id="Using-Laptop" src={usinglaptop} alt="USC Logo" style={{width:'100vh', marginTop:'-41vh'}} />
             </div>
           </div>
         }
