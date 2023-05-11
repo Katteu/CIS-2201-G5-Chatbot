@@ -42,7 +42,7 @@ const Profilecb = () => {
   }
   
   return (
-
+    <div className='budey'>
     <div className='ProfileBody'>
         <div className="rowzz">  
           <div className='ProfilePic'>
@@ -56,7 +56,7 @@ const Profilecb = () => {
                   <a className='logoutbtn'>
                     <div className='box'>
                       <div className='innerbox'><h4 className='btntext'>Change Password</h4></div>
-                    </div>
+                      </div>
                   </a> 
                 </div>
           </div>
@@ -73,6 +73,7 @@ const Profilecb = () => {
             <img src={profdes} alt="Prof Desing" style={{maxWidth: "50vh", maxHeight: "auto"}} />
           </div>
         </div>
+    </div>
     </div>
   )
 }

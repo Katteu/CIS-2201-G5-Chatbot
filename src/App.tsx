@@ -18,6 +18,7 @@ import Logincb from "./modules/Login/logincb";
 import Livechat from "./modules/Chatbot/categories/livechat";
 import Profilecb from "./modules/Login/profile";
 import ForgotpassCB from "./modules/Login/forgotpass";
+import ChangePassCB from "./modules/Login/changepass";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profilecb />} />
         <Route path="/forgotpass" element={<ForgotpassCB />}/>
+        <Route path="/changepass" element={<ChangePassCB />}/>
       </Route>  
     </Routes>
   );
