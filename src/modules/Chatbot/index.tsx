@@ -20,6 +20,7 @@ import Livechat from './categories/livechat';
 import { FaRegPaperPlane } from 'react-icons/fa'
 import Chatmenu from './component/chatmenu';
 import Preloader from './component/preloader';
+import Access from '../Landing/access';
 
 const socket = io("http://localhost:3001");
 
@@ -55,14 +56,14 @@ function Chatbot() {
   const [butColor,setButColor]=useState('0054F8')
   const [plane,setPlane]=useState('white');
   const [inpColor,setInpColor]=useState('#4da6ff')
+  const [email,setEmail] = useState('');
 
   useEffect(()=>{
     const userIDStore = parseInt(sessionStorage.getItem('userID') || '');
     setUserID(userIDStore);
-
-    // const userLoggedIn = sessionStorage.getItem('userID') !== null;
-    // setLoggedIn(userLoggedIn);
-  },[userID])
+    const userStore = sessionStorage.getItem('email') || '';
+    setEmail(userStore);
+  },[email])
 
   let value=false;
   useEffect(()=>{
@@ -210,6 +211,9 @@ function Chatbot() {
   ];
 
   return (
+    <>
+    {email!=='' ?
+    <>
     <div className='cbCont'>
       <div className='containerA' style={openModal==true || openB==true || openC==true? {opacity:'0.2'}:{opacity:'1'}}>
         <div className='upperCont'>
@@ -323,6 +327,9 @@ function Chatbot() {
       <Botupdates openB={openB} onCloseB={()=> setOpenB(false)}/>
       <Customize openC={openC} onCloseC={()=> setOpenC(false)}/>
     </div>
+    </>
+    :<Access/>}
+    </>
   )
 }
 

@@ -19,21 +19,23 @@ import Livechat from "./modules/Chatbot/categories/livechat";
 import Profilecb from "./modules/Login/profile";
 import ForgotpassCB from "./modules/Login/forgotpass";
 import ChangePassCB from "./modules/Login/changepass";
+import { useEffect, useState } from "react";
+import Access from "./modules/Landing/access";
 
 function App() {
   return (
     <Routes>
       <Route element={<SignedInLayout />} >
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/borrowing" element={<Borrowing />} />
-        <Route path="/seating-assignment" element={<SeatingAssignment />} />
-        <Route path="/meeting-scheduler" element={<MeetingScheduler />} />
-        <Route path="/bulletin-board" element={<BulletinBoard />} />
-        <Route path="/chatbot" element={<Chatbot />} />
-        <Route path="/event-manager" element={<EventManager />} />
-        <Route path="/inventory" element={<Inventory/>} />
-        <Route path="/grievances" element={<Grievances />} />
-        <Route path="/room-issues" element={<RoomIssues />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/borrowing" element={<Borrowing />} />
+          <Route path="/seating-assignment" element={<SeatingAssignment />} />
+          <Route path="/meeting-scheduler" element={<MeetingScheduler />} />
+          <Route path="/bulletin-board" element={<BulletinBoard />} />
+          <Route path="/chatbot" element={<Chatbot />} />
+          <Route path="/event-manager" element={<EventManager />} />
+          <Route path="/inventory" element={<Inventory/>} />
+          <Route path="/grievances" element={<Grievances />} />
+          <Route path="/room-issues" element={<RoomIssues />} />
       </Route>
       <Route element={<SignedOutLayout />} >
         <Route path="/" element={<Landing/>} />

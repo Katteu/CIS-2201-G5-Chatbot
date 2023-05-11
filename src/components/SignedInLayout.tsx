@@ -1,32 +1,64 @@
 import { useOutlet, useNavigate, useLocation } from "react-router-dom";
 import logo from "../assets/DCISM_LOGO.png";
-import { FiUser, FiLogOut, FiBell } from "react-icons/fi";
+import { FiUser, FiLogOut, FiBell, FiLogIn } from "react-icons/fi";
 import { colors } from "../constants/colors";
 import { SignedInLinks } from "../constants/links";
 import { getLinkClass } from "../helpers/functions";
+import { useEffect, useState } from "react";
+import Preloader from "../modules/Chatbot/component/preloader";
 
 function SignedInLayout() {
   const outlet = useOutlet();
+  const [firstName, setFirstName] = useState(sessionStorage.getItem("firstName") || "");
   const navigate = useNavigate();
   const location = useLocation();
+  const [isLoading, setIsLoading] = useState(true);
+  
 
   const logout = () => {
     sessionStorage.removeItem("firstName");
     sessionStorage.removeItem("lastName");
     sessionStorage.removeItem("email");
     sessionStorage.removeItem("userType");
-    navigate('/'); // Navigate to the root page
+    if (location.pathname === "/") {  
+      window.location.reload();
+    }else{
+      navigate('/');
+    }
+    setIsLoading(true);
   }
 
+  useEffect(() => {
+    const fNameStore = sessionStorage.getItem('firstName') || '';
+    setFirstName(fNameStore);
+    if (location.pathname === '/login') {
+      setIsLoading(false);
+    } else {
+      setIsLoading(true);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1500);
+    }
+  }, [location]);
 
   return (
+    <>
+    {isLoading ?
+      <Preloader />
+      :
     <div>
       <div style={styles.topNav}>
         <img src={logo} style={styles.logo} />
         <div style={{ marginLeft: "auto" }}>
+         {firstName!=='' ?
+          <>
           <FiBell onClick={()=> alert('No updates!')} style={styles.navIcon} />
           <FiUser onClick={()=> navigate('/profile')} style={styles.navIcon} />
           <FiLogOut onClick={logout} style={styles.navIcon} />
+          </>
+          :
+          <FiLogIn onClick={()=>navigate('/login')} style={styles.icon}/>
+        }
         </div>
       </div>
       <div style={styles.sideNav}>
@@ -43,6 +75,8 @@ function SignedInLayout() {
       </div>
       <div style={styles.contentContainer}>{outlet}</div>
     </div>
+    }
+    </>
   );
 }
 
@@ -90,6 +124,12 @@ const styles: any = {
     color: "white",
     height: 10,
     textAlign: "right",
+    cursor: "pointer",
+  },
+  icon: {
+    marginRight: 20,
+    color: colors.brand,
+    fontSize: 15,
     cursor: "pointer",
   },
 };

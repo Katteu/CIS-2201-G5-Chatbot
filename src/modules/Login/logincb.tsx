@@ -21,8 +21,10 @@ const Logincb = () => {
             password: password,
         }).then((response) => {
             if(response.data.message){
+                if(response.data.message!==''){
+                    alert(response.data.message);
+                }
                 setLoginStatus(response.data.message)
-                alert(loginStatus);
             }else{
                 setLoginStatus(response.data[0]);
                 // console.log(response.data[0]);

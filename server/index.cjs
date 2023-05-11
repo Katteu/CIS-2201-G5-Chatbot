@@ -255,27 +255,32 @@ app.post('/changepass',(req,res)=>{
   const newpassword = req.body.newpassword;
   const connewpassword = req.body.connewpassword;
   const currpassword = req.body.currpassword;
+  const email = req.body.email;
 
   const hashedPassword = crypto.createHash('sha256').update(currpassword).digest('hex');  
 
   if(connewpassword===newpassword){
   db.query(
-    "SELECT * FROM user_tb WHERE _Password = ?",
-    hashedPassword,
+    "SELECT * FROM user_tb WHERE _Password = ? AND _EmailAdd=?",
+    [hashedPassword,email],
     (err,result) => {
         if(err){
             // res.send({err:err})
-            res.send({message:'Incorrect Password'});
+            res.send({message:'An error occured! Try again.'});
         }
 
         if(result.length > 0){
-            const email = result[0]._EmailAdd;
             const query = `UPDATE user_tb SET _Password='${newpassword}' WHERE _EmailAdd='${email}'`;
             db.query(query,(err,result)=>{
-              if(err){
+              if(result){
+                res.send(result);
+              }else{
                 console.log(err);
+                res.send({message:'An error occured! Try again.'});
               }
             })
+        }else{
+          res.send({ message: 'Incorrect Current Password!' });
         }
     }
   );
@@ -293,15 +298,15 @@ app.post('/login', (req,res)=> {
         email,
         (err,result) => {
             if(err){
-                res.send({err:err})
+                  // res.send({err:err})
+                res.send({message: "Passwords do not match!"})
             }
 
             if(result.length > 0){
                 const hashedPassword = crypto.createHash('sha256').update(password).digest('hex'); // hash the password
                 if(hashedPassword === result[0]._Password){
                     req.session.user = result;
-                    // console.log(req.session.user);
-                    res.send(result);
+                    res.send(result); 
                 }else{
                     res.send({message: "Invalid Login Credentials!"});
                 }
@@ -311,6 +316,25 @@ app.post('/login', (req,res)=> {
         }
     );
 }); 
+
+app.post('/check',(req,res)=>{
+  const email = req.body.email
+  db.query(
+    "SELECT * FROM user_tb WHERE _EmailAdd = ?",
+    email,
+    (err,result) => {
+        if(err){
+          res.send({message: "An error has occured!"})
+        }
+
+        if(result.length > 0){
+          res.send(result); 
+        }else{
+            res.send({message: "E-mail does not exist!"});
+        }
+    }
+);
+})
 
 app.get("/login",(req,res)=>{
     if(req.session.user){

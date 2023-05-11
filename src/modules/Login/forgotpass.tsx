@@ -14,7 +14,21 @@ const ForgotpassCB = () => {
     const[loginStatus,setLoginStatus] = useState("");
     
     function forgotpass(){
-        //Write code for forgot password
+        event?.preventDefault();
+        Axios.post("http://localhost:3001/check", {
+          email:email,
+        }).then((response)=>{
+          if(response.data.message){
+            if(response.data.message!==''){
+              alert(response.data.message);
+            }
+          }else{
+            alert('Reset password e-mail sent!');
+            history('/login');
+          }
+        }).catch((error)=>{
+          console.error(error);
+        })
     }
 
     Axios.defaults.withCredentials = true;
