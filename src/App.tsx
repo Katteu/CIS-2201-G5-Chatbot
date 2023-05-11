@@ -17,6 +17,7 @@ import SeatingAssignment from "./modules/SeatingAssignment";
 import Logincb from "./modules/Login/logincb";
 import Livechat from "./modules/Chatbot/categories/livechat";
 import Profilecb from "./modules/Login/profile";
+import ForgotpassCB from "./modules/Login/forgotpass";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/login" element={<Logincb />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profilecb />} />
+        <Route path="/forgotpass" element={<ForgotpassCB />}/>
       </Route>  
     </Routes>
   );
