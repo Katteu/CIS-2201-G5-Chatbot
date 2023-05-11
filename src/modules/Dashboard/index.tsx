@@ -2,7 +2,7 @@ import React from 'react'
 
 function Dashboard() {
   return (
-    <div>Dashboard</div>
+    <div style={{padding: "100px"}}>SUP BTICHHH</div>
   )
 }
 

@@ -2,7 +2,7 @@ import React from 'react'
 
 function Grievances() {
   return (
-    <div>Grievances</div>
+    <div style={{padding: "100px"}}>SUP BTICHHH</div>
   )
 }
 

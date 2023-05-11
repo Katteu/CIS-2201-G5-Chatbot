@@ -2,7 +2,7 @@ import React from 'react'
 
 function RoomIssues() {
   return (
-    <div>RoomIssues</div>
+    <div style={{padding: "100px"}}>SUP BTICHHH</div>
   )
 }
 

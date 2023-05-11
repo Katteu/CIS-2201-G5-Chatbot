@@ -2,7 +2,7 @@ import React from 'react'
 
 function MeetingScheduler() {
   return (
-    <div>Meeting scheduler</div>
+    <div style={{padding: "100px"}}>SUP BTICHHH</div>
   )
 }
 

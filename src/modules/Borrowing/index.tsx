@@ -2,7 +2,7 @@ import React from 'react'
 
 function Borrowing() {
   return (
-    <div>Borrowing</div>
+    <div style={{padding: "100px"}}>SUP BTICHHH</div>
   )
 }
 
