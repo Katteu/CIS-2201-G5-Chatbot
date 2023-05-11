@@ -508,4 +508,11 @@
         font-size:0.85em;
       }
 
+    .themeDesc h1{
+        font-size: 1.1em;
+    }
+
+    .themeDesc p{
+        font-size: 0.9em;
+    }
 }

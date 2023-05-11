@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2023 at 03:43 PM
+-- Generation Time: May 11, 2023 at 06:22 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -33,7 +33,7 @@ CREATE TABLE `alumniaff_tb` (
 --
 
 INSERT INTO `alumniaff_tb` (`_AffID`, `_Question`, `_Response`, `_faqID`, `_imageURL`) VALUES
-(1, 'What graduate programs are offered right now by the department?', 'test', 5, NULL);
+(1, 'What graduate studies are offered right now by the department?', 'The department are offering two graduate studies which are Master of Science in Information Technology and Doctor of Philosophy in Information Technology.', 5, NULL);
 
 -- --------------------------------------------------------
 
@@ -100,6 +100,13 @@ CREATE TABLE `livechat_tb` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `livechat_tb`
+--
+
+INSERT INTO `livechat_tb` (`request_id`, `stud_id`, `progcoord_id`, `status`, `created_at`) VALUES
+(26, 1, 2, 'declined', '2023-05-11 16:18:28');
+
 -- --------------------------------------------------------
 
 --
@@ -113,6 +120,13 @@ CREATE TABLE `log_tb` (
   `_faqID` int(9) DEFAULT NULL,
   `date_time` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `log_tb`
+--
+
+INSERT INTO `log_tb` (`_LogID`, `_userID`, `_assistID`, `_faqID`, `date_time`) VALUES
+(1, 1, 2, NULL, '2023-05-11 16:16:08');
 
 -- --------------------------------------------------------
 
@@ -314,13 +328,13 @@ ALTER TABLE `faqs_tb`
 -- AUTO_INCREMENT for table `livechat_tb`
 --
 ALTER TABLE `livechat_tb`
-  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `log_tb`
 --
 ALTER TABLE `log_tb`
-  MODIFY `_LogID` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `_LogID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `misc_tb`

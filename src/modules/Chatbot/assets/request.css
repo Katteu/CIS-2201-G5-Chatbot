@@ -28,6 +28,10 @@
     margin-bottom: 0;  
 }
 
+.Contents h2{
+    margin-top:2%;
+}
+
 .Contents p{
     margin:0;
     margin-left:1%;
