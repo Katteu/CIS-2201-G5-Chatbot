@@ -46,15 +46,15 @@ const ChangePasscb = () => {
             <h1>Change Password</h1>
             <h3 className='passs'>Current Password</h3>
             <input type="password"  name="currpassword" id="passwords" className="form-control" 
-                  placeholder="Current Password" autoComplete="off" required 
+                  placeholder="Type current password..." autoComplete="off" required 
                   onChange={(e) => {setCurrPass(e.target.value);}}/>
             <h3 className='passs'>New Password</h3>
             <input type="password"  name="newpassword" id="passwordss" className="form-control" 
-                  placeholder="Current Password" autoComplete="off" required
+                  placeholder="Type new password..." autoComplete="off" required
                   onChange={(e) => {setNewPass(e.target.value)}}/>
             <h3 className='passs'>Confirm New Password</h3>
             <input type="password"  name="confirmnewpassword" id="passwordsss" className="form-control" 
-                  placeholder="Current Password" autoComplete="off" required
+                  placeholder="Type new password again..." autoComplete="off" required
                   onChange={(e) => {setConNewPass(e.target.value)}}/>
                   <button className='sumb' onClick={changePass}>Submit</button>
           </div>
