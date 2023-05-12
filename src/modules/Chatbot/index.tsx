@@ -13,7 +13,7 @@ import Studconcern from './categories/studconcern';
 import Roomlocation from './categories/roomlocation';
 import Disasterprep from './categories/disasterprep';
 import Alumniaff from './categories/alumniaff';
-import Miscellaneous from './categories/miscellaneous';
+import Misc from './categories/miscellaneous';
 import ProgCoord from './component/progcoord';
 import { io, Socket } from "socket.io-client";
 import Livechat from './categories/livechat';
@@ -21,6 +21,7 @@ import { FaRegPaperPlane } from 'react-icons/fa'
 import Chatmenu from './component/chatmenu';
 import Preloader from './component/preloader';
 import Access from '../Landing/access';
+import { StudCon, RoomLoc, DistPrep, AlumniAff, Miscellaneous } from './component/model';
 
 const socket = io("http://localhost:3001");
 
@@ -275,7 +276,7 @@ function Chatbot() {
                {/* Shows Alumni Affairs */}
                {showAlumnAff && <Alumniaff alumnData={alumnData}/>}
                {/* Shows Miscellaneous */}
-               {showMisc && <Miscellaneous miscData={miscData}/>}
+               {showMisc && <Misc miscData={miscData}/>}
 
                {/* Starts Human Handover */}
                {showHuman && 
