@@ -3,6 +3,7 @@ import Chatbubble from '../component/chatbubble';
 import clogo from "../../../assets/chatlogo.png";
 import ChatStud from '../component/chatStud';
 import Chatmenu from '../component/chatmenu'
+import { RoomLoc } from '../component/model';
 
 const Roomlocation = ({roomData}:{roomData: RoomLoc[]}) => {
 

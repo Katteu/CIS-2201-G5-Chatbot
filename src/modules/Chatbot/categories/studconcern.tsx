@@ -3,6 +3,7 @@ import Chatbubble from '../component/chatbubble';
 import clogo from "../../../assets/chatlogo.png";
 import ChatStud from '../component/chatStud';
 import Chatmenu from '../component/chatmenu'
+import { StudCon } from '../component/model';
 
 const Studconcern = ({studData}:{studData: StudCon[]}) => {
   /*To check what is clicked*/
