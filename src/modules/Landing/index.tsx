@@ -32,7 +32,7 @@ function Landing() {
           <div className='landingDes'>
             <div className="HeadTitle">
               <h1 className="firsttext" >Welcome to Tech Ops!</h1>
-              <h2>Department of Computer, Information Science and Mathematics</h2>
+              <h2>Department of Computer, Information Sciences and Mathematics</h2>
               <img alt="Laptop with Humans" className='lappy' src={usinglaptop} />
               <p>Log in to witness an immersive and enriching experience!</p>
               <div className='buttonDiv' onClick={()=> navigate('/login')}>

@@ -149,7 +149,7 @@ CREATE TABLE `misc_tb` (
 --
 
 INSERT INTO `misc_tb` (`_MisceID`, `_Question`, `_Response`, `_faqID`, `_imageURL`) VALUES
-(1, 'What companies are offering internships/jobs?', 'A lot of companies are offering internships or jobs. However, to specifically know, kindly visit the Facebook group named \"Department of Computer, Information Science and Mathematics\" for further information about available internships or jobs.', 6, NULL);
+(1, 'What companies are offering internships/jobs?', 'A lot of companies are offering internships or jobs. However, to specifically know, kindly visit the Facebook group named \"Department of Computer, Information Sciences and Mathematics\" for further information about available internships or jobs.', 6, NULL);
 
 -- --------------------------------------------------------
 
@@ -199,7 +199,7 @@ CREATE TABLE `studcon_tb` (
 
 INSERT INTO `studcon_tb` (`_SCID`, `_Question`, `_Response`, `_faqID`, `_imageURL`) VALUES
 (1, 'What are the office hours of the department?', 'The department is open from 8:00 AM to 5:00 PM, as those are its designated office hours.', 1, NULL),
-(2, 'What are the programs offered by the Department of Computer, Information Science and Mathematics?', 'The department offers Bachelor of Science in Computer Science, Bachelor of Science in Information Technology, and Bachelor of Science in Information Systems.', 2, NULL);
+(2, 'What are the programs offered by the Department of Computer, Information Sciences and Mathematics?', 'The department offers Bachelor of Science in Computer Science, Bachelor of Science in Information Technology, and Bachelor of Science in Information Systems.', 2, NULL);
 
 -- --------------------------------------------------------
 
