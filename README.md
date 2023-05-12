@@ -4,13 +4,17 @@
 ```
 npm install socket.io
 ```
+```
 npm install socket.io-client
 npm install --save-dev @types/socket.io-client
 ```
+```
 npm install express-session body-parser cookie-parser
+```
 ```
 npm install -g concurrently
 ```
+
 
 ## Important Links 
 1. [Deliverables](https://drive.google.com/drive/folders/1KxLr-nuEIsJ1NMRdx6y6PDaXoMM-g495?usp=sharing)
