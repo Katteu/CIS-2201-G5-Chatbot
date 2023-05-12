@@ -1,8 +1,14 @@
 # CIS2201-Class-Project
 
+## Dependencies to download before running chatbot
+npm install socket.io
+npm install socket.io-client
+npm install --save-dev @types/socket.io-client
+npm install express-session body-parser cookie-parser
+npm install -g concurrently
+
 ## Important Links 
 1. [Deliverables](https://drive.google.com/drive/folders/1KxLr-nuEIsJ1NMRdx6y6PDaXoMM-g495?usp=sharing)
-2. [UI Style Guide](https://drive.google.com/file/d/1KeXOv_WearzkQqlx2MZp-AEtljkELAO8/view?usp=share_link)
 
 Access using usc email ⚠
 
@@ -118,3 +124,4 @@ git push
 7. g7-inventory-module
 8. g8-grievances
 9. g9-room-issues
+
