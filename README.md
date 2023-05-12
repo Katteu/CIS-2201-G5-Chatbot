@@ -2,6 +2,9 @@
 
 ## Dependencies to download before running chatbot
 ```
+npm install nodemon
+```
+```
 npm install socket.io
 ```
 ```
