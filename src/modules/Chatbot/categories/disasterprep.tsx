@@ -78,7 +78,7 @@ const Disasterprep = ({disData}:{disData: DistPrep[]}) => {
       )}
 
       {selectedItem && (
-         <Chatbubble chatImage={clogo} message={selectedItem._Response}/>
+         <Chatbubble chatImage={clogo} message={selectedItem._Response} imageUrl={selectedItem?._imageURL}/>
       )}
 
       {contChat && (

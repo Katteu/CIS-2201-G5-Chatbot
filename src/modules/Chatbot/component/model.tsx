@@ -3,6 +3,7 @@ interface StudCon{
     _Question:string;
     _Response:string;
     _faqID:number;
+    _imageURL?: string;
   }
 
 interface RoomLoc{
@@ -18,6 +19,7 @@ interface DistPrep{
   _Question:string;
   _Response:string;
   _faqID:number;
+  _imageURL?: string;
 }
 
 interface AlumniAff{
@@ -25,6 +27,7 @@ interface AlumniAff{
   _Question:string;
   _Response:string;
   _faqID:number;
+  _imageURL?: string;
 }
 
 interface Miscellaneous{
@@ -32,6 +35,7 @@ interface Miscellaneous{
   _Question:string;
   _Response:string;
   _faqID:number;
+  _imageURL?: string;
 }
 
 interface Buttonz {
