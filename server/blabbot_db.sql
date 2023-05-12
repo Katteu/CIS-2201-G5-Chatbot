@@ -106,9 +106,6 @@ CREATE TABLE `livechat_tb` (
 -- Dumping data for table `livechat_tb`
 --
 
-INSERT INTO `livechat_tb` (`request_id`, `stud_id`, `progcoord_id`, `status`, `created_at`) VALUES
-(26, 1, 2, 'declined', '2023-05-11 16:18:28');
-
 -- --------------------------------------------------------
 
 --
@@ -126,9 +123,6 @@ CREATE TABLE `log_tb` (
 --
 -- Dumping data for table `log_tb`
 --
-
-INSERT INTO `log_tb` (`_LogID`, `_userID`, `_assistID`, `_faqID`, `date_time`) VALUES
-(1, 1, 2, NULL, '2023-05-11 16:16:08');
 
 -- --------------------------------------------------------
 

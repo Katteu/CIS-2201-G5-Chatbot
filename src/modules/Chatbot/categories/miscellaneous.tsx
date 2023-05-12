@@ -4,7 +4,6 @@ import clogo from "../../../assets/chatlogo.png";
 import ChatStud from '../component/chatStud';
 import Chatmenu from '../component/chatmenu'
 import { Miscellaneous } from '../component/model';
-import { RoomLoc } from '../component/model';
 
 const Miscellaneous = ({miscData}:{miscData: Miscellaneous[]}) => {
 
