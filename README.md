@@ -1,4 +1,4 @@
-# CIS2201-Class-Project
+# CIS-2201-Group5-ChatbotModule
 
 ## Dependencies to download before running chatbot
 ```
