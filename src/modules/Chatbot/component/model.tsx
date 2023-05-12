@@ -1,4 +1,4 @@
-interface StudCon{
+export interface StudCon{
     _SCID: number;
     _Question:string;
     _Response:string;
@@ -6,7 +6,7 @@ interface StudCon{
     _imageURL?: string;
   }
 
-interface RoomLoc{
+export interface RoomLoc{
   _RLID: number;
   _Question:string;
   _Response:string;
@@ -14,7 +14,7 @@ interface RoomLoc{
   _faqID:number;
 }
   
-interface DistPrep{
+export interface DistPrep{
   _DPID: number;
   _Question:string;
   _Response:string;
@@ -22,7 +22,7 @@ interface DistPrep{
   _imageURL?: string;
 }
 
-interface AlumniAff{
+export interface AlumniAff{
   _AffID: number;
   _Question:string;
   _Response:string;
@@ -30,7 +30,7 @@ interface AlumniAff{
   _imageURL?: string;
 }
 
-interface Miscellaneous{
+export interface Miscellaneous{
   _MisceID: number;
   _Question:string;
   _Response:string;
@@ -38,9 +38,10 @@ interface Miscellaneous{
   _imageURL?: string;
 }
 
-interface Buttonz {
+export interface Buttonz {
   label: string;
   onClick: (id: number) => void;
   "data-id": number;
 }
-  
+
+export {};

@@ -7,9 +7,10 @@ import axios from "axios";
 import Roomlocation from '../categories/roomlocation'
 import Disasterprep from '../categories/disasterprep'
 import Alumniaff from '../categories/alumniaff'
-import Miscellaneous from '../categories/miscellaneous'
+import Misc from '../categories/miscellaneous'
 import { io , Socket} from "socket.io-client";
 import { useNavigate } from 'react-router-dom'
+import {StudCon,RoomLoc,DistPrep,AlumniAff,Miscellaneous} from './model'
 
 const socket = io("http://localhost:3001");
 
@@ -156,7 +157,7 @@ const Chatmenu = () => {
                {/* Shows Alumni Affairs */}
                {showAlumnAff && <Alumniaff alumnData={alumnData}/>}
                {/* Shows Miscellaneous */}
-               {showMisc && <Miscellaneous miscData={miscData}/>}
+               {showMisc && <Misc miscData={miscData}/>}
 
                  {/* Starts Human Handover */}
                  {showHuman && 
