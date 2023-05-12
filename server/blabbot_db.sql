@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2023 at 06:22 PM
+-- Generation Time: May 12, 2023 at 05:52 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -54,7 +54,8 @@ CREATE TABLE `distprep_tb` (
 --
 
 INSERT INTO `distprep_tb` (`_DPID`, `_Question`, `_Response`, `_faqID`, `_imageURL`) VALUES
-(1, 'Where to find fire extinguishers on campus?', 'There are fire extinguishers in the hallways and near or in classrooms.', 4, NULL);
+(1, 'Where to find fire extinguishers on campus?', 'There are fire extinguishers in the hallways and near or in classrooms.', 4, NULL),
+(2, 'What is the emergency evacuation plan for the fourth floor of Lawrence Bunzel Building?', 'The following image displays the emergency evacuation plan listed with the emergency numbers and key map:', 14, 'https://i.imgur.com/jCeP81c.jpg');
 
 -- --------------------------------------------------------
 
@@ -84,7 +85,8 @@ INSERT INTO `faqs_tb` (`_faqID`, `_category`) VALUES
 (10, 'Room Location'),
 (11, 'Room Location'),
 (12, 'Room Location'),
-(13, 'Room Location');
+(13, 'Room Location'),
+(14, 'Disaster Preparedness');
 
 -- --------------------------------------------------------
 
@@ -316,13 +318,13 @@ ALTER TABLE `alumniaff_tb`
 -- AUTO_INCREMENT for table `distprep_tb`
 --
 ALTER TABLE `distprep_tb`
-  MODIFY `_DPID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `_DPID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `faqs_tb`
 --
 ALTER TABLE `faqs_tb`
-  MODIFY `_faqID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `_faqID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `livechat_tb`
