@@ -10,6 +10,7 @@ const axios = require('axios');
 
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const { match } = require('assert');
 
 const server = http.createServer(app);
 
@@ -96,13 +97,13 @@ io.on("connection", (socket) => {
       });
 
 
-      socket.on('stop_chat', async (studentId,callback) => {
-        try {
-          callback({status: chatRequest.status, req_ID: reqID});
-        } catch (error) {
-          console.error(error);
-        }
-      });
+      // socket.on('stop_chat', async (studentId,callback) => {
+      //   try {
+      //     callback({status: chatRequest.status, req_ID: reqID});
+      //   } catch (error) {
+      //     console.error(error);
+      //   }
+      // });
 
 
     socket.on("join_room", (data) => {
@@ -112,6 +113,52 @@ io.on("connection", (socket) => {
 
 
     socket.on("send_message", (data) => {
+      let { author, message } = data;
+      const isStudent = author === 'Student';
+      let misc = false;
+      let matchWord = '';
+      message = message.toLowerCase();
+      if(isStudent){
+      // Check if the message contains the specific words
+        if(message.includes("disaster preparedness") || message.includes('evacuation') || 
+          message.includes('fire') || message.includes('earthquake')){
+            const wordsToMatchDisaster = ['disaster preparedness', 'evacuation', 'fire', 'earthquake'];
+            matchWord = wordsToMatchDisaster.filter((word) => message.toLowerCase().includes(word));
+        }else if(message.includes('where is') || message.includes('LB') || message.includes('room') ||
+              message.includes('office')){
+              const wordsToMatchWay = ['where is','LB','room','office'];
+              matchWord = wordsToMatchWay.filter((word) => message.toLowerCase().includes(word));               
+        }else if(message.includes('alumni affairs') || message.includes('graduate') || message.includes('alumni')){
+              const wordsToMatchAlumni = ['alumni affairs','graduate','alumni'];
+              matchWord = wordsToMatchAlumni.filter((word) => message.toLowerCase().includes(word)); 
+        }else if(message.includes('student concerns') || message.includes('student') || message.includes('office')
+                 || message.includes('concerns')){
+            const wordsToMatchStud = ['student concerns','student','office','concerns'];
+            matchWord = wordsToMatchStud.filter((word) => message.toLowerCase().includes(word)); 
+        }else{
+            misc=true;
+        }
+
+        if (matchWord.length > 0 && misc===false) {
+          matchWord = matchWord[0]; // Extract the first matched word
+          db.query('INSERT INTO check_tb(_question,_keyword) VALUES (?,?)', [message,matchWord]);
+        }else{
+          db.query('INSERT INTO check_tb(_question,_keyword) VALUES (?,?)', [message,'misc']);
+          matchWord='misc';
+        }
+
+        db.query('SELECT * FROM check_tb WHERE _keyword=?', matchWord, (error, rows) => {
+          if (error) {
+            console.error(error);
+            return;
+          }
+          // console.log("No. of Rows:" + rows.length);
+          if (rows.length >= 4) {
+            db.query('CALL addFAQ(?,?,?)',[message,'',matchWord]);
+          }
+        });
+      }
+
         // console.log(data);
         io.emit('receive_message', data);
     });

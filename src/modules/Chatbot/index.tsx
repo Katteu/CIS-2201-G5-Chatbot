@@ -303,7 +303,7 @@ function Chatbot() {
           <div className='lowerContB'>
             <div className="formCont" style={openModal==true || openB==true || openC==true? {opacity:"0.2"}:{opacity:"1"}}>
               <form  className="textForm" onSubmit={handleSubmit}>
-              <input id="input" type="text" style={{border:"1px solid"+inpColor}} placeholder="Send a Message..."/>
+              <input id="input" type="text" style={{border:"1px solid"+inpColor}} placeholder="Can only send a message during live chat sessions..."/>
               </form>
             </div>
             

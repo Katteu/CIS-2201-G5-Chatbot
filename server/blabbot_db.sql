@@ -20,6 +20,38 @@ SET time_zone = "+00:00";
 CREATE DATABASE blabbot_db;
 USE blabbot_db;
 
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addFAQ` (IN `_question` VARCHAR(255), IN `_categories` VARCHAR(255), IN `keyword` VARCHAR(255))   BEGIN
+    IF _question LIKE '%fire%' or _question LIKE '%earthquake%' or _question LIKE '%disaster preparedness%' or _question LIKE '%evacuation%' THEN
+        SET _categories = 'Disaster Preparedness';
+        INSERT INTO faqs_tb(_category) VALUES (_categories);
+        INSERT INTO distprep_tb(_faqID,_Question,_Response) VALUES ((SELECT _faqID FROM faqs_tb ORDER BY _faqID DESC LIMIT 1),_question,"My apologies, still formulating a response... Pick another question for now!");
+    ELSEIF _question LIKE '%where is%' or _question LIKE '%LB%' or _question LIKE '%room%' 
+        or _question LIKE '%office%' THEN
+        SET _categories = 'Room Location';
+        INSERT INTO faqs_tb(_category) VALUES (_categories);
+        INSERT INTO roomlocations_tb(_faqID,_Question,_Response) VALUES ((SELECT _faqID FROM faqs_tb ORDER BY _faqID DESC LIMIT 1),_question,"My apologies, still formulating a response... Pick another question for now!");
+    ELSEIF _question LIKE '%alumni affairs%' or _question LIKE '%graduate%' or _question LIKE '%alumni%' THEN
+        SET _categories = 'Alumni Affairs';
+        INSERT INTO faqs_tb(_category) VALUES (_categories);
+        INSERT INTO alumniaff_tb(_faqID,_Question,_Response) VALUES ((SELECT _faqID FROM faqs_tb ORDER BY _faqID DESC LIMIT 1),_question,"My apologies, still formulating a response... Pick another question for now!");
+    ELSEIF _question LIKE '%student concerns%' or _question LIKE '%student%' or _question LIKE '%office%' or _question LIKE '%concerns%' THEN
+        SET _categories = 'Student Concerns';
+        INSERT INTO faqs_tb(_category) VALUES (_categories);
+        INSERT INTO studcon_tb(_faqID,_Question,_Response) VALUES ((SELECT _faqID FROM faqs_tb ORDER BY _faqID DESC LIMIT 1),_question,"My apologies, still formulating a response... Pick another question for now!");
+    ELSE
+        SET _categories = 'Miscellaneous';
+        INSERT INTO faqs_tb(_category) VALUES (_categories);
+        INSERT INTO misc_tb(_faqID,_Question,_Response) VALUES ((SELECT _faqID FROM faqs_tb ORDER BY _faqID DESC LIMIT 1),_question,"My apologies, still formulating a response... Pick another question for now!");
+    END IF;
+    DELETE FROM check_tb WHERE _keyword = keyword;
+END$$
+
+DELIMITER ;
+
 CREATE TABLE `alumniaff_tb` (
   `_AffID` int(20) NOT NULL,
   `_Question` varchar(255) NOT NULL,
@@ -34,6 +66,18 @@ CREATE TABLE `alumniaff_tb` (
 
 INSERT INTO `alumniaff_tb` (`_AffID`, `_Question`, `_Response`, `_faqID`, `_imageURL`) VALUES
 (1, 'What graduate studies are offered right now by the department?', 'The department are offering two graduate studies which are Master of Science in Information Technology and Doctor of Philosophy in Information Technology.', 5, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `check_tb`
+--
+
+CREATE TABLE `check_tb` (
+  `check_ID` int(11) NOT NULL,
+  `_question` varchar(255) NOT NULL,
+  `_keyword` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -176,7 +220,7 @@ INSERT INTO `roomlocations_tb` (`_RLID`, `_Question`, `_Response`, `_imageURL`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `studcon_tb`
+-- Table structure for table `studcon_tb` 
 --
 
 CREATE TABLE `studcon_tb` (
@@ -244,6 +288,12 @@ ALTER TABLE `alumniaff_tb`
   ADD KEY `_faqID` (`_faqID`);
 
 --
+-- Indexes for table `check_tb`
+--
+ALTER TABLE `check_tb`
+  ADD PRIMARY KEY (`check_ID`);
+
+--
 -- Indexes for table `distprep_tb`
 --
 ALTER TABLE `distprep_tb`
@@ -307,6 +357,13 @@ ALTER TABLE `user_tb`
 --
 ALTER TABLE `alumniaff_tb`
   MODIFY `_AffID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `check_tb`
+--
+ALTER TABLE `check_tb`
+  MODIFY `check_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 
 --
 -- AUTO_INCREMENT for table `distprep_tb`
