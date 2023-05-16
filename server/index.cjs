@@ -141,9 +141,9 @@ io.on("connection", (socket) => {
 
         if (matchWord.length > 0 && misc===false) {
           matchWord = matchWord[0]; // Extract the first matched word
-          db.query('INSERT INTO check_tb(_question,_keyword) VALUES (?,?)', [message,matchWord]);
+          db.query('INSERT INTO check_tb(_question,_keyword) VALUES (?,?)', [message.charAt(0).toUpperCase() + message.slice(1),matchWord]);
         }else{
-          db.query('INSERT INTO check_tb(_question,_keyword) VALUES (?,?)', [message,'misc']);
+          db.query('INSERT INTO check_tb(_question,_keyword) VALUES (?,?)', [message.charAt(0).toUpperCase() + message.slice(1),'misc']);
           matchWord='misc';
         }
 
@@ -153,8 +153,8 @@ io.on("connection", (socket) => {
             return;
           }
           // console.log("No. of Rows:" + rows.length);
-          if (rows.length >= 4) {
-            db.query('CALL addFAQ(?,?,?)',[message,'',matchWord]);
+          if (rows.length > 4) {
+            db.query('CALL addFAQ(?,?,?)',[message.charAt(0).toUpperCase() + message.slice(1),'',matchWord]);
           }
         });
       }

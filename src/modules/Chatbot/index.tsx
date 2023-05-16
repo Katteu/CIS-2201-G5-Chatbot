@@ -71,7 +71,6 @@ function Chatbot() {
   let value=false;
 
   useEffect(()=>{
-    localStorage.setItem("message",currentMessage);
     const userStore = parseInt(sessionStorage.getItem('userType') || '');
     setUserType(userStore);
 
@@ -153,7 +152,7 @@ function Chatbot() {
     console.log("Current Message:" + currentMessage);
     localStorage.setItem("message",currentMessage);
 
-    if(currentMessage!==""){
+    if(currentMessage!=="" && !butClick){
       switch(currentMessage){
         case "Human Handover":
         case "human handover":
@@ -347,8 +346,10 @@ function Chatbot() {
 
             </div>
           </div>
-          
-          <div className='lowerContB'>
+
+
+          {!showStudConcern && !showRoomLoc && !showDisPrep && !showAlumnAff && !showMisc && !showHuman ?
+            <div className='lowerContB'>
             <div className="formCont" style={openModal==true || openB==true || openC==true? {opacity:"0.2"}:{opacity:"1"}}>
               <form  className="textForm" onSubmit={handleSubmit}>
               <input id="input" type="text" placeholder="Send a Message..." 
@@ -358,15 +359,30 @@ function Chatbot() {
               ref={inputRef}/>
               </form>
             </div>
+
+            <div className="submitBtn" 
+                  style={openModal==true || openB==true || openC==true?{opacity:"0.2"}:{opacity:"1"}}>
+              <button style={{color:plane,backgroundColor:butColor}} onClick={sendMessage}>
+                     <FaRegPaperPlane  onClick={sendMessage}/></button>
+            </div>
+            </div>
+            : 
+            <div className='lowerContB'>
+            <div className="formCont" style={openModal==true || openB==true || openC==true? {opacity:"0.2"}:{opacity:"1"}}>
+              <form  className="textForm" onSubmit={handleSubmit}>
+              <input id="input" type="text" style={{border:"1px solid"+inpColor}} 
+                placeholder="Message inputs are now accepted only for live chat sessions..."
+                disabled={true}/>
+              </form>
+            </div>
             
             <div onClick={handleSubmit} className="submitBtn" 
                   style={openModal==true || openB==true || openC==true?{opacity:"0.2"}:{opacity:"1"}}>
               <button style={{color:plane,backgroundColor:butColor}} onClick={handleSubmit}>
                      <FaRegPaperPlane onClick={handleSubmit} onKeyDown={(event) => {event.key === "Enter" && event.preventDefault()}}/></button>
             </div>
-          </div>
-
-
+            </div>
+          } 
 
           </>
         }

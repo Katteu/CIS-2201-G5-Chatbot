@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Chatbubble from '../component/chatbubble';
 import clogo from "../../../assets/chatlogo.png";
 import ChatStud from '../component/chatStud';
 import Chatmenu from '../component/chatmenu'
 import { StudCon } from '../component/model';
+import { FaRegPaperPlane } from 'react-icons/fa'
 
 const Studconcern = ({studData}:{studData: StudCon[]}) => {
   /*To check what is clicked*/
@@ -28,6 +29,18 @@ const Studconcern = ({studData}:{studData: StudCon[]}) => {
       setButtonClicked(true);
     }
   };
+
+  const [mess,setMess] = useState<string|null>(null);
+
+  useEffect(()=>{
+    window.addEventListener('storage', () => {
+       setMess(localStorage.getItem('message'));   
+    });    
+
+    if(mess==='Proceed to Menu'){
+      proceedMenu();
+    }
+  },[]);
 
   const stopChatting = () => {
     if(!buttonClicked2){
@@ -61,45 +74,45 @@ const Studconcern = ({studData}:{studData: StudCon[]}) => {
   ];
 
   return (
-    <div>
-      <Chatbubble message="You may click or type your desired question:"
-                  chatImage={clogo}
-                  buttonz={
-                    studData.map((item, i) => ({
-                      label: item._Question,
-                      onClick: () => handleButtonClick(item._SCID),
-                      "data-id": item._SCID,
-                      key: i
-                    }))
-                  }
-      />
+      <div>
+        <Chatbubble message="You may click or type your desired question:"
+                    chatImage={clogo}
+                    buttonz={
+                      studData.map((item, i) => ({
+                        label: item._Question,
+                        onClick: () => handleButtonClick(item._SCID),
+                        "data-id": item._SCID,
+                        key: i
+                      }))
+                    }
+        />
 
-      {showQues && (
-         <ChatStud message={showQues?._Question}/>
-      )}
-      {selectedItem && (
-         <Chatbubble chatImage={clogo} message={selectedItem._Response} />
-      )}
-
-      {contChat && (
-          <Chatbubble message="Do you want to continue chatting?"
-          chatImage={clogo}
-          buttonz={choices}  /> 
-      )}
-       
-        {contChat2 && (
-          <ChatStud message={contChat2}/>
+        {showQues && (
+          <ChatStud message={showQues?._Question}/>
+        )}
+        {selectedItem && (
+          <Chatbubble chatImage={clogo} message={selectedItem._Response} />
         )}
 
-      {menuz && (<Chatmenu/>)}
+        {contChat && (
+            <Chatbubble message="Do you want to continue chatting?"
+            chatImage={clogo}
+            buttonz={choices}  /> 
+        )}
+        
+          {contChat2 && (
+            <ChatStud message={contChat2}/>
+          )}
 
-      {ask && (
-        <Studconcern studData={studData}/>
-      )}
-      {end && (
-        <Chatbubble chatImage={clogo} message="Thanks for chatting with me today! Don't hesitate to come back if you have more questions." />
-      )}
-    </div>
+        {menuz && (<Chatmenu/>)}
+
+        {ask && (
+          <Studconcern studData={studData}/>
+        )}
+        {end && (
+          <Chatbubble chatImage={clogo} message="Thanks for chatting with me today! Don't hesitate to come back if you have more questions." />
+        )}
+      </div>
   )
 }
 
