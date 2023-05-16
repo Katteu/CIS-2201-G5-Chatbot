@@ -70,3 +70,9 @@
     overflow-y: auto;
     height:94vh;
 }
+
+@media (min-width: 800px) and (max-width: 1600px){
+    .progToLive button{
+        width: 30%;
+    }
+}
