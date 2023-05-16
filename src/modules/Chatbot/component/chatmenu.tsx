@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ChatStud from './chatStud'
 import Chatbubble from './chatbubble'
 import Studconcern from '../categories/studconcern'
@@ -11,6 +11,7 @@ import Misc from '../categories/miscellaneous'
 import { io , Socket} from "socket.io-client";
 import { useNavigate } from 'react-router-dom'
 import {StudCon,RoomLoc,DistPrep,AlumniAff,Miscellaneous} from './model'
+import { MessageContext, booleanContext } from '..'
 
 const socket = io("http://localhost:3001");
 
@@ -38,6 +39,9 @@ const Chatmenu = () => {
     const [showHuman, setShowHuman] = useState(false);
     const [userType, setUserType] = useState(0);
     const [userID,setUserID] = useState(0);
+
+    const currentMessage = useContext(MessageContext);
+    let boolVal = useContext(booleanContext);
 
     useEffect(()=>{
       const userIDStore = parseInt(sessionStorage.getItem('userID') || '');
@@ -67,9 +71,54 @@ const Chatmenu = () => {
       
     },[]);
 
-    useEffect(() => {
-      localStorage.setItem("message", mess || '');
-    }, [mess]);
+    useEffect(()=>{
+      if(boolVal===true && currentMessage!==''){
+        sendMess();
+      }
+    },[boolVal]);
+
+    const [error,setError]=useState("");
+
+    const sendMess = async () =>{
+      let human = "Human Handover".toLowerCase();
+      let stud = "Student Concerns".toLowerCase();
+      let way = "Wayfinding".toLowerCase();
+      let room = "Room Location".toLowerCase();
+      let wayroom = "Wayfinding or Room Location".toLowerCase();
+      let disprep = "Disaster Preparedness".toLowerCase();
+      let alumn = "Alumni Affairs".toLowerCase();
+      let miscz = "Miscellaneous".toLowerCase();
+
+      switch(currentMessage.toLowerCase()){
+        case human:
+          humanHandover();
+          break;
+        case stud:
+          studentConcerns();
+          break;
+        case way:
+        case room:
+        case wayroom:
+          wayFinding();
+          break;     
+        case disprep:
+          disPrepared();
+          break;
+        case alumn:
+          alumniAffairs();
+          break;
+        case miscz:
+          misc();     
+          break;
+        default:
+          setButClick(true);
+          if(!showStudConcern && !showAlumnAff && !showDisPrep
+             && !showHuman && !showMisc && !showRoomLoc){
+              setLabel(currentMessage);
+              setError("Could not identify category.");
+             }     
+      }
+    }
 
 
     const humanHandover = async () => {
@@ -175,6 +224,8 @@ const Chatmenu = () => {
                           buttonz={reload}
                           chatImage={clogo}/>                
                 </>}
+
+                {error && <Chatbubble message={error} chatImage={clogo}/>}
           </>
         </div>
   )

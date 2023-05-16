@@ -252,6 +252,72 @@ app.get("/api/:_id/chat_requests",(req,res)=>{
     })
 })
 
+app.get("/api/:_question/studcon",(req,res)=>{
+  const quesInitial = req.params._question;
+  const ques = decodeURIComponent(quesInitial).replace(/\s/g, '');
+  const sqlGet = `SELECT _SCID from studcon_tb WHERE REPLACE(LOWER(_Question),' ','')='${ques}'`;
+  db.query(sqlGet,(err,result)=>{
+     if(err){
+      res.status(500).send(err);
+     }else{
+      res.status(200).send(result);
+     }
+      
+  })
+})
+
+app.get("/api/:_question/alumniaff",(req,res)=>{
+  const quesInitial = req.params._question;
+  const ques = decodeURIComponent(quesInitial).replace(/\s/g, '');
+  const sqlGet = `SELECT _AffID from alumniaff_tb WHERE REPLACE(LOWER(_Question),' ','')='${ques}'`;
+  db.query(sqlGet,(err,result)=>{
+     if(err){
+      res.status(500).send(err);
+     }else{
+      res.status(200).send(result);
+     }
+  })
+})
+
+app.get("/api/:_question/disprep",(req,res)=>{
+  const quesInitial = req.params._question;
+  const ques = decodeURIComponent(quesInitial).replace(/\s/g, '');
+  const sqlGet = `SELECT _DPID from distprep_tb WHERE REPLACE(LOWER(_Question),' ','')='${ques}'`;
+  db.query(sqlGet,(err,result)=>{
+     if(err){
+      res.status(500).send(err);
+     }else{
+      res.status(200).send(result);
+     }
+  })
+})
+
+app.get("/api/:_question/misc",(req,res)=>{
+  const quesInitial = req.params._question;
+  const ques = decodeURIComponent(quesInitial).replace(/\s/g, '');
+  const sqlGet = `SELECT _MisceID from misc_tb WHERE REPLACE(LOWER(_Question),' ','')='${ques}'`;
+  db.query(sqlGet,(err,result)=>{
+     if(err){
+      res.status(500).send(err);
+     }else{
+      res.status(200).send(result);
+     }
+  })
+})
+
+app.get("/api/:_question/roomloc",(req,res)=>{
+  const quesInitial = req.params._question;
+  const ques = decodeURIComponent(quesInitial).replace(/\s/g, '');
+  const sqlGet = `SELECT _RLID from roomlocations_tb WHERE REPLACE(LOWER(_Question),' ','')='${ques}'`;
+  db.query(sqlGet,(err,result)=>{
+     if(err){
+      res.status(500).send(err);
+     }else{
+      res.status(200).send(result);
+     }
+  })
+})
+
 app.get('/api/progcoord/available', (req, res) => {
     const availableProgramCoordinators = "SELECT * FROM user_tb WHERE _userType=2";
     db.query(availableProgramCoordinators, (err, result) => {

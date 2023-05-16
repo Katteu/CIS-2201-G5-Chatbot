@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { createContext, useEffect, useRef, useState } from 'react'
 import "../Chatbot/assets/chatbot.css"
 import "../Chatbot/assets/bubble.css"
 import bot from "../../assets/blabbot.png";
@@ -24,6 +24,8 @@ import Access from '../Landing/access';
 import { StudCon, RoomLoc, DistPrep, AlumniAff, Miscellaneous } from './component/model';
 
 const socket = io("http://localhost:3001");
+export const MessageContext = createContext('');
+export const booleanContext = createContext(false);
 
 function Chatbot() {
   let status = true;
@@ -33,6 +35,7 @@ function Chatbot() {
   const [label,setLabel]= useState<string|null>(null);
   const [butClick,setButClick] = useState<boolean>(false);
   const [currentMessage,setCurrentMessage] = useState("");
+  const [send,setSend]=useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   /*To hold the data*/
@@ -147,33 +150,52 @@ function Chatbot() {
 
   const [error,setError]=useState("");
 
+  const updateCurrentMessage = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+    setSend(true);
+    resetPlease();
+  };
+
+  const resetPlease = () =>{
+     if (inputRef.current) {
+      inputRef.current.value = "";
+      setTimeout(()=>setSend(false),500);
+    }   
+  }
+
   const sendMessage = async (event: { preventDefault: () => void })=>{
     event.preventDefault();
     console.log("Current Message:" + currentMessage);
-    localStorage.setItem("message",currentMessage);
 
     if(currentMessage!=="" && !butClick){
-      switch(currentMessage){
-        case "Human Handover":
-        case "human handover":
+      let human = "Human Handover".toLowerCase();
+      let stud = "Student Concerns".toLowerCase();
+      let way = "Wayfinding".toLowerCase();
+      let room = "Room Location".toLowerCase();
+      let wayroom = "Wayfinding or Room Location".toLowerCase();
+      let disprep = "Disaster Preparedness".toLowerCase();
+      let alumn = "Alumni Affairs".toLowerCase();
+      let miscz = "Miscellaneous".toLowerCase();
+
+      switch(currentMessage.toLowerCase()){
+        case human:
           humanHandover();
           break;
-        case "Student Concerns":
-        case "student concerns":
+        case stud:
           studentConcerns();
           break;
-        case "Wayfinding":
-        case "Room Location":
-        case "Wayfinding or Room Location":
+        case way:
+        case room:
+        case wayroom:
           wayFinding();
           break;     
-        case "Disaster Preparedness":
+        case disprep:
           disPrepared();
           break;
-        case "Alumni Affairs":
+        case alumn:
           alumniAffairs();
           break;
-        case "Miscellaneous":
+        case miscz:
           misc();     
           break;
         default:
@@ -184,6 +206,7 @@ function Chatbot() {
       }
       if (inputRef.current) {
         inputRef.current.value = "";
+        setCurrentMessage('');
       }
     }
   };
@@ -258,7 +281,8 @@ function Chatbot() {
   ];
 
   return (
-    <>
+    <MessageContext.Provider value={currentMessage}>
+      <booleanContext.Provider value={send}>
     {email!=='' ?
     <>
     <div className='cbCont'>
@@ -369,17 +393,19 @@ function Chatbot() {
             : 
             <div className='lowerContB'>
             <div className="formCont" style={openModal==true || openB==true || openC==true? {opacity:"0.2"}:{opacity:"1"}}>
-              <form  className="textForm" onSubmit={handleSubmit}>
-              <input id="input" type="text" style={{border:"1px solid"+inpColor}} 
-                placeholder="Message inputs are now accepted only for live chat sessions..."
-                disabled={true}/>
+              <form  className="textForm" onSubmit={updateCurrentMessage}>
+              <input id="input" type="text" placeholder="Send a Message..." 
+              style={{border:"1px solid"+inpColor}}
+              onChange={(event)=>{setCurrentMessage(event.target.value)}}
+              onKeyDown={(event) => {event.key === "Enter" && updateCurrentMessage(event)}}
+              ref={inputRef}/>
               </form>
             </div>
-            
-            <div onClick={handleSubmit} className="submitBtn" 
+
+            <div className="submitBtn" 
                   style={openModal==true || openB==true || openC==true?{opacity:"0.2"}:{opacity:"1"}}>
-              <button style={{color:plane,backgroundColor:butColor}} onClick={handleSubmit}>
-                     <FaRegPaperPlane onClick={handleSubmit} onKeyDown={(event) => {event.key === "Enter" && event.preventDefault()}}/></button>
+              <button style={{color:plane,backgroundColor:butColor}} onClick={updateCurrentMessage}>
+                     <FaRegPaperPlane  onClick={updateCurrentMessage}/></button>
             </div>
             </div>
           } 
@@ -401,7 +427,8 @@ function Chatbot() {
     </div>
     </>
     :<Access/>}
-    </>
+      </booleanContext.Provider>
+    </MessageContext.Provider>
   )
 }
 
