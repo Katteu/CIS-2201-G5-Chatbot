@@ -32,6 +32,8 @@ function Chatbot() {
   const [openC,setOpenC] = useState(false);
   const [label,setLabel]= useState<string|null>(null);
   const [butClick,setButClick] = useState<boolean>(false);
+  const [currentMessage,setCurrentMessage] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   /*To hold the data*/
   const [studData,setStudData] = useState<StudCon[]>([]);
@@ -67,7 +69,9 @@ function Chatbot() {
   },[email])
 
   let value=false;
+
   useEffect(()=>{
+    localStorage.setItem("message",currentMessage);
     const userStore = parseInt(sessionStorage.getItem('userType') || '');
     setUserType(userStore);
 
@@ -140,6 +144,49 @@ function Chatbot() {
 
   const handleSubmit = (event: { preventDefault: () => void; }) => {
     event.preventDefault(); 
+  };
+
+  const [error,setError]=useState("");
+
+  const sendMessage = async (event: { preventDefault: () => void })=>{
+    event.preventDefault();
+    console.log("Current Message:" + currentMessage);
+    localStorage.setItem("message",currentMessage);
+
+    if(currentMessage!==""){
+      switch(currentMessage){
+        case "Human Handover":
+        case "human handover":
+          humanHandover();
+          break;
+        case "Student Concerns":
+        case "student concerns":
+          studentConcerns();
+          break;
+        case "Wayfinding":
+        case "Room Location":
+        case "Wayfinding or Room Location":
+          wayFinding();
+          break;     
+        case "Disaster Preparedness":
+          disPrepared();
+          break;
+        case "Alumni Affairs":
+          alumniAffairs();
+          break;
+        case "Miscellaneous":
+          misc();     
+          break;
+        default:
+          setButClick(true);
+          setLabel(currentMessage);
+          setError("Could not identify category.");
+          setTimeout(()=>setStay(2),1500);
+      }
+      if (inputRef.current) {
+        inputRef.current.value = "";
+      }
+    }
   };
 
   // const [load,setLoad]=useState(true);
@@ -278,6 +325,7 @@ function Chatbot() {
                {/* Shows Miscellaneous */}
                {showMisc && <Misc miscData={miscData}/>}
 
+               {error && <Chatbubble message={error} chatImage={clogo}/>}
                {/* Starts Human Handover */}
                {showHuman && 
                 <>
@@ -303,7 +351,11 @@ function Chatbot() {
           <div className='lowerContB'>
             <div className="formCont" style={openModal==true || openB==true || openC==true? {opacity:"0.2"}:{opacity:"1"}}>
               <form  className="textForm" onSubmit={handleSubmit}>
-              <input id="input" type="text" style={{border:"1px solid"+inpColor}} placeholder="Can only send a message during live chat sessions..."/>
+              <input id="input" type="text" placeholder="Send a Message..." 
+              style={{border:"1px solid"+inpColor}}
+              onChange={(event)=>{setCurrentMessage(event.target.value)}}
+              onKeyDown={(event) => {event.key === "Enter" && sendMessage(event)}}
+              ref={inputRef}/>
               </form>
             </div>
             
@@ -313,6 +365,9 @@ function Chatbot() {
                      <FaRegPaperPlane onClick={handleSubmit} onKeyDown={(event) => {event.key === "Enter" && event.preventDefault()}}/></button>
             </div>
           </div>
+
+
+
           </>
         }
 

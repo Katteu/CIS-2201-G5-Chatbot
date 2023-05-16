@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Chatbubble from '../component/chatbubble';
 import clogo from "../../../assets/chatlogo.png";
 import ChatStud from '../component/chatStud';

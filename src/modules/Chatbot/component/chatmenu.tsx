@@ -19,6 +19,7 @@ const Chatmenu = () => {
 
     const [label,setLabel]= useState<string|null>(null);
     const [butClick,setButClick] = useState<boolean>(false);
+    const [mess,setMess]= useState<string|null>(null);
 
     /*To hold the data*/
     const [studData,setStudData] = useState<StudCon[]>([]);
@@ -37,7 +38,7 @@ const Chatmenu = () => {
     const [showHuman, setShowHuman] = useState(false);
     const [userType, setUserType] = useState(0);
     const [userID,setUserID] = useState(0);
-  
+
     useEffect(()=>{
       const userIDStore = parseInt(sessionStorage.getItem('userID') || '');
       setUserID(userIDStore);
@@ -46,10 +47,13 @@ const Chatmenu = () => {
     useEffect(()=>{
       const userStore = parseInt(sessionStorage.getItem('userType') || '');
       setUserType(userStore);
-  
-      if(showHuman){
+
+      const updatedMessage = localStorage.getItem("message");
+      setMess(updatedMessage);
+      
+      if(showHuman || mess==='Human Handover'){
         humanHandover();
-      }else if(showStudConcern){
+      }else if(showStudConcern || mess==='Student Concerns'){
         studentConcerns();
       }else if(showRoomLoc){
         wayFinding();
@@ -60,7 +64,12 @@ const Chatmenu = () => {
       }else if(showMisc){
         misc();
       }
+      
     },[]);
+
+    useEffect(() => {
+      localStorage.setItem("message", mess || '');
+    }, [mess]);
 
 
     const humanHandover = async () => {

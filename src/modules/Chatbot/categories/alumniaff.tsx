@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Chatbubble from '../component/chatbubble';
 import clogo from "../../../assets/chatlogo.png";
 import ChatStud from '../component/chatStud';
@@ -19,6 +19,13 @@ const Alumniaff = ({alumnData}:{alumnData: AlumniAff[]}) => {
   const [contChat2,setContChat2] = useState<string|null>(null);
   const [ask,setAsk] = useState(false);
   const [menuz,setMenuz] = useState(false);
+  
+  const [mess,setMess]=useState<string|null>(null);
+
+
+  useEffect(()=>{
+
+  },[])
 
   const handleButtonClick = (id: number) => {
     if(!buttonClicked){
