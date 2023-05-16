@@ -200,9 +200,12 @@ function Chatbot() {
           break;
         default:
           setButClick(true);
-          setLabel(currentMessage);
-          setError("Could not identify category.");
-          setTimeout(()=>setStay(2),1500);
+          if(!showStudConcern && !showAlumnAff && !showDisPrep
+            && !showHuman && !showMisc && !showRoomLoc){
+             setLabel(currentMessage);
+             setError("Could not identify category.");
+             setTimeout(()=>setStay(2),1500);
+            }     
       }
       if (inputRef.current) {
         inputRef.current.value = "";
@@ -372,7 +375,7 @@ function Chatbot() {
           </div>
 
 
-          {!showStudConcern && !showRoomLoc && !showDisPrep && !showAlumnAff && !showMisc && !showHuman ?
+          {stay!==2 && !showStudConcern && !showRoomLoc && !showDisPrep && !showAlumnAff && !showMisc && !showHuman ?
             <div className='lowerContB'>
             <div className="formCont" style={openModal==true || openB==true || openC==true? {opacity:"0.2"}:{opacity:"1"}}>
               <form  className="textForm" onSubmit={handleSubmit}>

@@ -44,40 +44,13 @@ const Chatmenu = () => {
     let boolVal = useContext(booleanContext);
 
     useEffect(()=>{
-      const userIDStore = parseInt(sessionStorage.getItem('userID') || '');
-      setUserID(userIDStore);
-    },[userID])
-
-    useEffect(()=>{
-      const userStore = parseInt(sessionStorage.getItem('userType') || '');
-      setUserType(userStore);
-
-      const updatedMessage = localStorage.getItem("message");
-      setMess(updatedMessage);
-      
-      if(showHuman || mess==='Human Handover'){
-        humanHandover();
-      }else if(showStudConcern || mess==='Student Concerns'){
-        studentConcerns();
-      }else if(showRoomLoc){
-        wayFinding();
-      }else if(showDisPrep){
-        disPrepared();
-      }else if(showAlumnAff){
-        alumniAffairs();
-      }else if(showMisc){
-        misc();
-      }
-      
-    },[]);
-
-    useEffect(()=>{
       if(boolVal===true && currentMessage!==''){
         sendMess();
       }
     },[boolVal]);
 
     const [error,setError]=useState("");
+    const [stay,setStay]=useState(0);
 
     const sendMess = async () =>{
       let human = "Human Handover".toLowerCase();
@@ -116,9 +89,38 @@ const Chatmenu = () => {
              && !showHuman && !showMisc && !showRoomLoc){
               setLabel(currentMessage);
               setError("Could not identify category.");
+              setTimeout(()=>setStay(2),1500);
              }     
       }
     }
+
+    useEffect(()=>{
+      const userIDStore = parseInt(sessionStorage.getItem('userID') || '');
+      setUserID(userIDStore);
+    },[userID])
+
+    useEffect(()=>{
+      const userStore = parseInt(sessionStorage.getItem('userType') || '');
+      setUserType(userStore);
+
+      const updatedMessage = localStorage.getItem("message");
+      setMess(updatedMessage);
+      
+      if(showHuman || mess==='Human Handover'){
+        humanHandover();
+      }else if(showStudConcern || mess==='Student Concerns'){
+        studentConcerns();
+      }else if(showRoomLoc){
+        wayFinding();
+      }else if(showDisPrep){
+        disPrepared();
+      }else if(showAlumnAff){
+        alumniAffairs();
+      }else if(showMisc){
+        misc();
+      }
+      
+    },[]);
 
 
     const humanHandover = async () => {
@@ -226,6 +228,7 @@ const Chatmenu = () => {
                 </>}
 
                 {error && <Chatbubble message={error} chatImage={clogo}/>}
+                {stay===2 && <Chatmenu/>}
           </>
         </div>
   )
