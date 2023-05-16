@@ -200,7 +200,7 @@ function Chatbot() {
           break;
         default:
           setButClick(true);
-          if(!showStudConcern && !showAlumnAff && !showDisPrep
+          if(!error && !showStudConcern && !showAlumnAff && !showDisPrep
             && !showHuman && !showMisc && !showRoomLoc){
              setLabel(currentMessage);
              setError("Could not identify category.");

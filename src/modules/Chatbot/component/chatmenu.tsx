@@ -85,12 +85,12 @@ const Chatmenu = () => {
           break;
         default:
           setButClick(true);
-          if(!showStudConcern && !showAlumnAff && !showDisPrep
+          if(!error && !showStudConcern && !showAlumnAff && !showDisPrep
              && !showHuman && !showMisc && !showRoomLoc){
               setLabel(currentMessage);
               setError("Could not identify category.");
               setTimeout(()=>setStay(2),1500);
-             }     
+          }     
       }
     }
 
